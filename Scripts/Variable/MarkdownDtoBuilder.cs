@@ -13,7 +13,7 @@ namespace FactStatusTool.Scripts.Variable {
     public class MarkdownDtoBuilder {
         private List<MarkdownItemDto> _markdownDtos;
 
-        public MarkdownDtoBuilder OfFactStatusConfig(FacutStatusConfig documentConfig) {
+        public MarkdownDtoBuilder OfFactStatusConfig(FactStatusConfig documentConfig) {
             // /Document/README.mdの生成
             MarkdownItemDto documentMarkdown = this.CreateDocumentMarkdown(
                 documentConfig.SubjectConfigList,
@@ -42,7 +42,7 @@ namespace FactStatusTool.Scripts.Variable {
                 // マークダウンアイテムの生成
                 MarkdownItemDto todoMarkdown = this.CreateTodoMarkdown(
                     todoConfig,
-                    documentConfig.ValidateConfigList,
+                    documentConfig.EvidenceConfigList,
                     documentConfig.ProcessConfigList,
                     documentConfig.SchemaConfigList,
                     $"Document/{filePath}");
@@ -50,19 +50,19 @@ namespace FactStatusTool.Scripts.Variable {
                 this._markdownDtos.Add(todoMarkdown);
             }
 
-            // /Validate/README.mdの生成
-            foreach (ValidateConfig validateConfig in documentConfig.ValidateConfigList) {
+            // /Evidence/README.mdの生成
+            foreach (EvidenceConfig evidenceConfig in documentConfig.EvidenceConfigList) {
                 // ファイルパスの生成
-                string filePath = this.SearchFilePath(validateConfig.Id, documentConfig);
+                string filePath = this.SearchFilePath(evidenceConfig.Id, documentConfig);
                 // マークダウンアイテムの生成
-                MarkdownItemDto validateMarkdown = this.CreateValidateMarkdown(
-                    validateConfig,
+                MarkdownItemDto evidenceMarkdown = this.CreateEvidenceMarkdown(
+                    evidenceConfig,
                     documentConfig.ResultConfigList,
                     documentConfig.ProcessConfigList,
                     documentConfig.SchemaConfigList,
                     $"Document/{filePath}");
                 // リストに追加
-                this._markdownDtos.Add(validateMarkdown);
+                this._markdownDtos.Add(evidenceMarkdown);
             }
 
             // /Result/README.mdの生成
@@ -118,7 +118,7 @@ namespace FactStatusTool.Scripts.Variable {
             return this;
         }
 
-        public MarkdownDtoBuilder OfFactStatusConfig(FacutStatusConfig documentConfig, string id) {
+        public MarkdownDtoBuilder OfFactStatusConfig(FactStatusConfig documentConfig, string id) {
             // ファイルパスの生成
             string filePath = this.SearchFilePath(id, documentConfig);
             
@@ -142,21 +142,21 @@ namespace FactStatusTool.Scripts.Variable {
                     TodoConfig todoConfig = this.SearchTodoConfig(id, documentConfig.TodoConfigList);
                     MarkdownItemDto todoMarkdown = this.CreateTodoMarkdown(
                         todoConfig,
-                        documentConfig.ValidateConfigList,
+                        documentConfig.EvidenceConfigList,
                         documentConfig.ProcessConfigList,
                         documentConfig.SchemaConfigList,
                         $"Document/{filePath}");
                     this._markdownDtos[0] = todoMarkdown;
                     break;
-                case "Validate":
-                    ValidateConfig validateConfig = this.SearchValidateConfig(id, documentConfig.ValidateConfigList);
-                    MarkdownItemDto validateMarkdown = this.CreateValidateMarkdown(
-                        validateConfig,
+                case "Evidence":
+                    EvidenceConfig evidenceConfig = this.SearchEvidenceConfig(id, documentConfig.EvidenceConfigList);
+                    MarkdownItemDto evidenceMarkdown = this.CreateEvidenceMarkdown(
+                        evidenceConfig,
                         documentConfig.ResultConfigList,
                         documentConfig.ProcessConfigList,
                         documentConfig.SchemaConfigList,
                         $"Document/{filePath}");
-                    this._markdownDtos[0] = validateMarkdown;
+                    this._markdownDtos[0] = evidenceMarkdown;
                     break;
                 case "Result":
                     ResultConfig resultConfig = this.SearchResultConfig(id, documentConfig.ResultConfigList);
@@ -220,7 +220,7 @@ namespace FactStatusTool.Scripts.Variable {
         /// <param name="id"></param>
         /// <param name="documentConfig"></param>
         /// <returns></returns>
-        private string SearchFilePath(string id, FacutStatusConfig documentConfig) {
+        private string SearchFilePath(string id, FactStatusConfig documentConfig) {
             string classTypeId = id.Substring(id.Length - 2);
             // idに紐づくデータを抽出
             switch(classTypeId) {
@@ -231,8 +231,8 @@ namespace FactStatusTool.Scripts.Variable {
                     var todo = documentConfig.TodoConfigList?.FirstOrDefault(todo => todo.Id == id);
                     return this.BuildPath(todo, documentConfig);
                 case "03":
-                    var validate = documentConfig.ValidateConfigList?.FirstOrDefault(validate => validate.Id == id);
-                    return this.BuildPath(validate, documentConfig);
+                    var evidence = documentConfig.EvidenceConfigList?.FirstOrDefault(evidence => evidence.Id == id);
+                    return this.BuildPath(evidence, documentConfig);
                 case "04":
                     var result = documentConfig.ResultConfigList?.FirstOrDefault(result => result.Id == id);
                     return this.BuildPath(result, documentConfig);
@@ -250,7 +250,7 @@ namespace FactStatusTool.Scripts.Variable {
             }
         }
 
-        private string BuildPath(SubjectConfig subjectConfig, FacutStatusConfig documentConfig) {
+        private string BuildPath(SubjectConfig subjectConfig, FactStatusConfig documentConfig) {
             // パスの結合
             List<string> pathList = new List<string> {
                 subjectConfig.PathName,
@@ -259,7 +259,7 @@ namespace FactStatusTool.Scripts.Variable {
             return string.Join("/", pathList);
         }
         
-        private string BuildPath(TodoConfig todoConfig, FacutStatusConfig documentConfig) {
+        private string BuildPath(TodoConfig todoConfig, FactStatusConfig documentConfig) {
             // 親のSubjectを取得
             var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
 
@@ -272,9 +272,9 @@ namespace FactStatusTool.Scripts.Variable {
             return string.Join("/", pathList);
         }
         
-        private string BuildPath(ValidateConfig validateConfig, FacutStatusConfig documentConfig) {
+        private string BuildPath(EvidenceConfig evidenceConfig, FactStatusConfig documentConfig) {
             // 親のTodoを取得
-            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == validateConfig.ParentId);
+            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == evidenceConfig.ParentId);
             // 親のSubjectを取得
             var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
             
@@ -282,17 +282,17 @@ namespace FactStatusTool.Scripts.Variable {
             List<string> pathList = new List<string> {
                 subjectConfig.PathName,
                 todoConfig.PathName,
-                validateConfig.PathName,
+                evidenceConfig.PathName,
                 "README.md"
             };
             return string.Join("/", pathList);
         }
         
-        private string BuildPath(ResultConfig resultConfig, FacutStatusConfig documentConfig) {
-            // 親のValidateを取得
-            var validateConfig = documentConfig.ValidateConfigList.First(validate => validate.Id == resultConfig.ParentId);
+        private string BuildPath(ResultConfig resultConfig, FactStatusConfig documentConfig) {
+            // 親のEvidenceを取得
+            var evidenceConfig = documentConfig.EvidenceConfigList.First(evidence => evidence.Id == resultConfig.ParentId);
             // 親のTodoを取得
-            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == validateConfig.ParentId);
+            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == evidenceConfig.ParentId);
             // 親のSubjectを取得
             var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
             
@@ -300,20 +300,20 @@ namespace FactStatusTool.Scripts.Variable {
             List<string> pathList = new List<string> {
                 subjectConfig.PathName,
                 todoConfig.PathName,
-                validateConfig.PathName,
+                evidenceConfig.PathName,
                 resultConfig.PathName,
                 "README.md"
             };
             return string.Join("/", pathList);
         }
         
-        private string BuildPath(RecordConfig recordConfig, FacutStatusConfig documentConfig) {
+        private string BuildPath(RecordConfig recordConfig, FactStatusConfig documentConfig) {
             // 親のResultを取得
             var resultConfig = documentConfig.ResultConfigList.First(result => result.Id == recordConfig.ParentId);
-            // 親のValidateを取得
-            var validateConfig = documentConfig.ValidateConfigList.First(validate => validate.Id == resultConfig.ParentId);
+            // 親のEvidenceを取得
+            var evidenceConfig = documentConfig.EvidenceConfigList.First(evidence => evidence.Id == resultConfig.ParentId);
             // 親のTodoを取得
-            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == validateConfig.ParentId);
+            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == evidenceConfig.ParentId);
             // 親のSubjectを取得
             var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
             
@@ -321,29 +321,7 @@ namespace FactStatusTool.Scripts.Variable {
             List<string> pathList = new List<string> {
                 subjectConfig.PathName,
                 todoConfig.PathName,
-                validateConfig.PathName,
-                resultConfig.PathName,
-                recordConfig.PathName,
-                "README.md"
-            };
-            return string.Join("/", pathList);
-        }
-        
-        private string BuildPath(ProcessConfig recordConfig, FacutStatusConfig documentConfig) {
-            // 親のResultを取得
-            var resultConfig = documentConfig.ResultConfigList.First(result => result.Id == recordConfig.ParentId);
-            // 親のValidateを取得
-            var validateConfig = documentConfig.ValidateConfigList.First(validate => validate.Id == resultConfig.ParentId);
-            // 親のTodoを取得
-            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == validateConfig.ParentId);
-            // 親のSubjectを取得
-            var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
-            
-            // パスの結合
-            List<string> pathList = new List<string> {
-                subjectConfig.PathName,
-                todoConfig.PathName,
-                validateConfig.PathName,
+                evidenceConfig.PathName,
                 resultConfig.PathName,
                 recordConfig.PathName,
                 "README.md"
@@ -351,13 +329,13 @@ namespace FactStatusTool.Scripts.Variable {
             return string.Join("/", pathList);
         }
         
-        private string BuildPath(SchemaConfig recordConfig, FacutStatusConfig documentConfig) {
+        private string BuildPath(ProcessConfig recordConfig, FactStatusConfig documentConfig) {
             // 親のResultを取得
             var resultConfig = documentConfig.ResultConfigList.First(result => result.Id == recordConfig.ParentId);
-            // 親のValidateを取得
-            var validateConfig = documentConfig.ValidateConfigList.First(validate => validate.Id == resultConfig.ParentId);
+            // 親のEvidenceを取得
+            var evidenceConfig = documentConfig.EvidenceConfigList.First(evidence => evidence.Id == resultConfig.ParentId);
             // 親のTodoを取得
-            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == validateConfig.ParentId);
+            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == evidenceConfig.ParentId);
             // 親のSubjectを取得
             var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
             
@@ -365,7 +343,29 @@ namespace FactStatusTool.Scripts.Variable {
             List<string> pathList = new List<string> {
                 subjectConfig.PathName,
                 todoConfig.PathName,
-                validateConfig.PathName,
+                evidenceConfig.PathName,
+                resultConfig.PathName,
+                recordConfig.PathName,
+                "README.md"
+            };
+            return string.Join("/", pathList);
+        }
+        
+        private string BuildPath(SchemaConfig recordConfig, FactStatusConfig documentConfig) {
+            // 親のResultを取得
+            var resultConfig = documentConfig.ResultConfigList.First(result => result.Id == recordConfig.ParentId);
+            // 親のEvidenceを取得
+            var evidenceConfig = documentConfig.EvidenceConfigList.First(evidence => evidence.Id == resultConfig.ParentId);
+            // 親のTodoを取得
+            var todoConfig = documentConfig.TodoConfigList.First(todo => todo.Id == evidenceConfig.ParentId);
+            // 親のSubjectを取得
+            var subjectConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == todoConfig.ParentId);
+            
+            // パスの結合
+            List<string> pathList = new List<string> {
+                subjectConfig.PathName,
+                todoConfig.PathName,
+                evidenceConfig.PathName,
                 resultConfig.PathName,
                 recordConfig.PathName,
                 "README.md"
@@ -441,7 +441,7 @@ namespace FactStatusTool.Scripts.Variable {
 
         private MarkdownItemDto CreateTodoMarkdown(
             TodoConfig todoConfig,
-            List<ValidateConfig> validateConfigList,
+            List<EvidenceConfig> evidenceConfigList,
             List<ProcessConfig> processConfigList,
             List<SchemaConfig> schemaConfigList,
             string filePath) {
@@ -452,11 +452,11 @@ namespace FactStatusTool.Scripts.Variable {
             // 実装内容
             markdownList.Add(Header(2, "実装内容"));
             markdownList.Add(Text(todoConfig.Description));
-            // 実装検証に紐づくValidateを抽出
-            markdownList.Add(Header(2, "実装検証"));
-            var validateFiltered = validateConfigList.Where(validate => validate.ParentId == todoConfig.Id).ToList();
-            foreach (var validate in validateFiltered) {
-                markdownList.Add(Link(validate.Title, $"./{validate.PathName}/README.md"));
+            // 実装証拠に紐づくEvidenceを抽出
+            markdownList.Add(Header(2, "実装証拠"));
+            var evidenceFiltered = evidenceConfigList.Where(evidence => evidence.ParentId == todoConfig.Id).ToList();
+            foreach (var evidence in evidenceFiltered) {
+                markdownList.Add(Link(evidence.Title, $"./{evidence.PathName}/README.md"));
             }
             // 実装手順に紐づくProcessを抽出
             markdownList.Add(Header(2, "実装手順"));
@@ -482,34 +482,34 @@ namespace FactStatusTool.Scripts.Variable {
             return markdownDto;
         }
 
-        private MarkdownItemDto CreateValidateMarkdown(
-            ValidateConfig validateConfig,
+        private MarkdownItemDto CreateEvidenceMarkdown(
+            EvidenceConfig evidenceConfig,
             List<ResultConfig> resultConfigList,
             List<ProcessConfig> processConfigList,
             List<SchemaConfig> schemaConfigList,
             string filePath) {
 
-            // Validate/README.md作成
+            // Evidence/README.md作成
             var markdownList = new List<string>();
-            markdownList.Add(Header(1, validateConfig.Title));
-            // 検証内容
-            markdownList.Add(Header(2, "検証内容"));
-            markdownList.Add(Text(validateConfig.Description));
-            // 検証結果に紐づくResultを抽出、追加
-            markdownList.Add(Header(2, "検証結果"));
-            var validateFiltered = resultConfigList.Where(result => result.ParentId == validateConfig.Id).ToList();
-            foreach (var validate in validateFiltered) {
-                markdownList.Add(Link(validate.Title, $"./{validate.PathName}/README.md"));
+            markdownList.Add(Header(1, evidenceConfig.Title));
+            // 証拠内容
+            markdownList.Add(Header(2, "証拠内容"));
+            markdownList.Add(Text(evidenceConfig.Description));
+            // 証拠結果に紐づくResultを抽出、追加
+            markdownList.Add(Header(2, "証拠結果"));
+            var evidenceFiltered = resultConfigList.Where(result => result.ParentId == evidenceConfig.Id).ToList();
+            foreach (var evidence in evidenceFiltered) {
+                markdownList.Add(Link(evidence.Title, $"./{evidence.PathName}/README.md"));
             }
-            // 検証手順に紐づくProcessを抽出、追加
-            markdownList.Add(Header(2, "検証手順"));
-            var processFiltered = processConfigList.Where(process => process.ParentId == validateConfig.Id).ToList();
+            // 証拠手順に紐づくProcessを抽出、追加
+            markdownList.Add(Header(2, "証拠手順"));
+            var processFiltered = processConfigList.Where(process => process.ParentId == evidenceConfig.Id).ToList();
             foreach (var process in processFiltered) {
                 markdownList.Add(Link(process.Title, $"./{process.PathName}/README.md"));
             }
-            // 検証手順に紐づくSchemaを抽出、追加
-            markdownList.Add(Header(2, "検証構想"));
-            var schemaFiltered = schemaConfigList.Where(schema => schema.ParentId == validateConfig.Id).ToList();
+            // 証拠手順に紐づくSchemaを抽出、追加
+            markdownList.Add(Header(2, "証拠構想"));
+            var schemaFiltered = schemaConfigList.Where(schema => schema.ParentId == evidenceConfig.Id).ToList();
             foreach (var schema in schemaFiltered) {
                 markdownList.Add(Link(schema.Title, $"./{schema.PathName}/README.md"));
             }
@@ -649,7 +649,7 @@ namespace FactStatusTool.Scripts.Variable {
             markdownList.Add(schemaConfig.Evaluation);
             // 仮説
             markdownList.Add(Header(2, "仮説"));
-            markdownList.Add(schemaConfig.Abduction);
+            markdownList.Add(schemaConfig.Hypothesis);
             // 抽象目標
             markdownList.Add(Header(2, "抽象目標"));
             markdownList.Add(schemaConfig.AbstractGoal);
@@ -676,8 +676,8 @@ namespace FactStatusTool.Scripts.Variable {
             return todoConfigList.First(todo => todo.Id == id);
         }
 
-        private ValidateConfig SearchValidateConfig(string id, List<ValidateConfig> validateConfigList) {
-            return validateConfigList.First(validate => validate.Id == id);
+        private EvidenceConfig SearchEvidenceConfig(string id, List<EvidenceConfig> evidenceConfigList) {
+            return evidenceConfigList.First(evidence => evidence.Id == id);
         }
 
         private ResultConfig SearchResultConfig(string id, List<ResultConfig> resultConfigList) {

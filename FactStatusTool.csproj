@@ -12,7 +12,6 @@
   <ItemGroup>
     <Folder Include="Scripts\Interface\" />
     <Folder Include="Tests\Interface\" />
-    <Folder Include="Tests\Core\" />
   </ItemGroup>
 
   <ItemGroup>

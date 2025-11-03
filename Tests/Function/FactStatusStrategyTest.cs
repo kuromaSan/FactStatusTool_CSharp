@@ -18,7 +18,7 @@ namespace FactStatusTool.Tests.Function {
         [Fact]
         public void LoadJsonByRelationalTest() {
             var documentStrategy = new FactStatusStrategy(new JsonRepository(), new MarkdownRepository());
-            FacutStatusConfig documentConfig = documentStrategy.LoadJsonByRelational("D:/Action/__CoreTemplateIDCM/Document/RelationalData.json");
+            FactStatusConfig documentConfig = documentStrategy.LoadJsonByRelational("D:/Action/__CoreTemplateIDCM/Document/RelationalData.json");
 
             Assert.NotNull(documentConfig);
             Assert.NotNull(documentConfig.SubjectConfigList);
@@ -46,12 +46,12 @@ namespace FactStatusTool.Tests.Function {
             //    output.WriteLine($"Todo_Description: {todoDto.Description}");
             //}
 
-            //foreach (ValidateDto validateDto in relationalDataDto.Validates) {
-            //    output.WriteLine($"Validate_ParentId: {validateDto.ParentId}");
-            //    output.WriteLine($"Validate_Id: {validateDto.Id}");
-            //    output.WriteLine($"Validate_Path: {validateDto.PathName}");
-            //    output.WriteLine($"Validate_Title: {validateDto.Title}");
-            //    output.WriteLine($"Validate_Description: {validateDto.Description}");
+            //foreach (EvidenceDto evidenceDto in relationalDataDto.Evidences) {
+            //    output.WriteLine($"Evidence_ParentId: {evidenceDto.ParentId}");
+            //    output.WriteLine($"Evidence_Id: {evidenceDto.Id}");
+            //    output.WriteLine($"Evidence_Path: {evidenceDto.PathName}");
+            //    output.WriteLine($"Evidence_Title: {evidenceDto.Title}");
+            //    output.WriteLine($"Evidence_Description: {evidenceDto.Description}");
             //}
 
             //foreach (ResultDto resultDto in relationalDataDto.Results) {

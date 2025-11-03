@@ -10,7 +10,7 @@ namespace FactStatusTool.Scripts.Function {
         private readonly JsonRepository _JsonRepository;
         private readonly MarkdownRepository _MarkdownRepository;
 
-        public object SelectConfigById(FacutStatusConfig documentConfig, string ducumentId) {
+        public object SelectConfigById(FactStatusConfig documentConfig, string ducumentId) {
 
             // Idを"'0000','00','00'"で区切る
 
@@ -28,40 +28,48 @@ namespace FactStatusTool.Scripts.Function {
             return new object();
         }
 
-        public FacutStatusConfig LoadJsonByRelational(string filePath) {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public FactStatusConfig LoadJsonByRelational(string filePath) {
             // jsonファイルを読み込み
             JsonByRelationalDto relationalDataDto = this._JsonRepository.LoadJsonByRelational(filePath);
 
             // DocumentConfigに変換
             var documentBuilder = new FactStatusBuilder();
-            documentBuilder.OfProjectConfigList(relationalDataDto.Subjects);
+            documentBuilder.OfSubjectConfigList(relationalDataDto.Subjects);
             documentBuilder.OfTodoConfigList(relationalDataDto.Todos);
-            documentBuilder.OfValidateConfigList(relationalDataDto.Validates);
+            documentBuilder.OfEvidenceConfigList(relationalDataDto.Evidences);
             documentBuilder.OfResultConfigList(relationalDataDto.Results);
             documentBuilder.OfArgumentConfigList(relationalDataDto.Arguments);
             documentBuilder.OfRecordConfigList(relationalDataDto.Records);
             documentBuilder.OfProcessConfigList(relationalDataDto.Processs);
             documentBuilder.OfStepConfigList(relationalDataDto.Steps);
             documentBuilder.OfSchemaConfigList(relationalDataDto.Schemas);
-            documentBuilder.OfExceptionConfigList(relationalDataDto.Exceptions);
-            FacutStatusConfig documentConfig = documentBuilder.Build();
+            FactStatusConfig documentConfig = documentBuilder.Build();
 
             return documentConfig;
         }
 
-        public void SaveJsonByRelational(string filePath, FacutStatusConfig documentConfig) {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="documentConfig"></param>
+        public void SaveJsonByRelational(string filePath, FactStatusConfig documentConfig) {
             // DocumentConfigをRelationalDataDtoに変換
             var jsonByRelationalDtoBuilder = new JsonByRelationalDtoBuilder();
             jsonByRelationalDtoBuilder.OfSubjects(documentConfig.SubjectConfigList);
             jsonByRelationalDtoBuilder.OfTodos(documentConfig.TodoConfigList);
-            jsonByRelationalDtoBuilder.OfValidates(documentConfig.ValidateConfigList);
+            jsonByRelationalDtoBuilder.OfEvidences(documentConfig.EvidenceConfigList);
             jsonByRelationalDtoBuilder.OfResults(documentConfig.ResultConfigList);
             jsonByRelationalDtoBuilder.OfArguments(documentConfig.ArgumentConfigList);
             jsonByRelationalDtoBuilder.OfRecords(documentConfig.RecordConfigList);
             jsonByRelationalDtoBuilder.OfProcess(documentConfig.ProcessConfigList);
             jsonByRelationalDtoBuilder.OfSteps(documentConfig.StepConfigList);
             jsonByRelationalDtoBuilder.OfSchemas(documentConfig.SchemaConfigList);
-            jsonByRelationalDtoBuilder.OfExceptions(documentConfig.ExceptionConfigList);
             JsonByRelationalDto jsonByRelationalDto = jsonByRelationalDtoBuilder.Build();
             // jsonファイルを保存
             this._JsonRepository.SaveJsonByRelational(filePath, jsonByRelationalDto);

@@ -11,8 +11,8 @@ namespace FactStatusTool.Scripts.Variable {
         public required List<SubjectJsonByRelationalDto> Subjects { get; set; }
         [JsonPropertyName("Todos")]
         public required List<TodoJsonByRelationalDto> Todos { get; set; }
-        [JsonPropertyName("Validates")]
-        public required List<ValidateJsonByRelationalDto> Validates { get; set; }
+        [JsonPropertyName("Evidences")]
+        public required List<EvidenceJsonByRelationalDto> Evidences { get; set; }
         [JsonPropertyName("Results")]
         public required List<ResultJsonByRelationalDto> Results { get; set; }
         [JsonPropertyName("arguments")]
@@ -51,7 +51,7 @@ namespace FactStatusTool.Scripts.Variable {
         public required string Description { get; set; }
     }
 
-    public class ValidateJsonByRelationalDto {
+    public class EvidenceJsonByRelationalDto {
         [JsonPropertyName("parent_id")]
         public required string ParentId { get; set; }
         [JsonPropertyName("id")]
@@ -132,8 +132,8 @@ namespace FactStatusTool.Scripts.Variable {
         public required string Experience { get; set; }
         [JsonPropertyName("evaluation")]
         public required string Evaluation { get; set; }
-        [JsonPropertyName("abduction")]
-        public required string Abduction { get; set; }
+        [JsonPropertyName("hypothesis")]
+        public required string Hypothesis { get; set; }
         [JsonPropertyName("abstraction_goal")]
         public required string AbstractionGoal { get; set; }
         [JsonPropertyName("execution_goal")]

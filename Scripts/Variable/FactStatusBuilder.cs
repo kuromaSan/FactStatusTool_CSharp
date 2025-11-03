@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -11,9 +13,9 @@ namespace FactStatusTool.Scripts.Variable {
     /// </summary>
     public class FactStatusBuilder {
         // フィールド
-        private List<SubjectConfig> _projectConfigList;
+        private List<SubjectConfig> _subjectConfigList;
         private List<TodoConfig> _todoConfigList;
-        private List<ValidateConfig> _validateConfigList;
+        private List<EvidenceConfig> _evidenceConfigList;
         private List<ResultConfig> _resultConfigList;
         private List<ArgumentConfig> _argumentConfigList;
         private List<RecordConfig> _recordConfigList;
@@ -21,8 +23,8 @@ namespace FactStatusTool.Scripts.Variable {
         private List<StepConfig> _stepConfigList;
         private List<SchemaConfig> _schemaConfigList;
 
-        public FactStatusBuilder OfProjectConfigList(List<SubjectConfig> value) {
-            _projectConfigList = value;
+        public FactStatusBuilder OfSubjectConfigList(List<SubjectConfig> value) {
+            _subjectConfigList = value;
             return this;
         }
 
@@ -31,8 +33,8 @@ namespace FactStatusTool.Scripts.Variable {
             return this;
         }
         
-        public FactStatusBuilder OfValidateConfigList(List<ValidateConfig> value) {
-            _validateConfigList = value;
+        public FactStatusBuilder OfEvidenceConfigList(List<EvidenceConfig> value) {
+            _evidenceConfigList = value;
             return this;
         }
 
@@ -66,14 +68,14 @@ namespace FactStatusTool.Scripts.Variable {
             return this;
         }
 
-        public FactStatusBuilder OfProjectConfigList(List<SubjectJsonByRelationalDto> value) {
+        public FactStatusBuilder OfSubjectConfigList(List<SubjectJsonByRelationalDto> value) {
             foreach (SubjectJsonByRelationalDto projectDto in value) {
                 SubjectConfig projectConfig = new SubjectConfig(
                     projectDto.Id,
                     projectDto.PathName,
                     projectDto.Title,
                     projectDto.Description);
-                _projectConfigList.Add(projectConfig);
+                _subjectConfigList.Add(projectConfig);
             }
             return this;
         }
@@ -91,15 +93,15 @@ namespace FactStatusTool.Scripts.Variable {
             return this;
         }
 
-        public FactStatusBuilder OfValidateConfigList(List<ValidateJsonByRelationalDto> value) {
-            foreach (ValidateJsonByRelationalDto validateDto in value) {
-                ValidateConfig validateConfig = new ValidateConfig(
-                    validateDto.ParentId,
-                    validateDto.Id,
-                    validateDto.PathName,
-                    validateDto.Title,
-                    validateDto.Description);
-                _validateConfigList.Add(validateConfig);
+        public FactStatusBuilder OfEvidenceConfigList(List<EvidenceJsonByRelationalDto> value) {
+            foreach (EvidenceJsonByRelationalDto evidenceDto in value) {
+                EvidenceConfig evidenceConfig = new EvidenceConfig(
+                    evidenceDto.ParentId,
+                    evidenceDto.Id,
+                    evidenceDto.PathName,
+                    evidenceDto.Title,
+                    evidenceDto.Description);
+                _evidenceConfigList.Add(evidenceConfig);
             }
             return this;
         }
@@ -185,7 +187,7 @@ namespace FactStatusTool.Scripts.Variable {
                     schemaDto.Title,
                     schemaDto.Experience,
                     schemaDto.Evaluation,
-                    schemaDto.Abduction,
+                    schemaDto.Hypothesis,
                     schemaDto.AbstractionGoal,
                     schemaDto.ExecutionGoal);
                 _schemaConfigList.Add(schemaConfig);
@@ -197,11 +199,11 @@ namespace FactStatusTool.Scripts.Variable {
         /// DocumentConfigの生成
         /// </summary>
         /// <returns></returns>
-        public FacutStatusConfig Build() {
-            return new FacutStatusConfig(
-                this._projectConfigList,
+        public FactStatusConfig Build() {
+            return new FactStatusConfig(
+                this._subjectConfigList,
                 this._todoConfigList,
-                this._validateConfigList,
+                this._evidenceConfigList,
                 this._resultConfigList,
                 this._argumentConfigList,
                 this._recordConfigList,
@@ -210,13 +212,153 @@ namespace FactStatusTool.Scripts.Variable {
                 this._schemaConfigList);
         }
 
+        static public FactStatusBuilder InitFactStatusBuilder() {
+            var factStatusBuilder = new FactStatusBuilder();
+
+            // 
+            var subjectConfigList = new List<SubjectConfig> { 
+                new SubjectConfig(
+                    "00010001",
+                    "Subject",
+                    "主題名",
+                    "")
+            };
+            factStatusBuilder.OfSubjectConfigList(subjectConfigList);
+
+            // 
+            var todoConfigList = new List<TodoConfig> {
+                new TodoConfig(
+                    "00010001",
+                    "00010002",
+                    "Todo",
+                    "実装名",
+                    "")
+            };
+            factStatusBuilder.OfTodoConfigList(todoConfigList);
+
+            //
+            var evidenceConfigList = new List<EvidenceConfig> {
+                new EvidenceConfig(
+                    "00010002",
+                    "00010003",
+                    "Evidence",
+                    "証拠名",
+                    "")
+            };
+            factStatusBuilder.OfEvidenceConfigList(evidenceConfigList);
+            
+            //
+            var resultConfigList = new List<ResultConfig> {
+                new ResultConfig(
+                    "00010003",
+                    "00010004",
+                    "result",
+                    "結果名",
+                    true,
+                    "1.0",
+                    "float",
+                    "null")
+            };
+            factStatusBuilder.OfResultConfigList(resultConfigList);
+            
+            //
+            var argumentConfigList = new List<ArgumentConfig> {
+                new ArgumentConfig(
+                    "00010004",
+                    "00010104",
+                    "intKey",
+                    "int",
+                    "12")
+            };
+            factStatusBuilder.OfArgumentConfigList(argumentConfigList);
+            
+            //
+            var recordConfigList = new List<RecordConfig> {
+                new RecordConfig(
+                    "00010004",
+                    "00010005",
+                    "20001010101010",
+                    "2000年10月10日10時10分10秒",
+                    DateTime.ParseExact(
+                        "2000-10-10 10:10:10",
+                        "yyyy-MM-dd HH:mm:ss",
+                        CultureInfo.InvariantCulture),
+                    "確認者",
+                    true,
+                    "1.0",
+                    "float",
+                    "null",
+                    "")
+            };
+            factStatusBuilder.OfRecordConfigList(recordConfigList);
+            
+            //
+            var processConfigList = new List<ProcessConfig> {
+                new ProcessConfig(
+                    "00010002",
+                    "00010006",
+                    "Process",
+                    "手順名"),
+                new ProcessConfig(
+                    "00010003",
+                    "00020006",
+                    "Process",
+                    "手順名"),
+            };
+            factStatusBuilder.OfProcessConfigList(processConfigList);
+            
+            //
+            var stepCnfigList = new List<StepConfig> {
+                new StepConfig(
+                    "00010006",
+                    "00010106",
+                    "1行目"),
+                new StepConfig(
+                    "00010006",
+                    "00020106",
+                    "2行目"),
+                new StepConfig(
+                    "00010006",
+                    "00030106",
+                    "3行目"),
+            };
+            factStatusBuilder.OfStepConfigList(stepCnfigList);
+
+            // 
+            var schemaConfigList = new List<SchemaConfig> {
+                new SchemaConfig(
+                    "00010001",
+                    "00010007",
+                    "Schema",
+                    "構想名",
+                    "体験内容",
+                    "評価内容",
+                    "仮説内容",
+                    "抽象目標内容",
+                    "具体目標内容"),
+                new SchemaConfig(
+                    "00010002",
+                    "00020007",
+                    "Schema",
+                    "構想名",
+                    "体験内容",
+                    "評価内容",
+                    "仮説内容",
+                    "抽象目標内容",
+                    "具体目標内容"),
+            };
+            factStatusBuilder.OfSchemaConfigList(schemaConfigList);
+
+            return factStatusBuilder;
+        }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public FactStatusBuilder() {
-            this._projectConfigList = new List<SubjectConfig>();
+            this._subjectConfigList = new List<SubjectConfig>();
             this._todoConfigList = new List<TodoConfig>();
-            this._validateConfigList = new List<ValidateConfig>();
+            this._evidenceConfigList = new List<EvidenceConfig>();
             this._resultConfigList = new List<ResultConfig>();
             this._argumentConfigList = new List<ArgumentConfig>();
             this._recordConfigList = new List<RecordConfig>();

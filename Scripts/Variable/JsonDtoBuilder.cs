@@ -9,14 +9,13 @@ namespace FactStatusTool.Scripts.Variable {
     public class JsonByRelationalDtoBuilder {
         private List<SubjectJsonByRelationalDto> _subjects;
         private List<TodoJsonByRelationalDto> _todos;
-        private List<ValidateJsonByRelationalDto> _validates;
+        private List<EvidenceJsonByRelationalDto> _evidences;
         private List<ResultJsonByRelationalDto> _results;
         private List<ArgumentJsonByRelationalDto> _arguments;
         private List<RecordJsonByRelationalDto> _records;
         private List<ProcessJsonByRelationalDto> _processs;
         private List<StepJsonByRelationalDto> _steps;
         private List<SchemaJsonByRelationalDto> _schemas;
-        private List<ExceptionJsonByRelationalDto> _exceptions;
 
         public JsonByRelationalDtoBuilder OfSubjects(List<SubjectConfig> value) {
             foreach (SubjectConfig subjectConfig in value) {
@@ -45,16 +44,16 @@ namespace FactStatusTool.Scripts.Variable {
             return this;
         }
 
-        public JsonByRelationalDtoBuilder OfValidates(List<ValidateConfig> value) {
-            foreach (ValidateConfig validateConfig in value) {
-                ValidateJsonByRelationalDto validateDto = new() {
-                    ParentId = validateConfig.ParentId,
-                    Id = validateConfig.Id,
-                    PathName = validateConfig.PathName,
-                    Title = validateConfig.Title,
-                    Description = validateConfig.Description
+        public JsonByRelationalDtoBuilder OfEvidences(List<EvidenceConfig> value) {
+            foreach (EvidenceConfig evidenceConfig in value) {
+                EvidenceJsonByRelationalDto evidenceDto = new() {
+                    ParentId = evidenceConfig.ParentId,
+                    Id = evidenceConfig.Id,
+                    PathName = evidenceConfig.PathName,
+                    Title = evidenceConfig.Title,
+                    Description = evidenceConfig.Description
                 };
-                _validates.Add(validateDto);
+                _evidences.Add(evidenceDto);
             }
             return this;
         }
@@ -120,7 +119,7 @@ namespace FactStatusTool.Scripts.Variable {
                     Title = schemaConfig.Title,
                     Experience = schemaConfig.Experience,
                     Evaluation = schemaConfig.Evaluation,
-                    Abduction = schemaConfig.Abduction,
+                    Hypothesis = schemaConfig.Hypothesis,
                     AbstractionGoal = schemaConfig.AbstractGoal,
                     ExecutionGoal = schemaConfig.ExecutionGoal
                 };
@@ -163,7 +162,7 @@ namespace FactStatusTool.Scripts.Variable {
             JsonByRelationalDto jsonByRelationalDto = new() {
                 Subjects = _subjects,
                 Todos = _todos,
-                Validates = _validates,
+                Evidences = _evidences,
                 Results = _results,
                 Records = _records,
                 Processs = _processs,
@@ -180,7 +179,7 @@ namespace FactStatusTool.Scripts.Variable {
         public JsonByRelationalDtoBuilder() {
             this._subjects = new List<SubjectJsonByRelationalDto>();
             this._todos = new List<TodoJsonByRelationalDto>();
-            this._validates = new List<ValidateJsonByRelationalDto>();
+            this._evidences = new List<EvidenceJsonByRelationalDto>();
             this._results = new List<ResultJsonByRelationalDto>();
             this._arguments = new List<ArgumentJsonByRelationalDto>();
             this._records = new List<RecordJsonByRelationalDto>();

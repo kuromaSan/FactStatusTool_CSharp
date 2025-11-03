@@ -17,7 +17,7 @@ namespace FactStatusTool.Scripts.Function {
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <returns>TreeDataDto</returns>
-        public static JsonByRelationalDto LoadJsonByTree(string jsonFilePath){
+        public JsonByRelationalDto LoadJsonByTree(string jsonFilePath){
             // ファイルパスからテキストに変換
             string jsonText = File.ReadAllText(jsonFilePath);
 
@@ -37,7 +37,7 @@ namespace FactStatusTool.Scripts.Function {
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <returns>RelationalDataDto</returns>
-        public static JsonByRelationalDto LoadJsonByRelational(string jsonFilePath){
+        public JsonByRelationalDto LoadJsonByRelational(string jsonFilePath){
             // ファイルパスからテキストに変換
             string jsonText = File.ReadAllText(jsonFilePath);
 
@@ -57,7 +57,7 @@ namespace FactStatusTool.Scripts.Function {
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <param name="jsonNode"></param>
-        public static void SaveJsonByTree(string jsonFilePath, JsonNode jsonNode){
+        public void SaveJsonByTree(string jsonFilePath, JsonNode jsonNode){
             // 整形オプションを作成
             var options = new JsonSerializerOptions {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
@@ -73,7 +73,7 @@ namespace FactStatusTool.Scripts.Function {
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <param name="jsonNode"></param>
-        public static void SaveJsonByRelational(string jsonFilePath, JsonByRelationalDto jsonByRelationalDto) {
+        public void SaveJsonByRelational(string jsonFilePath, JsonByRelationalDto jsonByRelationalDto) {
 
             // 整形オプションを作成
             JsonSerializerOptions jsonSerializerOptions1 = new() {
@@ -93,7 +93,7 @@ namespace FactStatusTool.Scripts.Function {
         /// IDパターン設定のjsonファイルを内容を読み込み
         /// </summary>
         /// <returns>IdPatternRulesDto</returns>
-        public static IdPatternRulesDto LoadJsonByIdPatternRules(string jsonFilePath) {
+        public IdPatternRulesDto LoadJsonByIdPatternRules(string jsonFilePath) {
             // ファイルパスからテキストに変換
             string jsonText = File.ReadAllText(jsonFilePath);
 

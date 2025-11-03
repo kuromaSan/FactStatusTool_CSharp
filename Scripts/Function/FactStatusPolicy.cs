@@ -10,169 +10,434 @@ namespace FactStatusTool.Scripts.Function {
     public class FactStatusPolicy {
         private readonly FactStatusStrategy _DocumentStrategy;
 
-        public void IsGetConfig(FacutStatusConfig documentConfig) {
-
-        }
-
         /// <summary>
         /// 設定一覧を表示
         /// </summary>
-        public void ViewConfigList(FacutStatusConfig documentConfig) {
+        public void ViewConfigList(
+            FactStatusConfig documentConfig,
+            string configId) {
 
         }
 
         /// <summary>
-        /// 設定をIDから選択
+        /// タイプ指定で設定を作成
         /// </summary>
-        /// <param name="configId"></param>
-        public void SelectConfig(FacutStatusConfig documentConfig, string configId) {
-
+        public FactStatusConfig CreateConfig(
+            FactStatusConfig documentConfig,
+            string configType) {
+            
+            return documentConfig;
         }
 
         /// <summary>
-        /// 実装設定の追加
+        /// パス名の設定
         /// </summary>
-        /// <param name="config"></param>
-        public void AddConfig(
-            FacutStatusConfig documentConfig,
-            TodoConfig config) {
+        public FactStatusConfig SetPathName(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return documentConfig;
+        }
+        
+        /// <summary>
+        /// パス名の取得
+        /// </summary>
+        public string GetPathName(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return "";
         }
 
         /// <summary>
-        /// 検証設定の追加
+        /// タイトルの設定
         /// </summary>
-        /// <param name="config"></param>
-        public void AddConfig(
-            FacutStatusConfig documentConfig,
-            ValidateConfig config) {
+        public FactStatusConfig SetTitle(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return documentConfig;
         }
 
         /// <summary>
-        /// 結果設定の追加
+        /// タイトルの取得
         /// </summary>
-        /// <param name="config"></param>
-        public void AddConfig(
-            FacutStatusConfig documentConfig,
-            ResultConfig config) {
+        public string GetTitle(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return "";
         }
 
         /// <summary>
-        /// 記録設定の追加
+        /// 説明の設定
         /// </summary>
-        /// <param name="config"></param>
-        public void AddConfig(
-            FacutStatusConfig documentConfig,
-            RecordConfig config) {
+        public FactStatusConfig SetDescription(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return documentConfig;
         }
 
         /// <summary>
-        /// 手順設定の追加
+        /// 説明の取得
         /// </summary>
-        /// <param name="config"></param>
-        public void AddConfig(
-            FacutStatusConfig documentConfig,
-            ProcessConfig config) {
+        public string GetDescription(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return "";
         }
 
         /// <summary>
-        /// 構想設定の追加
+        /// 成功、失敗の設定
         /// </summary>
-        /// <param name="config"></param>
-        public void AddConfig(
-            FacutStatusConfig documentConfig,
-            SchemaConfig config) {
+        public FactStatusConfig SetSuccess(
+            FactStatusConfig documentConfig,
+            string configId) {
 
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 成功、失敗状態の取得
+        /// </summary>
+        public bool GetSuccess(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return true;
+        }
+
+        /// <summary>
+        /// 例外の設定
+        /// </summary>
+        public FactStatusConfig SetException(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 例外の取得
+        /// </summary>
+        public string GetException(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// キーの設定
+        /// </summary>
+        public FactStatusConfig SetKey(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// キーの取得
+        /// </summary>
+        public string GetKey(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// データ型の設定
+        /// </summary>
+        public FactStatusConfig SetDataType(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// データ型の取得
+        /// </summary>
+        public string GetDataType(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 値の設定
+        /// </summary>
+        public FactStatusConfig SetValue(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 値の取得
+        /// </summary>
+        public string GetValue(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 日付の設定
+        /// </summary>
+        public FactStatusConfig SetDate(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 日付の取得
+        /// </summary>
+        public DateTime GetDate(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return DateTime.Now;
+        }
+
+        /// <summary>
+        /// 確認者の設定
+        /// </summary>
+        public FactStatusConfig SetReviewer(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 確認者の取得
+        /// </summary>
+        public string GetReviewer(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// メッセージの設定
+        /// </summary>
+        public FactStatusConfig SetMessage(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// メッセージの取得
+        /// </summary>
+        public string GetMessage(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 体験の設定
+        /// </summary>
+        public FactStatusConfig SetExperience(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 体験の取得
+        /// </summary>
+        public string GetExperience(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 評価の設定
+        /// </summary>
+        public FactStatusConfig SetEvaluation(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 評価の取得
+        /// </summary>
+        public string GetEvaluation(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 仮説の設定
+        /// </summary>
+        public FactStatusConfig SetHypothesis(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 仮説の取得
+        /// </summary>
+        public string GetHypothesis(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 抽象目標の設定
+        /// </summary>
+        public FactStatusConfig SetAbstractionGoal(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 抽象目標の取得
+        /// </summary>
+        public string GetAbstractionGoal(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
+        }
+
+        /// <summary>
+        /// 具体目標の設定
+        /// </summary>
+        public FactStatusConfig SetExecutionGoal(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return documentConfig;
+        }
+
+        /// <summary>
+        /// 具体目標の取得
+        /// </summary>
+        public string GetExecutionGoal(
+            FactStatusConfig documentConfig,
+            string configId) {
+
+            return "";
         }
 
         /// <summary>
         /// 設定IDから削除
         /// </summary>
         /// <param name="configId"></param>
-        public void DeleteConfig(
-            FacutStatusConfig documentConfig,
+        public FactStatusConfig DeleteConfig(
+            FactStatusConfig documentConfig,
             string configId) {
+            
 
+            return documentConfig;
         }
 
         /// <summary>
         /// 設定IDに移動
         /// </summary>
         /// <param name="configId"></param>
-        public void MoveConfig(
-            FacutStatusConfig documentConfig,
+        public FactStatusConfig MoveConfig(
+            FactStatusConfig documentConfig,
             string sourceId,
-            string distId) {
+            string destinationId) {
 
+
+            return documentConfig;
         }
 
         /// <summary>
         /// 設定IDにコピー
         /// </summary>
-        /// <param name="configId"></param>
-        public void CopyConfig(
-            FacutStatusConfig documentConfig,
+        /// <param name="documentConfig"></param>
+        /// <param name="sourceId"></param>
+        /// <param name="destinationIdList"></param>
+        /// <returns></returns>
+        public FactStatusConfig CopyConfig(
+            FactStatusConfig documentConfig,
             string sourceId,
-            string distId) {
+            List<string> destinationIdList) {
 
+
+            return documentConfig;
         }
 
         /// <summary>
         /// 実装数を取得
         /// </summary>
-        public void GetTodoCount(FacutStatusConfig documentConfig) {
+        public int GetTodoCount(FactStatusConfig documentConfig) {
 
+            return 0;
         }
 
         /// <summary>
-        /// 検証数を取得 
+        /// 証拠数を取得 
         /// </summary>
-        public void GetValidateCount(FacutStatusConfig documentConfig) {
+        public int GetEvidenceCount(FactStatusConfig documentConfig) {
 
+            return 0;
         }
 
         /// <summary>
         /// 結果数を取得
         /// </summary>
-        public void GetResultCount(FacutStatusConfig documentConfig) {
+        public int GetResultCount(FactStatusConfig documentConfig) {
 
+            return 0;
         }
 
         /// <summary>
         /// 成功数を取得
         /// </summary>
-        public void GetSuccessCount(FacutStatusConfig documentConfig) {
+        public int GetSuccessCount(FactStatusConfig documentConfig) {
 
-        }
-
-        /// <summary>
-        /// 成功内容数を取得
-        /// </summary>
-        public void GetSuccessConfigList(FacutStatusConfig documentConfig) {
-
+            return 0;
         }
 
         /// <summary>
         /// 失敗数を取得
         /// </summary>
-        public void GetFailureCount(FacutStatusConfig documentConfig) {
+        public int GetFailureCount(FactStatusConfig documentConfig) {
 
+            return 0;
         }
 
         /// <summary>
         /// 失敗内容数を取得
         /// </summary>
-        public void GetFailureConfigList(FacutStatusConfig documentConfig) {
+        public void GetFailureConfigList(FactStatusConfig documentConfig) {
 
         }
 
         // # 読み込み書き出し
-
         /// <summary>
         /// 階層型Jsonの読み込み
         /// </summary>
@@ -181,24 +446,29 @@ namespace FactStatusTool.Scripts.Function {
         }
 
         /// <summary>
-        /// データベース型jsonの読み込み
+        /// 階層型Jsonで保存
         /// </summary>
-        public FacutStatusConfig LoadJsonByRelational(string loadFilePath) {
-            FacutStatusConfig loadDocumentConfig = this._DocumentStrategy.LoadJsonByRelational(loadFilePath);
-            return loadDocumentConfig;
+        public void SaveJsonByTree(
+            string saveFilePath,
+            FactStatusConfig documentConfig) {
+
         }
 
         /// <summary>
-        /// 階層型Jsonで保存
+        /// データベース型jsonの読み込み
         /// </summary>
-        public void SaveJsonByTree(string saveFilePath) {
-
+        public FactStatusConfig LoadJsonByRelational(string loadFilePath) {
+            FactStatusConfig loadDocumentConfig = this._DocumentStrategy.LoadJsonByRelational(loadFilePath);
+            return loadDocumentConfig;
         }
 
         /// <summary>
         /// データベース型Jsonで保存
         /// </summary>
-        public void SaveJsonByRelational(string saveFilePath,FacutStatusConfig documentConfig) {
+        public void SaveJsonByRelational(
+            string saveFilePath,
+            FactStatusConfig documentConfig) {
+
             this._DocumentStrategy.SaveJsonByRelational(saveFilePath,documentConfig);
         }
 
@@ -212,7 +482,7 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// Markdown単体で保存
         /// </summary>
-        public void SaveMarkdownBySingle(string saveFilePath,FacutStatusConfig documentConfig) {
+        public void SaveMarkdownBySingle(string saveFilePath,FactStatusConfig documentConfig) {
 
         }
 
@@ -226,7 +496,7 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// Markdownルートを作成して保存
         /// </summary>
-        public void SaveMarkdownByRoot(string saveFilePath,FacutStatusConfig documentConfig) {
+        public void SaveMarkdownByRoot(string saveFilePath,FactStatusConfig documentConfig) {
 
         }
 

@@ -15,7 +15,7 @@ namespace FactStatusTool.Tests.Function {
     public class JsonRepositoryTest(ITestOutputHelper output) {
         [Fact]
         public void LoadJsonByRelationalTest() {
-            JsonByRelationalDto relationalDataDto = JsonRepository.LoadJsonByRelational("D:/Action/FactStatusTool/Documents/RelationalData.json");
+            JsonByRelationalDto relationalDataDto = new JsonRepository().LoadJsonByRelational("D:/Action/FactStatusTool/Documents/RelationalData.json");
 
             Assert.NotNull(relationalDataDto);
             Assert.NotNull(relationalDataDto.Subjects);
@@ -26,7 +26,7 @@ namespace FactStatusTool.Tests.Function {
                 fileInfo.Delete();
             }
             
-            JsonRepository.SaveJsonByRelational(fileInfo.ToString(), relationalDataDto);
+            new JsonRepository().SaveJsonByRelational(fileInfo.ToString(), relationalDataDto);
 
 
 
@@ -45,12 +45,12 @@ namespace FactStatusTool.Tests.Function {
                 output.WriteLine($"Todo_Description: {todoDto.Description}");
             }
 
-            foreach (ValidateJsonByRelationalDto validateDto in relationalDataDto.Validates) {
-                output.WriteLine($"Validate_ParentId: {validateDto.ParentId}");
-                output.WriteLine($"Validate_Id: {validateDto.Id}");
-                output.WriteLine($"Validate_Path: {validateDto.PathName}");
-                output.WriteLine($"Validate_Title: {validateDto.Title}");
-                output.WriteLine($"Validate_Description: {validateDto.Description}");
+            foreach (EvidenceJsonByRelationalDto evidenceDto in relationalDataDto.Evidences) {
+                output.WriteLine($"Evidence_ParentId: {evidenceDto.ParentId}");
+                output.WriteLine($"Evidence_Id: {evidenceDto.Id}");
+                output.WriteLine($"Evidence_Path: {evidenceDto.PathName}");
+                output.WriteLine($"Evidence_Title: {evidenceDto.Title}");
+                output.WriteLine($"Evidence_Description: {evidenceDto.Description}");
             }
 
             foreach (ResultJsonByRelationalDto resultDto in relationalDataDto.Results) {
@@ -81,7 +81,7 @@ namespace FactStatusTool.Tests.Function {
 
         [Fact]
         public void LoadJsonByIdPatternRulesTest() {
-            IdPatternRulesDto idPatternRulesDto = JsonRepository.LoadJsonByIdPatternRules("D:/Action/__CoreTemplateIDCM/Documents/IdPatternRules.json");
+            IdPatternRulesDto idPatternRulesDto = new JsonRepository().LoadJsonByIdPatternRules("D:/Action/__CoreTemplateIDCM/Documents/IdPatternRules.json");
 
             Assert.NotNull(idPatternRulesDto);
             Assert.NotNull(idPatternRulesDto.ClassTypes);

@@ -13,16 +13,16 @@ namespace FactStatusTool.Tests.Function {
     public class MarkdownRepositoryTest {
         private readonly ITestOutputHelper output;
 
-        private FacutStatusConfig CreateDocumentConfig() {
+        private FactStatusConfig CreateDocumentConfig() {
             var documentStrategy = new FactStatusStrategy(new JsonRepository(), new MarkdownRepository());
-            FacutStatusConfig documentConfig = documentStrategy.LoadJsonByRelational("D:/Action/__CoreTemplateIDCM/Document/RelationalData.json");
+            FactStatusConfig documentConfig = documentStrategy.LoadJsonByRelational("D:/Action/__CoreTemplateIDCM/Document/RelationalData.json");
             return documentConfig;
         }
 
         [Fact]
         public void SaveMarkdownByRootTest() {
             // JsonからDocumentConfigを生成
-            FacutStatusConfig documentConfig = CreateDocumentConfig();
+            FactStatusConfig documentConfig = CreateDocumentConfig();
             // Markdownの保存先ルートディレクトリ
             string markdownRootDirectory = "D:/Action/FactStatus_CSharp";
 

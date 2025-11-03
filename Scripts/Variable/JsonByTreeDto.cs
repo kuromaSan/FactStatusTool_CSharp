@@ -38,8 +38,8 @@ namespace FactStatusTool.Scripts.Variable {
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        [JsonPropertyName("Validate")]
-        public List<ValidateDtoByTree>? Validate { get; set; }
+        [JsonPropertyName("Evidence")]
+        public List<EvidenceDtoByTree>? Evidence { get; set; }
 
         [JsonPropertyName("Process")]
         public List<ProcessDtoByTree>? Process { get; set; }
@@ -48,7 +48,7 @@ namespace FactStatusTool.Scripts.Variable {
         public List<SchemaDtoByTree>? Schema { get; set; }
     }
 
-    public class ValidateDtoByTree {
+    public class EvidenceDtoByTree {
         [JsonPropertyName("path_name")]
         public required string PathName { get; set; }
 
@@ -149,8 +149,8 @@ namespace FactStatusTool.Scripts.Variable {
         [JsonPropertyName("evaluation")]
         public string? Evaluation { get; set; }
 
-        [JsonPropertyName("abduction")]
-        public string? Abduction { get; set; }
+        [JsonPropertyName("hypothesis")]
+        public string? Hypothesis { get; set; }
 
         [JsonPropertyName("abstraction_goal")]
         public string? AbstractionGoal { get; set; }

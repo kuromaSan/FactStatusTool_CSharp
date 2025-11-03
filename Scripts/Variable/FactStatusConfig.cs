@@ -12,17 +12,17 @@ namespace FactStatusTool.Scripts.Variable {
     /// </summary>
     /// <param name="subjectConfigs"></param>
     /// <param name="todoConfigs"></param>
-    /// <param name="validateConfigs"></param>
+    /// <param name="evidenceConfigs"></param>
     /// <param name="resultConfigs"></param>
     /// <param name="argumentConfigs"></param>
     /// <param name="recordConfigs"></param>
     /// <param name="processConfigs"></param>
     /// <param name="stepConfigs"></param>
     /// <param name="schemaConfigs"></param>
-    public class FacutStatusConfig(
+    public class FactStatusConfig(
         List<SubjectConfig> subjectConfigs,
         List<TodoConfig> todoConfigs,
-        List<ValidateConfig> validateConfigs,
+        List<EvidenceConfig> evidenceConfigs,
         List<ResultConfig> resultConfigs,
         List<ArgumentConfig> argumentConfigs,
         List<RecordConfig> recordConfigs,
@@ -47,12 +47,12 @@ namespace FactStatusTool.Scripts.Variable {
             }
         }
 
-        public List<ValidateConfig> ValidateConfigList {
+        public List<EvidenceConfig> EvidenceConfigList {
             get {
-                return validateConfigs;
+                return evidenceConfigs;
             }
             internal set {
-                validateConfigs = value;
+                evidenceConfigs = value;
             }
         }
 
@@ -234,7 +234,7 @@ namespace FactStatusTool.Scripts.Variable {
     }
 
     /// <summary>
-    /// 
+    /// 証拠に関するクラス
     /// </summary>
     /// <remarks>
     /// コンストラクタ
@@ -244,7 +244,7 @@ namespace FactStatusTool.Scripts.Variable {
     /// <param name="pathName"></param>
     /// <param name="title"></param>
     /// <param name="description"></param>
-    public class ValidateConfig(
+    public class EvidenceConfig(
         string parentId,
         string id,
         string pathName,
@@ -583,7 +583,7 @@ namespace FactStatusTool.Scripts.Variable {
     /// <param name="title"></param>
     /// <param name="experience"></param>
     /// <param name="evaluation"></param>
-    /// <param name="abduction"></param>
+    /// <param name="hypothesis"></param>
     /// <param name="abstractGoal"></param>
     /// <param name="executionGoal"></param>
     public class SchemaConfig(
@@ -593,7 +593,7 @@ namespace FactStatusTool.Scripts.Variable {
         string title,
         string experience,
         string evaluation,
-        string abduction,
+        string hypothesis,
         string abstractGoal,
         string executionGoal) {
         public string ParentId {
@@ -650,12 +650,12 @@ namespace FactStatusTool.Scripts.Variable {
             }
         }
 
-        public string Abduction {
+        public string Hypothesis {
             get {
-                return abduction;
+                return hypothesis;
             }
             internal set {
-                abduction = value;
+                hypothesis = value;
             }
         }
 
