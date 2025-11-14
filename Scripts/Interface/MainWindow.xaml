@@ -5,11 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Scripts.Interface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="FactStatusTool - Markdown Export" Height="200" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
+
+        <!-- RelationalJson label and textbox -->
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="RelationalJson:" />
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="RelationalJsonPathTextBox" Margin="6,4" />
+        <Button Grid.Row="0" Grid.Column="2" Content="..." Margin="6,4" Click="BrowseRelationalJson_Click" />
+
+        <!-- Markdown label and textbox -->
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Markdown:" />
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="MarkdownOutputPathTextBox" Margin="6,4" />
+        <Button Grid.Row="1" Grid.Column="2" Content="..." Margin="6,4" Click="BrowseMarkdownOutput_Click" />
+
+        <!-- Convert button -->
+        <Button Grid.Row="2" Grid.Column="1" x:Name="ConvertButton" Content="変換を実行" Margin="6,12" Width="120" HorizontalAlignment="Left" Click="ConvertButton_Click" />
 
     </Grid>
 </Window>
