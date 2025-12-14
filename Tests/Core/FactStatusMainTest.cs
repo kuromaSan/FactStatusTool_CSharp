@@ -7,8 +7,13 @@ using Xunit;
 using Xunit.Abstractions;
 
 namespace FactStatusTool.Tests.Core {
-    public class FactStatusModelTest(ITestOutputHelper output) {
+    public class FactStatusMainTest(ITestOutputHelper output) {
         private readonly ITestOutputHelper output = output;
+
+        [Fact]
+        public void LoadFilePath() {
+
+        }
 
         [Fact]
         public void SaveJsonByRelational() {

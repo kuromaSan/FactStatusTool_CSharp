@@ -70,9 +70,9 @@ namespace FactStatusTool.Scripts.Core {
         /// FactStatusModelを生成
         /// </summary>
         /// <returns></returns>
-        public FactStatusModel Build() {
+        public FactStatusMain Build() {
             FactStatusConfig factStatusConfig = this._factStatusBuilder.Build();
-            return new FactStatusModel(
+            return new FactStatusMain(
                 factStatusConfig,
                 this._factStatusPolicy);
         }

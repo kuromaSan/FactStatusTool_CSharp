@@ -7,344 +7,106 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FactStatusTool.Scripts.Function {
-    public class FactStatusPolicy {
-        private readonly FactStatusStrategy _DocumentStrategy;
+    public class FactStatusPolicy(
+    FactStatusStrategy documentStrategy) {
+        private readonly FactStatusStrategy _DocumentStrategy = documentStrategy;
+
+        // Exception管理用リスト。いつか専用のクラスを用意したい
+        private readonly List<Exception> _ExceptionList = [];
+        private const string LOADFILEPATH_EXCEPTION = "LoadFilePathにファイルパスを設定してください。\nFactStatus.LoadFilePath = \"ファイルパス\"";
+        private const string SAVEFILEPATH_EXCEPTION = "SaveFilePathにファイルパスを設定してください。\nFactStatus.SaveFilePath = \"ファイルパス\"";
+        private const string CONFIGTYPE_EXCEPTION = "ConfigTypeに\"IDの後ろ2桁\"の文字列を設定してください。\nFactStatus.ConfigType = \"IDの後ろ2桁\"";
+        private const string CONFIGID_EXCEPTION = "SelectConfigIdに\"選択対象のID\"の文字列を設定してください。\nFactStatus.SelectConfigId = \"選択対象のID\"";
+        private const string PROPERTYNAME_EXCEPTION = "SelectPropertyNameに\"IDに含まれるプロパティ\"の文字列を設定してください。\nFactStatus.SelectPropertyName = \"IDに含まれるプロパティ\"";
+        private const string EDITVALUE_EXCEPTION = "EditValueに\"変更内容\"の文字列を設定してください。\nFactStatus.EditValue = \"変更内容\"";
+        private const string MOVECONFIGID_EXCEPTION = "MoveConfigIdに\"移動先のID\"の文字列を設定してください。\nFactStatus.MoveConfigId = \"移動先のID\"";
+        private const string COPYCONFIGIDLIST_EXCEPTION = "CopyConfigIdListに\"コピー先のID\"の配列[文字列]を設定してください。\nFactStatus.CopyConfigIdList = [\"コピー先のID\",\"複数コピーする場合のID\"]";
 
         /// <summary>
         /// 設定一覧を表示
         /// </summary>
-        public void ViewConfigList(
-            FactStatusConfig documentConfig,
-            string configId) {
+        public string ViewConfigList(
+        FactStatusConfig documentConfig,
+        string? configId) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( configId )) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGID_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
+            return configId!;
         }
 
         /// <summary>
         /// タイプ指定で設定を作成
         /// </summary>
         public FactStatusConfig CreateConfig(
-            FactStatusConfig documentConfig,
-            string configType) {
-            
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// パス名の設定
-        /// </summary>
-        public FactStatusConfig SetPathName(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-        
-        /// <summary>
-        /// パス名の取得
-        /// </summary>
-        public string GetPathName(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// タイトルの設定
-        /// </summary>
-        public FactStatusConfig SetTitle(
-            FactStatusConfig documentConfig,
-            string configId) {
+        FactStatusConfig documentConfig,
+        string? configType) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( configType )) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGTYPE_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
             return documentConfig;
         }
 
         /// <summary>
-        /// タイトルの取得
+        /// 指定したプロパティ内容を設定
         /// </summary>
-        public string GetTitle(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 説明の設定
-        /// </summary>
-        public FactStatusConfig SetDescription(
-            FactStatusConfig documentConfig,
-            string configId) {
+        /// <param name="documentConfig"></param>
+        /// <param name="configId"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="editValue"></param>
+        /// <returns></returns>
+        public FactStatusConfig SetEditConfig(
+        FactStatusConfig documentConfig,
+        string? configId,
+        string? propertyName,
+        string? editValue) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( configId )) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGID_EXCEPTION));
+            }
+            if (string.IsNullOrEmpty( propertyName )) {
+                this._ExceptionList.Add(new ArgumentNullException(PROPERTYNAME_EXCEPTION));
+            }
+            if (string.IsNullOrEmpty( editValue )) {
+                this._ExceptionList.Add(new ArgumentNullException(EDITVALUE_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
             return documentConfig;
         }
 
         /// <summary>
-        /// 説明の取得
+        /// 指定したプロパティ内容を取得
         /// </summary>
-        public string GetDescription(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 成功、失敗の設定
-        /// </summary>
-        public FactStatusConfig SetSuccess(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 成功、失敗状態の取得
-        /// </summary>
-        public bool GetSuccess(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return true;
-        }
-
-        /// <summary>
-        /// 例外の設定
-        /// </summary>
-        public FactStatusConfig SetException(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 例外の取得
-        /// </summary>
-        public string GetException(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// キーの設定
-        /// </summary>
-        public FactStatusConfig SetKey(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// キーの取得
-        /// </summary>
-        public string GetKey(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// データ型の設定
-        /// </summary>
-        public FactStatusConfig SetDataType(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// データ型の取得
-        /// </summary>
-        public string GetDataType(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 値の設定
-        /// </summary>
-        public FactStatusConfig SetValue(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 値の取得
-        /// </summary>
-        public string GetValue(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 日付の設定
-        /// </summary>
-        public FactStatusConfig SetDate(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 日付の取得
-        /// </summary>
-        public DateTime GetDate(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return DateTime.Now;
-        }
-
-        /// <summary>
-        /// 確認者の設定
-        /// </summary>
-        public FactStatusConfig SetReviewer(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 確認者の取得
-        /// </summary>
-        public string GetReviewer(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// メッセージの設定
-        /// </summary>
-        public FactStatusConfig SetMessage(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// メッセージの取得
-        /// </summary>
-        public string GetMessage(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 体験の設定
-        /// </summary>
-        public FactStatusConfig SetExperience(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 体験の取得
-        /// </summary>
-        public string GetExperience(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 評価の設定
-        /// </summary>
-        public FactStatusConfig SetEvaluation(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 評価の取得
-        /// </summary>
-        public string GetEvaluation(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 仮説の設定
-        /// </summary>
-        public FactStatusConfig SetHypothesis(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 仮説の取得
-        /// </summary>
-        public string GetHypothesis(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 抽象目標の設定
-        /// </summary>
-        public FactStatusConfig SetAbstractionGoal(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 抽象目標の取得
-        /// </summary>
-        public string GetAbstractionGoal(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return "";
-        }
-
-        /// <summary>
-        /// 具体目標の設定
-        /// </summary>
-        public FactStatusConfig SetExecutionGoal(
-            FactStatusConfig documentConfig,
-            string configId) {
-
-            return documentConfig;
-        }
-
-        /// <summary>
-        /// 具体目標の取得
-        /// </summary>
-        public string GetExecutionGoal(
-            FactStatusConfig documentConfig,
-            string configId) {
+        /// <param name="documentConfig"></param>
+        /// <param name="configId"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public string GetEditConfig(
+        FactStatusConfig documentConfig,
+        string? configId,
+        string? propertyName) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( configId )) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGID_EXCEPTION));
+            }
+            if (string.IsNullOrEmpty( propertyName )) {
+                this._ExceptionList.Add(new ArgumentNullException(PROPERTYNAME_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
             return "";
         }
@@ -354,9 +116,15 @@ namespace FactStatusTool.Scripts.Function {
         /// </summary>
         /// <param name="configId"></param>
         public FactStatusConfig DeleteConfig(
-            FactStatusConfig documentConfig,
-            string configId) {
-            
+        FactStatusConfig documentConfig,
+        string? configId) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( configId )) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGID_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
             return documentConfig;
         }
@@ -366,10 +134,19 @@ namespace FactStatusTool.Scripts.Function {
         /// </summary>
         /// <param name="configId"></param>
         public FactStatusConfig MoveConfig(
-            FactStatusConfig documentConfig,
-            string sourceId,
-            string destinationId) {
-
+        FactStatusConfig documentConfig,
+        string? sourceId,
+        string? destinationId) {
+            // 引数チェック
+            if (string.IsNullOrEmpty(sourceId)) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGID_EXCEPTION));
+            }
+            if (string.IsNullOrEmpty(destinationId)) {
+                this._ExceptionList.Add(new ArgumentNullException(MOVECONFIGID_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
             return documentConfig;
         }
@@ -382,9 +159,19 @@ namespace FactStatusTool.Scripts.Function {
         /// <param name="destinationIdList"></param>
         /// <returns></returns>
         public FactStatusConfig CopyConfig(
-            FactStatusConfig documentConfig,
-            string sourceId,
-            List<string> destinationIdList) {
+        FactStatusConfig documentConfig,
+        string? sourceId,
+        List<string>? destinationIdList) {
+            // 引数チェック
+            if (string.IsNullOrEmpty(sourceId)) {
+                this._ExceptionList.Add(new ArgumentNullException(CONFIGID_EXCEPTION));
+            }
+            if (destinationIdList == null || destinationIdList.Count == 0) {
+                this._ExceptionList.Add(new ArgumentNullException(COPYCONFIGIDLIST_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
 
             return documentConfig;
@@ -393,7 +180,8 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 実装数を取得
         /// </summary>
-        public int GetTodoCount(FactStatusConfig documentConfig) {
+        public int GetTodoCount(
+        FactStatusConfig documentConfig) {
 
             return 0;
         }
@@ -401,7 +189,8 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 証拠数を取得 
         /// </summary>
-        public int GetEvidenceCount(FactStatusConfig documentConfig) {
+        public int GetEvidenceCount(
+        FactStatusConfig documentConfig) {
 
             return 0;
         }
@@ -409,7 +198,8 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 結果数を取得
         /// </summary>
-        public int GetResultCount(FactStatusConfig documentConfig) {
+        public int GetResultCount(
+        FactStatusConfig documentConfig) {
 
             return 0;
         }
@@ -417,7 +207,8 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 成功数を取得
         /// </summary>
-        public int GetSuccessCount(FactStatusConfig documentConfig) {
+        public int GetSuccessCount(
+        FactStatusConfig documentConfig) {
 
             return 0;
         }
@@ -425,7 +216,8 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 失敗数を取得
         /// </summary>
-        public int GetFailureCount(FactStatusConfig documentConfig) {
+        public int GetFailureCount(
+        FactStatusConfig documentConfig) {
 
             return 0;
         }
@@ -433,7 +225,8 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 失敗内容数を取得
         /// </summary>
-        public void GetFailureConfigList(FactStatusConfig documentConfig) {
+        public void GetFailureConfigList(
+        FactStatusConfig documentConfig) {
 
         }
 
@@ -441,7 +234,15 @@ namespace FactStatusTool.Scripts.Function {
         /// <summary>
         /// 階層型Jsonの読み込み
         /// </summary>
-        public void LoadJsonByTree(string loadFilePath) {
+        public void LoadJsonByTree(
+        string? loadFilePath) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( loadFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(LOADFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
         }
 
@@ -449,16 +250,32 @@ namespace FactStatusTool.Scripts.Function {
         /// 階層型Jsonで保存
         /// </summary>
         public void SaveJsonByTree(
-            string saveFilePath,
-            FactStatusConfig documentConfig) {
+        string? saveFilePath,
+        FactStatusConfig documentConfig) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( saveFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(SAVEFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
         }
 
         /// <summary>
         /// データベース型jsonの読み込み
         /// </summary>
-        public FactStatusConfig LoadJsonByRelational(string loadFilePath) {
-            FactStatusConfig loadDocumentConfig = this._DocumentStrategy.LoadJsonByRelational(loadFilePath);
+        public FactStatusConfig LoadJsonByRelational(
+        string? loadFilePath) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( loadFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(LOADFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
+
+            FactStatusConfig loadDocumentConfig = this._DocumentStrategy.LoadJsonByRelational(loadFilePath!);
             return loadDocumentConfig;
         }
 
@@ -466,43 +283,74 @@ namespace FactStatusTool.Scripts.Function {
         /// データベース型Jsonで保存
         /// </summary>
         public void SaveJsonByRelational(
-            string saveFilePath,
-            FactStatusConfig documentConfig) {
+        string? saveFilePath,
+        FactStatusConfig documentConfig) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( saveFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(SAVEFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
-            this._DocumentStrategy.SaveJsonByRelational(saveFilePath,documentConfig);
+            this._DocumentStrategy.SaveJsonByRelational(saveFilePath!,documentConfig);
         }
 
         /// <summary>
         /// Markdown単体を読み込み
         /// </summary>
-        public void LoadMarkdownBySingle(string loadFilePath) {
-
+        public void LoadMarkdownBySingle(
+        string? loadFilePath) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( loadFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(LOADFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
         }
 
         /// <summary>
         /// Markdown単体で保存
         /// </summary>
-        public void SaveMarkdownBySingle(string saveFilePath,FactStatusConfig documentConfig) {
-
+        public void SaveMarkdownBySingle(
+        string? saveFilePath,
+        FactStatusConfig documentConfig) {
+            // 引数チェック
+            if (string.IsNullOrEmpty( saveFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(SAVEFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
         }
 
         /// <summary>
         /// Markdownルートから読み込み
         /// </summary>
-        public void LoadMarkdownByRoot(string loadFilePath) {
+        public void LoadMarkdownByRoot(
+        string? loadFilePath) {
+            if (string.IsNullOrEmpty( loadFilePath )) {
+                this._ExceptionList.Add(new ArgumentNullException(LOADFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
 
         }
 
         /// <summary>
         /// Markdownルートを作成して保存
         /// </summary>
-        public void SaveMarkdownByRoot(string saveFilePath,FactStatusConfig documentConfig) {
-
-        }
-
-
-        public FactStatusPolicy(FactStatusStrategy documentStrategy) {
-            this._DocumentStrategy = documentStrategy;
+        public void SaveMarkdownByRoot(
+        string? saveFilePath,
+        FactStatusConfig documentConfig) {
+            if (string.IsNullOrEmpty(saveFilePath)) {
+                this._ExceptionList.Add(new ArgumentNullException(SAVEFILEPATH_EXCEPTION));
+            }
+            if (_ExceptionList.Count > 0) {
+                throw new AggregateException(this._ExceptionList);
+            }
         }
     }
 }
