@@ -9,8 +9,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FactStatusTool.Scripts.Function;
-using FactStatusTool.Scripts.Variable;
+using FactStatusTool.Scripts.Logic;
+using FactStatusTool.Scripts.Setup;
 
 namespace Scripts.Interface;
 
@@ -68,11 +68,11 @@ public partial class MainWindow : Window
             FactStatusConfig config = policy.LoadJsonByRelational(jsonPath);
 
             // build markdown dto list
-            var builder = new MarkdownDtoBuilder();
-            var markdownDto = builder.OfFactStatusConfig(config).ListBuild();
+            //var builder = new MarkdownDtoBuilder();
+            //var markdownDto = builder.OfFactStatusConfig(config).ListBuild();
 
             // save markdown files
-            markdownRepo.SaveMarkdownByRoot(markdownRoot, markdownDto);
+            //markdownRepo.SaveMarkdownByRoot(markdownRoot, markdownDto);
 
             System.Windows.MessageBox.Show("変換が完了しました。", "完了", MessageBoxButton.OK, MessageBoxImage.Information);
         }

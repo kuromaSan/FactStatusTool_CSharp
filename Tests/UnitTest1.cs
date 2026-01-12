@@ -6,6 +6,6 @@ public class UnitTest1(ITestOutputHelper output) {
     private readonly ITestOutputHelper output = output;
     [Fact]
     public void Test1() {
-
+        // 空テスト
     }
 }

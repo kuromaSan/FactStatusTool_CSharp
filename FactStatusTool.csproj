@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Tests\Interface\" />
+    <Folder Include="Tests\Value\" />
   </ItemGroup>
 
   <ItemGroup>

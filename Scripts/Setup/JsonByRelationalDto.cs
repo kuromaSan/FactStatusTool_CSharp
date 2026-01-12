@@ -1,0 +1,160 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace FactStatusTool.Scripts.Setup {
+    public class JsonByRelationalDto {
+        [JsonPropertyName("Subjects")]
+        public required List<SubjectJsonByRelationalDto> Subjects { get; set; }
+        [JsonPropertyName("Achievements")]
+        public required List<AchievementJsonByRelationalDto> Achievements { get; set; }
+        [JsonPropertyName("Evidences")]
+        public required List<EvidenceJsonByRelationalDto> Evidences { get; set; }
+        [JsonPropertyName("Results")]
+        public required List<ResultJsonByRelationalDto> Results { get; set; }
+        [JsonPropertyName("arguments")]
+        public required List<ArgumentJsonByRelationalDto> Arguments { get; set; }
+        [JsonPropertyName("assertions")]
+        public required List<AssertionJsonByRelationalDto> Assertions { get; set; }
+        [JsonPropertyName("Records")]
+        public required List<RecordJsonByRelationalDto> Records { get; set; }
+        [JsonPropertyName("Todos")]
+        public required List<TodoJsonByRelationalDto> Todos { get; set; }
+        [JsonPropertyName("Schemas")]
+        public required List<SchemaJsonByRelationalDto> Schemas { get; set; }
+    }
+
+    public class SubjectJsonByRelationalDto {
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("description")]
+        public required string Description { get; set; }
+    }
+
+    public class AchievementJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("description")]
+        public required string Description { get; set; }
+    }
+
+    public class EvidenceJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("description")]
+        public required string Description { get; set; }
+    }
+
+    public class ResultJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("success")]
+        public required string Success { get; set; }
+    }
+
+    public class RecordJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("date")]
+        public required string Date { get; set; } // "2000-00-00"
+        [JsonPropertyName("reviewer")]
+        public required string Reviewer { get; set; }
+        [JsonPropertyName("success")]
+        public required string Success { get; set; }
+        [JsonPropertyName("description")]
+        public required string Description { get; set; }
+    }
+
+    public class TodoJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("description")]
+        public required string Description { get; set; }
+    }
+
+    public class SchemaJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("path_name")]
+        public required string PathName { get; set; }
+        [JsonPropertyName("title")]
+        public required string Title { get; set; }
+        [JsonPropertyName("experience")]
+        public required string Experience { get; set; }
+        [JsonPropertyName("evaluation")]
+        public required string Evaluation { get; set; }
+        [JsonPropertyName("hypothesis")]
+        public required string Hypothesis { get; set; }
+        [JsonPropertyName("abstraction_goal")]
+        public required string AbstractionGoal { get; set; }
+        [JsonPropertyName("execution_goal")]
+        public required string ExecutionGoal { get; set; }
+    }
+
+    public class ArgumentJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("key")]
+        public required string Key { get; set; }
+        [JsonPropertyName("type")]
+        public required string Type { get; set; }
+        [JsonPropertyName("value")]
+        public required string Value { get; set; }
+    }
+
+    public class AssertionJsonByRelationalDto {
+        [JsonPropertyName("parent_id")]
+        public required string ParentId { get; set; }
+        [JsonPropertyName("id")]
+        public required string Id { get; set; }
+        [JsonPropertyName("assert")]
+        public required string Assert { get; set; }
+        [JsonPropertyName("target")]
+        public required string Target { get; set; }
+        [JsonPropertyName("type")]
+        public required string Type { get; set; }
+        [JsonPropertyName("value")]
+        public required string Value { get; set; }
+    }
+}
