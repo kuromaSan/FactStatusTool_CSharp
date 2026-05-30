@@ -15,7 +15,63 @@ namespace FactStatus.Domain.Model {
         public PathValue PathName { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
-        public bool Success { get; private set; } = true;
+        public BoolValue Success { get; private set; }
+
+        /// <summary>
+        /// パス名の変更
+        /// </summary>
+        /// <param name="pathName"></param>
+        public void ChangePathName(PathValue pathName) {
+            PathName = pathName;
+        }
+
+        /// <summary>
+        /// パス名の変更
+        /// </summary>
+        /// <param name="pathName"></param>
+        public void ChangePathName(string pathName) {
+            PathName = PathValue.PathIsDirectory(pathName);
+        }
+        
+        /// <summary>
+        /// タイトルの変更
+        /// </summary>
+        /// <param name="title"></param>
+        public void ChangeTitle(string title) {
+            Title = title ?? "";
+        }
+
+        /// <summary>
+        /// 内容の変更
+        /// </summary>
+        /// <param name="description"></param>
+        public void ChangeDescription(string description) {
+            Description = description ?? "";
+        }
+
+        /// <summary>
+        /// 成功状態の変更
+        /// </summary>
+        /// <param name="success"></param>
+        public void ChangeSuccess(bool success) {
+            Success = new BoolValue(success);
+        }
+        
+        /// <summary>
+        /// 成功状態の変更
+        /// </summary>
+        /// <param name="success"></param>
+        public void ChangeSuccess(int success) {
+            Success = BoolValue.FromInt(success);
+        }
+        
+        /// <summary>
+        /// 成功状態の変更
+        /// </summary>
+        /// <param name="success"></param>
+        public void ChangeSuccess(string success) {
+            Success = BoolValue.FromString(success);
+        }
 
         /// <summary>
         /// コンストラクタ
@@ -26,14 +82,14 @@ namespace FactStatus.Domain.Model {
         /// <param name="description"></param>
         /// <param name="success"></param>
         public EvidenceEntity(
-            string id,
-            string pathName,
+            IdValue id,
+            PathValue pathName,
             string title,
             string description,
-            bool success) {
+            BoolValue success) {
 
-            Id = new IdValue(id);
-            PathName = new PathValue(pathName, PathTypeEnum.Directory);
+            Id = id;
+            PathName = pathName;
             Title = title ?? "";
             Description = description ?? "";
             Success = success;

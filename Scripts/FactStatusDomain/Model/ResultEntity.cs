@@ -18,6 +18,38 @@ namespace FactStatus.Domain.Model {
         public List<AssertionEntity> Assertions { get; private set; }
 
         /// <summary>
+        /// パス名の変更
+        /// </summary>
+        /// <param name="pathName"></param>
+        public void ChangePathName(string pathName) {
+            PathName = PathValue.PathIsDirectory(pathName);
+        }
+
+        /// <summary>
+        /// タイトルの変更
+        /// </summary>
+        /// <param name="title"></param>
+        public void ChangeTitle(string title) {
+            Title = title ?? "";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<ArgumentEntity> GetArguments() {
+            return Arguments;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<AssertionEntity> GetAssertions() {
+            return Assertions;
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>
@@ -26,14 +58,14 @@ namespace FactStatus.Domain.Model {
         /// <param name="arguments"></param>
         /// <param name="assertions"></param>
         public ResultEntity(
-            string id,
-            string pathName,
+            IdValue id,
+            PathValue pathName,
             string title,
             List<ArgumentEntity> arguments,
             List<AssertionEntity> assertions) {
 
-            Id = new IdValue(id);
-            PathName = new PathValue(pathName, PathTypeEnum.Directory);
+            Id = id;
+            PathName = pathName;
             Title = title ?? "";
             Arguments = arguments;
             Assertions = assertions;

@@ -11,7 +11,7 @@ using Xunit.Abstractions;
 using FactStatus.Domain.Setup;
 using FactStatus.Domain.Value;
 
-namespace Tests.FactStatus.Logic {
+namespace Domain.Test.Logic {
     public class JsonRepositoryTest(ITestOutputHelper output) {
         [Fact]
         public void LoadJsonTest() {

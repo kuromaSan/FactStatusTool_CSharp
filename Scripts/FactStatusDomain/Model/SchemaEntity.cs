@@ -21,7 +21,7 @@ namespace FactStatus.Domain.Model {
         public string ExecutionGoal { get; private set; }
 
         public void ChangePathName(string pathName) {
-            PathName.Change(pathName);
+            PathName = PathValue.PathIsDirectory(pathName);
         }
 
         public void ChangeTitle(string title) {
@@ -40,8 +40,8 @@ namespace FactStatus.Domain.Model {
         /// <param name="abstractionGoal"></param>
         /// <param name="executionGoal"></param>
         public SchemaEntity(
-            string id,
-            string pathName,
+            IdValue id,
+            PathValue pathName,
             string title,
             string experience,
             string evaluation,
@@ -49,8 +49,8 @@ namespace FactStatus.Domain.Model {
             string abstractionGoal,
             string executionGoal) {
 
-            Id = new IdValue(id);
-            PathName = new PathValue(pathName, PathTypeEnum.Directory);
+            Id = id;
+            PathName = pathName;
             Title = title ?? "";
             Experience = experience ?? "";
             Evaluation = evaluation ?? "";

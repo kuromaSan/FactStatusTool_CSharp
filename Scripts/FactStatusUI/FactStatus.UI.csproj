@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-    <Folder Include="DomainInterface\" />
     <Folder Include="Logic\" />
     <Folder Include="Model\" />
     <Folder Include="Setup\" />

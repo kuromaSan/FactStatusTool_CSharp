@@ -16,6 +16,19 @@ namespace FactStatus.Domain.Value {
             return $"{Index:D4}{(int)Type:D4}";
         }
 
+        /// <summary>
+        /// 文字列のコンストラクタ
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static IdValue FromString(string id) {
+            return new IdValue(id);
+        }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="id"></param>
         public IdValue(string id) {
             // null,文字列長さチェック
             Validation.NullOfString(id);

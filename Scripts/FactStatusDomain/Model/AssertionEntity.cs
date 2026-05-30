@@ -29,15 +29,15 @@ namespace FactStatus.Domain.Model {
         /// <param name="dataType"></param>
         /// <param name="value"></param>
         public AssertionEntity(
-            string id,
-            string parentId,
+            IdValue id,
+            IdValue parentId,
             AssertEnum assert,
             string target,
             DataTypeEnum dataType,
             string value) {
 
-            Id = new IdValue(id);
-            ParentId = new IdValue(parentId);
+            Id = id;
+            ParentId = parentId;
 
             Validation.EnumNotNullAndDefined<AssertEnum>(assert,AssertEnum.None);
             Assert = assert;

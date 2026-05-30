@@ -30,6 +30,8 @@
   <ItemGroup>
     <Folder Include="Surface\" />
     <Folder Include="Value\" />
+    <Folder Include="Model\" />
+    <Folder Include="Rule\" />
   </ItemGroup>
 
   <ItemGroup>

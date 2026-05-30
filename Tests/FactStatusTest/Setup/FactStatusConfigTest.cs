@@ -11,7 +11,7 @@ using FactStatus.Domain.Model;
 using FactStatus.Domain.Value;
 using Xunit.Abstractions;
 
-namespace Tests.FactStatus.Setup {
+namespace Domain.Test.Setup {
     public class FactStatusConfigTest(ITestOutputHelper output) {
         private readonly ITestOutputHelper output = output;
 
@@ -22,29 +22,29 @@ namespace Tests.FactStatus.Setup {
             var documentEntity = new DocumentEntity(
                 "");
             var subjectEntity = new SubjectEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 "");
             var achievementEntity = new AchievementEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 "");
             var evidenceEntity = new EvidenceEntity(
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 "",
-                "",
-                "",
-                true);
+                BoolValue.IsTrue());
             var resultEntity = new ResultEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 new List<ArgumentEntity> {
                     new ArgumentEntity(
-                        "00010104",
-                        "",
+                        IdValue.FromString("00010104"),
+                        IdValue.FromString(""),
                         0,
                         0,
                         "testKey",
@@ -53,8 +53,8 @@ namespace Tests.FactStatus.Setup {
                 },
                 new List<AssertionEntity> {
                     new AssertionEntity(
-                        "00010204",
-                        "",
+                        IdValue.FromString("00010204"),
+                        IdValue.FromString(""),
                         AssertEnum.Equal,
                         "ClassName.functionName()",
                         DataTypeEnum.Int,
@@ -66,21 +66,21 @@ namespace Tests.FactStatus.Setup {
                 "yyyy-MM-dd HH:mm:ss",
                 CultureInfo.InvariantCulture);
             var recordEntity = new RecordEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 "",
                 date,
                 "",
-                true);
+                BoolValue.IsTrue());
             var todoEntity = new TodoEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 "");
             var schemaEntity = new SchemaEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "",
                 "",
                 "",
@@ -88,8 +88,8 @@ namespace Tests.FactStatus.Setup {
                 "",
                 "");
             var groupEntity = new GroupEntity(
-                "",
-                "",
+                IdValue.FromString(""),
+                PathValue.PathIsDirectory(""),
                 "");
 
             // 設定の作成
@@ -133,8 +133,8 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var subjectEntity = new SubjectEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 description);
 
@@ -155,8 +155,8 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var achievementEntity = new AchievementEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 description);
 
@@ -181,22 +181,22 @@ namespace Tests.FactStatus.Setup {
             string pathName = "path";
             string title = "title";
             string description = "description";
-            bool success = true;
+            string success = "1";
 
             // 設定の作成
             var evidenceEntity = new EvidenceEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 description,
-                success);
+                BoolValue.FromString(success));
 
             // 内容確認
             Assert.Equal(id, evidenceEntity.Id.GetId());
             Assert.Equal(pathName, evidenceEntity.PathName.Path);
             Assert.Equal(title, evidenceEntity.Title);
             Assert.Equal(description, evidenceEntity.Description);
-            Assert.Equal(success, evidenceEntity.Success);
+            Assert.Equal(success, evidenceEntity.Success.ToStringOfNumber());
         }
         
         [Fact]
@@ -207,8 +207,8 @@ namespace Tests.FactStatus.Setup {
             string title = "title";
             var argumentValue = new List<ArgumentEntity> {
                     new ArgumentEntity(
-                        "00010104",
-                        "",
+                        IdValue.FromString("00010104"),
+                        IdValue.FromString(""),
                         0,
                         0,
                         "testKey",
@@ -217,8 +217,8 @@ namespace Tests.FactStatus.Setup {
             };
             var assertionValue = new List<AssertionEntity> {
                     new AssertionEntity(
-                        "00010204",
-                        "",
+                        IdValue.FromString("00010204"),
+                        IdValue.FromString(""),
                         AssertEnum.Equal,
                         "ClassName.functionName()",
                         DataTypeEnum.Int,
@@ -227,8 +227,8 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var resultEntity = new ResultEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 argumentValue,
                 assertionValue);
@@ -245,7 +245,7 @@ namespace Tests.FactStatus.Setup {
             string id = "00010002";
             string pathName = "path";
             string title = "title";
-            bool success = true;
+            string success = "1";
             var date = DateTime.ParseExact(
                 "2000-10-10 10:10:10",
                 "yyyy-MM-dd HH:mm:ss",
@@ -255,13 +255,13 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var recordEntity = new RecordEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 description,
                 date,
                 reviewer,
-                success);
+                BoolValue.FromString(success));
 
             // 内容確認
             Assert.Equal(id, recordEntity.Id.GetId());
@@ -270,7 +270,7 @@ namespace Tests.FactStatus.Setup {
             Assert.Equal(description, recordEntity.Description);
             Assert.Equal(date, recordEntity.Date);
             Assert.Equal(reviewer, recordEntity.Reviewer);
-            Assert.Equal(success,recordEntity.Success);
+            Assert.Equal(success,recordEntity.Success.ToStringOfNumber());
         }
 
         [Fact]
@@ -283,8 +283,8 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var todoEntity = new TodoEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 description);
 
@@ -310,8 +310,8 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var schemaEntity = new SchemaEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title,
                 experience,
                 evaluation,
@@ -339,8 +339,8 @@ namespace Tests.FactStatus.Setup {
 
             // 設定の作成
             var groupEntity = new GroupEntity(
-                id,
-                pathName,
+                IdValue.FromString(id),
+                PathValue.PathIsDirectory(pathName),
                 title);
 
             // 内容確認

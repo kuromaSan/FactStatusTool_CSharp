@@ -15,18 +15,34 @@ namespace FactStatus.Domain.Model {
         public string Title { get; private set; }
 
         /// <summary>
+        /// パス名の変更
+        /// </summary>
+        /// <param name="pathName"></param>
+        public void ChangePathName(string pathName) {
+            PathName = PathValue.PathIsDirectory(pathName);
+        }
+
+        /// <summary>
+        /// タイトルの変更
+        /// </summary>
+        /// <param name="title"></param>
+        public void ChangeTitle(string title) {
+            Title = title ?? "";
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>
         /// <param name="pathName"></param>
         /// <param name="title"></param>
         public GroupEntity(
-            string id,
-            string pathName,
+            IdValue id,
+            PathValue pathName,
             string title) {
 
-            Id = new IdValue(id);
-            PathName = new PathValue(pathName, PathTypeEnum.Directory);
+            Id = id;
+            PathName = pathName;
             Title = title ?? "";
         }
     }

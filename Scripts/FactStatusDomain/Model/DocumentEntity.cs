@@ -17,11 +17,35 @@ namespace FactStatus.Domain.Model {
         public string Description { get; private set; }
 
         /// <summary>
+        /// パス名の変更
+        /// </summary>
+        /// <param name="pathName"></param>
+        private void ChangePathName(string pathName) {
+            PathName = PathValue.PathIsDirectory(pathName);
+        }
+
+        /// <summary>
+        /// タイトルの変更
+        /// </summary>
+        /// <param name="title"></param>
+        private void ChangeTitle(string title) {
+            Title = title;
+        }
+
+        /// <summary>
+        /// 内容の変更
+        /// </summary>
+        /// <param name="description"></param>
+        public void ChangeDiscription(string description) {
+            Description = description ?? "";
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="description"></param>
         public DocumentEntity(string description) {
-            Id = new IdValue("00010000");
+            Id = new IdValue("00010001");
             PathName = new PathValue("Documents",PathTypeEnum.Directory);
             Title = "ドキュメント";
             Description = description ?? "";

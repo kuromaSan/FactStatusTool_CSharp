@@ -13,7 +13,7 @@ using FactStatus.Domain.Setup;
 using FactStatus.Domain.Logic;
 using FactStatus.Domain.Value;
 
-namespace Tests.FactStatus.Logic {
+namespace Domain.Test.Logic {
     public class FactStatusStrategyTest(ITestOutputHelper output) {
         private readonly ITestOutputHelper output = output;
 

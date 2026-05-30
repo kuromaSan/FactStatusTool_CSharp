@@ -31,8 +31,8 @@ namespace FactStatus.Domain.Model {
         /// <param name="dataType"></param>
         /// <param name="value"></param>
         public ArgumentEntity(
-            string id,
-            string parentId,
+            IdValue id,
+            IdValue parentId,
             int listIndex,
             int keyIndex,
             string keyName,
@@ -40,8 +40,8 @@ namespace FactStatus.Domain.Model {
             string value) {
             
 
-            Id = new IdValue(id);
-            ParentId = new IdValue(parentId);
+            Id = id;
+            ParentId = parentId;
 
             Validation.MinusOneOrLessOfInt(listIndex);
             ListIndex = listIndex;

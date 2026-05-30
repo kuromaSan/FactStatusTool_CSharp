@@ -6,6 +6,12 @@ using FactStatus.Domain.Value;
 namespace FactStatus.Domain.Rule {
     internal static class Validation {
         // S - 共通
+
+        /// <summary>
+        /// 文字列がNullであればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void NullOfString(string value) {
             if (string.IsNullOrWhiteSpace(value)) {
                 throw new ArgumentException(
@@ -14,6 +20,12 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// 指定した文字列より長ければエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="length"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void LengthOfString(string value, int length) {
             if (value.Length <= length) {
                 throw new ArgumentException(
@@ -22,6 +34,11 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// 文字列を整数型に変換できなければエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void StringToInt(string value) {
             if (!int.TryParse(value, out _)) {
                 throw new ArgumentException(
@@ -30,6 +47,11 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// 整数が負の数であればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void MinusOneOrLessOfInt(int value) {
             if (value <= -1) {
                 throw new ArgumentException(
@@ -38,6 +60,42 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// 整数を真理値に変換できる値（マッピング辞書に存在する値）でなければエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="intToBoolDict"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public static void ValidateIntToBool(int value, Dictionary<int, bool> intToBoolDict) {
+            if (!intToBoolDict.ContainsKey(value)) {
+                throw new ArgumentException(
+                    ValidationMessages.Get(ValidationErrorCode.InvalidBoolIntValue),
+                    nameof(value));
+            }
+        }
+
+        /// <summary>
+        /// 文字列を真理値に変換できる値（マッピング辞書に存在する値）でなければエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="stringToBoolDict"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public static void ValidateStringToBool(string value, Dictionary<string, bool> stringToBoolDict) {
+            NullOfString(value);
+
+            if (!stringToBoolDict.ContainsKey(value)) {
+                throw new ArgumentException(
+                    ValidationMessages.Get(ValidationErrorCode.InvalidBoolStringValue),
+                    nameof(value));
+            }
+        }
+
+        /// <summary>
+        /// 指定した列挙型のキーに文字列が含まれていなければエラーを投げる
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void StringToEnum<TEnum>(string value) where TEnum : struct, Enum {
             if (!int.TryParse(value, out int enumValue)) {
                 throw new ArgumentException(
@@ -52,6 +110,13 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// 指定した列挙型の値がNullでなく、かつ定義されていればエラーを投げる
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="nullValue"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void EnumNotNullAndDefined<TEnum>(TEnum value, TEnum nullValue) where TEnum : struct, Enum {
             if (!Enum.IsDefined(typeof(TEnum), value)) {
                 throw new ArgumentException(
@@ -66,6 +131,11 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// DateTimeが未設定（default値）であればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void DateTimeNotDefault(DateTime value) {
             if (value == default(DateTime)) {
                 throw new ArgumentException(
@@ -74,6 +144,12 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// DateTimeが未来の日時であればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="now"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void DateTimeNotFuture(DateTime value, DateTime now) {
             if (value > now) {
                 throw new ArgumentException(
@@ -82,6 +158,13 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// DateTimeが指定した範囲外であればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void DateTimeInRange(DateTime value, DateTime min, DateTime max) {
             if (value < min || value > max) {
                 throw new ArgumentException(
@@ -90,6 +173,11 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// Root値にパス区切り文字が含まれていればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void RootValue(string value) {
             if (value.Contains('/') || value.Contains('\\')) {
                 throw new ArgumentException(
@@ -98,6 +186,11 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// Directory値に拡張子が含まれていればエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void DirectoryValue(string value) {
             if (Path.HasExtension(value)) {
                 throw new ArgumentException(
@@ -106,6 +199,11 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
+        /// <summary>
+        /// File値に拡張子が含まれていなければエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void FileValue(string value) {
             if (!Path.HasExtension(value)) {
                 throw new ArgumentException(
@@ -113,7 +211,12 @@ namespace FactStatus.Domain.Rule {
                     nameof(value));
             }
         }
-        
+
+        /// <summary>
+        /// RootFile値にパス区切り文字が含まれているか、拡張子が含まれていなければエラーを投げる
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentException"></exception>
         public static void RootFileValue(string value) {
             if (value.Contains('/') || value.Contains('\\') || !Path.HasExtension(value)) {
                 throw new ArgumentException(
@@ -122,7 +225,12 @@ namespace FactStatus.Domain.Rule {
             }
         }
 
-
+        /// <summary>
+        /// 指定したキーが辞書に存在しない場合、エラーを投げる
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <param name="key"></param>
+        /// <exception cref="KeyNotFoundException"></exception>
         public static void DictionaryKeyFound(Dictionary<string, string> dict, string key) {
             if (!dict.TryGetValue(key, out var value) || value is null) {
                 throw new KeyNotFoundException(
@@ -133,7 +241,7 @@ namespace FactStatus.Domain.Rule {
         
         // S - FactStatus専用
         /// <summary>
-        /// 
+        /// 指定したIDのエンティティが辞書に存在しない場合、エラーを投げる
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entityDict"></param>
@@ -148,6 +256,9 @@ namespace FactStatus.Domain.Rule {
         // E - FactStatus専用
     }
 
+    /// <summary>
+    /// バリデーションメッセージを管理するクラス
+    /// </summary>
     file static class ValidationMessages {
         private static readonly Dictionary<ValidationErrorCode, string> Messages = new() {
             // S - 共通
@@ -165,6 +276,8 @@ namespace FactStatus.Domain.Rule {
             { ValidationErrorCode.DirectoryHasExtension, "ディレクトリ値に拡張子は使用できません。" },
             { ValidationErrorCode.FileMissingExtension, "ファイル値には拡張子が必要です。" },
             { ValidationErrorCode.DictionaryKeyNotFound, "指定されたキーが見つかりません。Key:{0}" },
+            { ValidationErrorCode.InvalidBoolIntValue, "真理値に変換できる整数は 0 または 1 のみです。" },
+            { ValidationErrorCode.InvalidBoolStringValue, "真理値に変換できる文字列ではありません。" },
             // E - 共通
             // S - FactStatus専用
             { ValidationErrorCode.EntityNotFoundById, "指定されたIDのエンティティが見つかりません。ID:{0}" },
@@ -177,6 +290,9 @@ namespace FactStatus.Domain.Rule {
         }
     }
 
+    /// <summary>
+    /// バリデーションエラーコードを管理する列挙型
+    /// </summary>
     file enum ValidationErrorCode {
         // S - 共通
         NullOrWhiteSpace,
@@ -193,6 +309,8 @@ namespace FactStatus.Domain.Rule {
         DirectoryHasExtension,
         FileMissingExtension,
         DictionaryKeyNotFound,
+        InvalidBoolIntValue,
+        InvalidBoolStringValue,
         // E - 共通
         // S - FactStatus専用
         EntityNotFoundById,

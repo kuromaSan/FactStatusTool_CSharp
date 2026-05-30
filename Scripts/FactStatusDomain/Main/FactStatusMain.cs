@@ -11,7 +11,7 @@ using FactStatus.Domain.Setup;
 using FactStatus.Domain.Value;
 
 namespace FactStatus.Domain.Main {
-    public class FactStatus {
+    public class FactStatusMain {
         
         private readonly FactStatusPolicy _factStatusPolicy;
         private FactStatusConfig _factStatusConfig;
@@ -31,12 +31,18 @@ namespace FactStatus.Domain.Main {
         /// </summary>
         public string SelectIdEntity { get; set; }
 
-        // 
+        /// <summary>
+        /// ドキュメントエンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public DocumentEntity GetDocumentEntity() {
-
             return _factStatusPolicy.GetDocumentEntity(_factStatusConfig);
         }
 
+        /// <summary>
+        /// 主題エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public SubjectEntity GetSubjectEntity() {
             return _factStatusPolicy.GetSubjectEntity(
                 _factStatusConfig,
@@ -44,6 +50,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 実績エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public AchievementEntity GetAchievementEntity() {
             return _factStatusPolicy.GetAchievementEntity(
                 _factStatusConfig,
@@ -51,6 +61,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 証拠エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public EvidenceEntity GetEvidenceEntity() {
             return _factStatusPolicy.GetEvidenceEntity(
                 _factStatusConfig,
@@ -58,6 +72,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 結果エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public ResultEntity GetResultEntity() {
             return _factStatusPolicy.GetResultEntity(
                 _factStatusConfig,
@@ -65,6 +83,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 記録エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public RecordEntity GetRecordEntity() {
             return _factStatusPolicy.GetRecordEntity(
                 _factStatusConfig,
@@ -72,6 +94,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 手順エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public TodoEntity GetTodoEntity() {
             return _factStatusPolicy.GetTodoEntity(
                 _factStatusConfig,
@@ -79,6 +105,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 構想エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public SchemaEntity GetSchemaEntity() {
             return _factStatusPolicy.GetSchemaEntity(
                 _factStatusConfig,
@@ -86,6 +116,10 @@ namespace FactStatus.Domain.Main {
             );
         }
 
+        /// <summary>
+        /// 集合エンティティの取得
+        /// </summary>
+        /// <returns></returns>
         public GroupEntity GetGroupEntity() {
             return _factStatusPolicy.GetGroupEntity(
                 _factStatusConfig,
@@ -93,10 +127,19 @@ namespace FactStatus.Domain.Main {
             );
         }
 
-        public Dictionary<IdValue,SubjectEntity> GetSubjectEntityDict(IdTypeEnum idTypeEnum) {
+        /// <summary>
+        /// 主題エンティティ辞書の取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue,SubjectEntity> GetSubjectEntityDict() {
             return _factStatusPolicy.GetSubjectEntityDict(_factStatusConfig);
         }
 
+        /// <summary>
+        /// 達成エンティティの取得
+        /// </summary>
+        /// <param name="idTypeEnum"></param>
+        /// <returns></returns>
         public Dictionary<IdValue, AchievementEntity> GetAchievementEntityDict(IdTypeEnum idTypeEnum) {
             return _factStatusPolicy.GetAchievementEntityDict(_factStatusConfig);
         }
@@ -274,7 +317,7 @@ namespace FactStatus.Domain.Main {
             _factStatusPolicy.SaveMarkdownRoot(SaveFilePath, _factStatusConfig);
         }
 
-        public FactStatus(
+        public FactStatusMain(
             FactStatusConfig factStatusConfig,
             FactStatusPolicy factStatusPolicy) {
 

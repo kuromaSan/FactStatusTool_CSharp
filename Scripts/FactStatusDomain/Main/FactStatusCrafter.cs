@@ -57,11 +57,19 @@ namespace FactStatus.Domain.Main {
             catch (AggregateException) { throw; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void EditDocumentEntity(DocumentEntity value) {
             this._documentEntity = value;
             _factStatusBuilder.OfDocumentEntity(this._documentEntity);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public void AddSubjectEntity(SubjectEntity value) {
             this._subjectEntityDict.Add(value.Id,value);
             this._factStatusBuilder.OfSubjectEntityDict(this._subjectEntityDict);
@@ -123,9 +131,9 @@ namespace FactStatus.Domain.Main {
         /// FactStatusオブジェクトを生成
         /// </summary>
         /// <returns></returns>
-        public FactStatus Build() {
+        public FactStatusMain Build() {
             FactStatusConfig factStatusConfig = this._factStatusBuilder.Build();
-            return new FactStatus(
+            return new FactStatusMain(
                 factStatusConfig,
                 this._factStatusPolicy);
         }

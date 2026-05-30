@@ -17,7 +17,7 @@ namespace FactStatus.Domain.Model {
         public string Description { get; private set; }
 
         public void ChangePathName(string pathName) {
-            PathName.Change(pathName);
+            PathName = PathValue.PathIsDirectory(pathName);
         }
 
         public void ChangeTitle(string title) {
@@ -36,14 +36,14 @@ namespace FactStatus.Domain.Model {
         /// <param name="title"></param>
         /// <param name="description"></param>
         public TodoEntity(
-            string id,
-            string pathName,
+            IdValue id,
+            PathValue pathName,
             string title,
             string description){
 
             // 
-            Id = new IdValue(id);
-            PathName = new PathValue(pathName, PathTypeEnum.Directory);
+            Id = id;
+            PathName = pathName;
             Title = title ?? "";
             Description = description ?? "";
         }

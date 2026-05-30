@@ -1,0 +1,21 @@
+{
+  "classTypes":{
+    "01":"Documents",
+    "02":"Subject",
+    "03":"Achievement",
+    "04":"Evidence",
+    "05":"Result",
+    "06":"Record",
+    "07":"Todo",
+    "08":"Schema",
+    "09":"Group"
+  },
+  "propertyTypes":{
+    "01":"arguments",
+    "02":"assertions"
+  },
+  "EdgeTypes":{
+    "80":"Parent",
+    "81":"Group"
+  }
+}

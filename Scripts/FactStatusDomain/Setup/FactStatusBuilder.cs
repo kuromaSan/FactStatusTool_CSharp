@@ -98,8 +98,8 @@ namespace FactStatus.Domain.Setup {
         public FactStatusBuilder OfSubjectEntityDict(List<SubjectConfigJsonDto> value) {
             foreach (SubjectConfigJsonDto subjectConfigDto in value) {
                 var subjectEntity = new SubjectEntity(
-                    subjectConfigDto.Id,
-                    subjectConfigDto.PathName,
+                    IdValue.FromString(subjectConfigDto.Id),
+                    PathValue.PathIsDirectory(subjectConfigDto.PathName),
                     subjectConfigDto.Title,
                     subjectConfigDto.Description);
                 _subjectEntityDict.Add(subjectEntity.Id,subjectEntity);
@@ -110,8 +110,8 @@ namespace FactStatus.Domain.Setup {
         public FactStatusBuilder OfAchievementEntityDict(List<AchievementConfigJsonDto> value) {
             foreach (AchievementConfigJsonDto achievementConfigDto in value) {
                 var achievementEntity = new AchievementEntity(
-                    achievementConfigDto.Id,
-                    achievementConfigDto.PathName,
+                    IdValue.FromString(achievementConfigDto.Id),
+                    PathValue.PathIsDirectory(achievementConfigDto.PathName),
                     achievementConfigDto.Title,
                     achievementConfigDto.Description);
                 _achievementEntityDict.Add(achievementEntity.Id,achievementEntity);
@@ -122,11 +122,11 @@ namespace FactStatus.Domain.Setup {
         public FactStatusBuilder OfEvidenceEntityDict(List<EvidenceConfigJsonDto> value) {
             foreach (EvidenceConfigJsonDto evidenceConfigDto in value) {
                 var evidenceEntity = new EvidenceEntity(
-                    evidenceConfigDto.Id,
-                    evidenceConfigDto.PathName,
+                    IdValue.FromString(evidenceConfigDto.Id),
+                    PathValue.PathIsDirectory(evidenceConfigDto.PathName),
                     evidenceConfigDto.Title,
                     evidenceConfigDto.Description,
-                    evidenceConfigDto.Success switch { "1" => true, "0" => false, _ => throw new ArgumentException($"Invalid Success value: '{evidenceConfigDto.Success}'") });
+                    BoolValue.FromString(evidenceConfigDto.Success));
                 _evidenceEntityDict.Add(evidenceEntity.Id,evidenceEntity);
             }
             return this;
@@ -141,8 +141,8 @@ namespace FactStatus.Domain.Setup {
             var argumentValueDict = new Dictionary<string,List<ArgumentEntity>>();
             foreach (ArgumentPropertieJsonDto argumentDto in argumentDtos) {
                 var argumentValue = new ArgumentEntity(
-                    argumentDto.Id,
-                    argumentDto.ParentId,
+                    IdValue.FromString(argumentDto.Id),
+                    IdValue.FromString(argumentDto.ParentId),
                     this.convertStringToInt(argumentDto.ListIndex),
                     this.convertStringToInt(argumentDto.KeyIndex),
                     argumentDto.KeyName,
@@ -161,8 +161,8 @@ namespace FactStatus.Domain.Setup {
             var assertionValueDict = new Dictionary<string,List<AssertionEntity>>();
             foreach (AssertionPropertieJsonDto assertionDto in assertionDtos) {
                 var assertionValue = new AssertionEntity(
-                    assertionDto.Id,
-                    assertionDto.ParentId,
+                    IdValue.FromString(assertionDto.Id),
+                    IdValue.FromString(assertionDto.ParentId),
                     this.convertAssertEnum(assertionDto.Assert),
                     assertionDto.Target,
                     this.convertDataTypeEnum(assertionDto.DataType),
@@ -182,8 +182,8 @@ namespace FactStatus.Domain.Setup {
                 var assertionValues = assertionValueDict.TryGetValue(resultConfigDto.Id, out var foundAssertions) ? foundAssertions : new List<AssertionEntity>();
 
                 var resultEntity = new ResultEntity(
-                    resultConfigDto.Id,
-                    resultConfigDto.PathName,
+                    IdValue.FromString(resultConfigDto.Id),
+                    PathValue.PathIsDirectory(resultConfigDto.PathName),
                     resultConfigDto.Title,
                     argumentValues,
                     assertionValues);
@@ -195,13 +195,13 @@ namespace FactStatus.Domain.Setup {
         public FactStatusBuilder OfRecordEntityDict(List<RecordConfigJsonDto> value) {
             foreach (RecordConfigJsonDto recordConfigDto in value) {
                 var recordEntity = new RecordEntity(
-                    recordConfigDto.Id,
-                    recordConfigDto.PathName,
+                    IdValue.FromString(recordConfigDto.Id),
+                    PathValue.PathIsDirectory(recordConfigDto.PathName),
                     recordConfigDto.Title,
                     recordConfigDto.Description,
                     DateTime.ParseExact(recordConfigDto.Date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
                     recordConfigDto.Reviewer,
-                    recordConfigDto.Success switch { "1" => true, "0" => false, _ => throw new ArgumentException($"Invalid Success value: '{recordConfigDto.Success}'") });
+                    BoolValue.FromString(recordConfigDto.Success));
                 _recordEntityDict.Add(recordEntity.Id,recordEntity);
             }
             return this;
@@ -210,8 +210,8 @@ namespace FactStatus.Domain.Setup {
         public FactStatusBuilder OfTodoEntityDict(List<TodoConfigJsonDto> value) {
             foreach (TodoConfigJsonDto todoConfigDto in value) {
                 var todoEntity = new TodoEntity(
-                    todoConfigDto.Id,
-                    todoConfigDto.PathName,
+                    IdValue.FromString(todoConfigDto.Id),
+                    PathValue.PathIsDirectory(todoConfigDto.PathName),
                     todoConfigDto.Title,
                     todoConfigDto.Description);
                 _todoEntityDict.Add(todoEntity.Id,todoEntity);
@@ -224,8 +224,8 @@ namespace FactStatus.Domain.Setup {
             // SchemaConfigに変換して追加
             foreach (SchemaConfigJsonDto schemaConfigDto in value) {
                 var schemaEntity = new SchemaEntity(
-                    schemaConfigDto.Id,
-                    schemaConfigDto.PathName,
+                    IdValue.FromString(schemaConfigDto.Id),
+                    PathValue.PathIsDirectory(schemaConfigDto.PathName),
                     schemaConfigDto.Title,
                     schemaConfigDto.Experience,
                     schemaConfigDto.Evaluation,
@@ -241,8 +241,8 @@ namespace FactStatus.Domain.Setup {
             // GroupConfigに変換して追加
             foreach (GroupConfigJsonDto groupConfigDto in value) {
                 var groupEntity = new GroupEntity(
-                    groupConfigDto.Id,
-                    groupConfigDto.PathName,
+                    IdValue.FromString(groupConfigDto.Id),
+                    PathValue.PathIsDirectory(groupConfigDto.PathName),
                     groupConfigDto.Title);
                 _groupEntityDict.Add(groupEntity.Id,groupEntity);
             }

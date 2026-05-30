@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactStatus.Domain", "Script
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactStatus.UI", "Scripts\FactStatusUI\FactStatus.UI.csproj", "{6D62C832-3D0A-D8A9-A9C0-37466ECE7AD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactStatus.Test", "Tests\FactStatusTest\FactStatus.Test.csproj", "{CC3D5139-1288-D57A-2DD9-B52D4BFF74D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactStatus.Domain.Test", "Tests\FactStatusTest\FactStatus.Domain.Test.csproj", "{CC3D5139-1288-D57A-2DD9-B52D4BFF74D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

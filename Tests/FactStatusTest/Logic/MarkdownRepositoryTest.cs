@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 using FactStatus.Domain.Logic;
 using FactStatus.Domain.Setup;
 
-namespace Tests.FactStatus.Logic {
+namespace Domain.Test.Logic {
     public class MarkdownRepositoryTest {
         private readonly ITestOutputHelper output;
 

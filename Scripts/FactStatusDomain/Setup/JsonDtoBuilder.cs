@@ -66,7 +66,7 @@ namespace FactStatus.Domain.Setup {
                     PathName = evidenceConfig.PathName.Path,
                     Title = evidenceConfig.Title,
                     Description = evidenceConfig.Description,
-                    Success = evidenceConfig.Success switch { true => "1", false => "0" }
+                    Success = evidenceConfig.Success.ToStringOfNumber()
                 };
                 _evidenceConfigDtos.Add(evidenceDto);
             }
@@ -94,7 +94,7 @@ namespace FactStatus.Domain.Setup {
                     Description = recordConfig.Description,
                     Date = recordConfig.Date.ToString("yyyy-MM-dd HH:mm:ss"),
                     Reviewer = recordConfig.Reviewer,
-                    Success = recordConfig.Success switch { true => "1", false => "0"}
+                    Success = recordConfig.Success.ToStringOfNumber()
                 };
                 _recordConfigDtos.Add(recordDto);
             }
@@ -258,7 +258,7 @@ namespace FactStatus.Domain.Setup {
                     PathName = evidenceConfig.PathName.Path,
                     Title = evidenceConfig.Title,
                     Description = evidenceConfig.Description,
-                    Success = evidenceConfig.Success switch { true => "1", false => "0" }
+                    Success = evidenceConfig.Success.ToStringOfNumber()
                 };
                 _evidenceConfigDtos.Add(evidenceDto);
             }
@@ -286,7 +286,7 @@ namespace FactStatus.Domain.Setup {
                     Description = recordConfig.Description,
                     Date = recordConfig.Date.ToString("yyyy-MM-dd HH:mm:ss"),
                     Reviewer = recordConfig.Reviewer,
-                    Success = recordConfig.Success switch { true => "1", false => "0" }
+                    Success = recordConfig.Success.ToStringOfNumber()
                 };
                 _recordConfigDtos.Add(recordDto);
             }

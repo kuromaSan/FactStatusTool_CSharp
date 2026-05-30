@@ -16,14 +16,26 @@ namespace FactStatus.Domain.Model {
         public string Title { get; private set; }
         public string Description { get; private set; }
 
+        /// <summary>
+        /// パス名の変更
+        /// </summary>
+        /// <param name="pathName"></param>
         public void ChangePathName(string pathName) {
-            PathName.Change(pathName);
+            PathName = PathValue.PathIsDirectory(pathName);
         }
 
+        /// <summary>
+        /// タイトルの変更
+        /// </summary>
+        /// <param name="title"></param>
         public void ChangeTitle(string title) {
             Title = title ?? "";
         }
 
+        /// <summary>
+        /// 内容の変更
+        /// </summary>
+        /// <param name="description"></param>
         public void ChangeDescription(string description) {
             Description = description ?? "";
         }
@@ -36,14 +48,14 @@ namespace FactStatus.Domain.Model {
         /// <param name="title"></param>
         /// <param name="description"></param>
         public SubjectEntity(
-            string id,
-            string pathName,
+            IdValue id,
+            PathValue pathName,
             string title,
             string description) {
 
-            // 
-            Id = new IdValue(id);
-            PathName = new PathValue(pathName,PathTypeEnum.Directory);
+            // 初期設定
+            Id = id;
+            PathName = pathName;
             Title = title ?? "";
             Description = description ?? "";
         }
