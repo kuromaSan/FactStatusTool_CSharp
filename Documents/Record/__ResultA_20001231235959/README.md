@@ -5,14 +5,8 @@
 見本名
 ## 判定(OK/NG)
 NG
-## 期待値
+## 記録内容
 
-## 期待型式
-
-## 例外型式
-Exception
-## メッセージ
-エラー発生
 
 ---
 [Back](../../Result/__EvidenceA_ResultA/README.md)  

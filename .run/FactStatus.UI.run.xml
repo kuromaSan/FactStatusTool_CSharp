@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FactStatus.UI" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+    <option name="launchProfileName" value="FactStatus.UI" />
+    <option name="launchProfileProjectPath" value="$PROJECT_DIR$/Scripts/FactStatusUI/FactStatus.UI.csproj" />
+    <option name="launchProfileProjectWorkingDirectory" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

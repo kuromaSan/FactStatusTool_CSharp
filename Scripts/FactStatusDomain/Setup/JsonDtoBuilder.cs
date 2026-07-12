@@ -9,22 +9,22 @@ using FactStatus.Domain.Value;
 
 namespace FactStatus.Domain.Setup {
     public class JsonDtoBuilder {
-        private DocumentConfigJsonDto _documentConfigDto;
-        private List<SubjectConfigJsonDto> _subjectConfigDtos;
-        private List<AchievementConfigJsonDto> _achievementConfigDtos;
-        private List<EvidenceConfigJsonDto> _evidenceConfigDtos;
-        private List<ResultConfigJsonDto> _resultConfigDtos;
-        private List<RecordConfigJsonDto> _recordConfigDtos;
-        private List<TodoConfigJsonDto> _todoConfigDtos;
-        private List<SchemaConfigJsonDto> _schemaConfigDtos;
-        private List<GroupConfigJsonDto> _groupConfigDtos;
+        private DocumentAggregateJsonDto _documentAggregateDto;
+        private List<SubjectAggregateJsonDto> _subjectAggregateDtos;
+        private List<AchievementAggregateJsonDto> _achievementAggregateDtos;
+        private List<EvidenceAggregateJsonDto> _evidenceAggregateDtos;
+        private List<ResultAggregateJsonDto> _resultAggregateDtos;
+        private List<RecordAggregateJsonDto> _recordAggregateDtos;
+        private List<TodoAggregateJsonDto> _todoAggregateDtos;
+        private List<SchemaAggregateJsonDto> _schemaAggregateDtos;
+        private List<GroupAggregateJsonDto> _groupAggregateDtos;
         private List<ArgumentPropertieJsonDto> _argumentPropertieDtos;
         private List<AssertionPropertieJsonDto> _assertionPropertieDtos;
         private List<ParentEdgeJsonDto> _parentEdgeDtos;
         private List<GroupEdgeJsonDto> _groupEdgeDtos;
 
-        public JsonDtoBuilder OfDocumentConfig(DocumentEntity value) {
-            _documentConfigDto = new DocumentConfigJsonDto() {
+        public JsonDtoBuilder OfDocumentAggregate(DocumentEntity value) {
+            _documentAggregateDto = new DocumentAggregateJsonDto() {
                 Id = value.Id.GetId(),
                 PathName = value.PathName.Path,
                 Title = value.Title,
@@ -33,124 +33,124 @@ namespace FactStatus.Domain.Setup {
             return this;
         }
 
-        public JsonDtoBuilder OfSubjectConfigs(List<SubjectEntity> value) {
+        public JsonDtoBuilder OfSubjectAggregates(List<SubjectEntity> value) {
             foreach (SubjectEntity subjectEntity in value) {
-                SubjectConfigJsonDto subjectDto = new() {
+                SubjectAggregateJsonDto subjectDto = new() {
                     Id = subjectEntity.Id.GetId(),
                     PathName = subjectEntity.PathName.Path,
                     Title = subjectEntity.Title,
                     Description = subjectEntity.Description
                 };
-                _subjectConfigDtos.Add(subjectDto);
+                _subjectAggregateDtos.Add(subjectDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfAchievementConfigs(List<AchievementEntity> value) {
-            foreach (AchievementEntity achievementConfig in value) {
-                AchievementConfigJsonDto achievementDto = new() {
-                    Id = achievementConfig.Id.GetId(),
-                    PathName = achievementConfig.PathName.Path,
-                    Title = achievementConfig.Title,
-                    Description = achievementConfig.Description
+        public JsonDtoBuilder OfAchievementAggregates(List<AchievementEntity> value) {
+            foreach (AchievementEntity achievementAggregate in value) {
+                AchievementAggregateJsonDto achievementDto = new() {
+                    Id = achievementAggregate.Id.GetId(),
+                    PathName = achievementAggregate.PathName.Path,
+                    Title = achievementAggregate.Title,
+                    Description = achievementAggregate.Description
                 };
-                _achievementConfigDtos.Add(achievementDto);
+                _achievementAggregateDtos.Add(achievementDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfEvidenceConfigs(List<EvidenceEntity> value) {
-            foreach (EvidenceEntity evidenceConfig in value) {
-                EvidenceConfigJsonDto evidenceDto = new() {
-                    Id = evidenceConfig.Id.GetId(),
-                    PathName = evidenceConfig.PathName.Path,
-                    Title = evidenceConfig.Title,
-                    Description = evidenceConfig.Description,
-                    Success = evidenceConfig.Success.ToStringOfNumber()
+        public JsonDtoBuilder OfEvidenceAggregates(List<EvidenceEntity> value) {
+            foreach (EvidenceEntity evidenceAggregate in value) {
+                EvidenceAggregateJsonDto evidenceDto = new() {
+                    Id = evidenceAggregate.Id.GetId(),
+                    PathName = evidenceAggregate.PathName.Path,
+                    Title = evidenceAggregate.Title,
+                    Description = evidenceAggregate.Description,
+                    Success = evidenceAggregate.Success.ToStringOfNumber()
                 };
-                _evidenceConfigDtos.Add(evidenceDto);
+                _evidenceAggregateDtos.Add(evidenceDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfResultConfigs(List<ResultEntity> value) {
-            foreach (ResultEntity resultConfig in value) {
-                ResultConfigJsonDto resultDto = new() {
-                    Id = resultConfig.Id.GetId(),
-                    PathName = resultConfig.PathName.Path,
-                    Title = resultConfig.Title
+        public JsonDtoBuilder OfResultAggregates(List<ResultEntity> value) {
+            foreach (ResultEntity resultAggregate in value) {
+                ResultAggregateJsonDto resultDto = new() {
+                    Id = resultAggregate.Id.GetId(),
+                    PathName = resultAggregate.PathName.Path,
+                    Title = resultAggregate.Title
                 };
-                _resultConfigDtos.Add(resultDto);
+                _resultAggregateDtos.Add(resultDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfRecordConfigs(List<RecordEntity> value) {
-            foreach (RecordEntity recordConfig in value) {
-                RecordConfigJsonDto recordDto = new() {
-                    Id = recordConfig.Id.GetId(),
-                    PathName = recordConfig.PathName.Path,
-                    Title = recordConfig.Title,
-                    Description = recordConfig.Description,
-                    Date = recordConfig.Date.ToString("yyyy-MM-dd HH:mm:ss"),
-                    Reviewer = recordConfig.Reviewer,
-                    Success = recordConfig.Success.ToStringOfNumber()
+        public JsonDtoBuilder OfRecordAggregates(List<RecordEntity> value) {
+            foreach (RecordEntity recordAggregate in value) {
+                RecordAggregateJsonDto recordDto = new() {
+                    Id = recordAggregate.Id.GetId(),
+                    PathName = recordAggregate.PathName.Path,
+                    Title = recordAggregate.Title,
+                    Description = recordAggregate.Description,
+                    Date = recordAggregate.Date.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Reviewer = recordAggregate.Reviewer,
+                    Success = recordAggregate.Success.ToStringOfNumber()
                 };
-                _recordConfigDtos.Add(recordDto);
+                _recordAggregateDtos.Add(recordDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfTodoConfigs(List<TodoEntity> value) {
-            foreach (TodoEntity todoConfig in value) {
-                TodoConfigJsonDto todoDto = new() {
-                    Id = todoConfig.Id.GetId(),
-                    PathName = todoConfig.PathName.Path,
-                    Title = todoConfig.Title,
-                    Description = todoConfig.Description
+        public JsonDtoBuilder OfTodoAggregates(List<TodoEntity> value) {
+            foreach (TodoEntity todoAggregate in value) {
+                TodoAggregateJsonDto todoDto = new() {
+                    Id = todoAggregate.Id.GetId(),
+                    PathName = todoAggregate.PathName.Path,
+                    Title = todoAggregate.Title,
+                    Description = todoAggregate.Description
                 };
-                _todoConfigDtos.Add(todoDto);
+                _todoAggregateDtos.Add(todoDto);
             }
             return this;
         }
 
 
-        public JsonDtoBuilder OfSchemaConfigs(List<SchemaEntity> value) {
-            // SchemaConfigに変換して追加
-            foreach (SchemaEntity schemaConfig in value) {
-                SchemaConfigJsonDto schemaDto = new() {
-                    Id = schemaConfig.Id.GetId(),
-                    PathName = schemaConfig.PathName.Path,
-                    Title = schemaConfig.Title,
-                    Experience = schemaConfig.Experience,
-                    Evaluation = schemaConfig.Evaluation,
-                    Hypothesis = schemaConfig.Hypothesis,
-                    AbstractionGoal = schemaConfig.AbstractionGoal,
-                    ExecutionGoal = schemaConfig.ExecutionGoal
+        public JsonDtoBuilder OfSchemaAggregates(List<SchemaEntity> value) {
+            // SchemaAggregateに変換して追加
+            foreach (SchemaEntity schemaAggregate in value) {
+                SchemaAggregateJsonDto schemaDto = new() {
+                    Id = schemaAggregate.Id.GetId(),
+                    PathName = schemaAggregate.PathName.Path,
+                    Title = schemaAggregate.Title,
+                    Experience = schemaAggregate.Experience,
+                    Evaluation = schemaAggregate.Evaluation,
+                    Hypothesis = schemaAggregate.Hypothesis,
+                    AbstractionGoal = schemaAggregate.AbstractionGoal,
+                    ExecutionGoal = schemaAggregate.ExecutionGoal
                 };
-                _schemaConfigDtos.Add(schemaDto);
+                _schemaAggregateDtos.Add(schemaDto);
             }
             return this;
         }
         
-        public JsonDtoBuilder OfGroupConfigs(List<GroupEntity> value) {
-            // SchemaConfigに変換して追加
-            foreach (GroupEntity schemaConfig in value) {
-                GroupConfigJsonDto groupConfigDto = new() {
-                    Id = schemaConfig.Id.GetId(),
-                    PathName = schemaConfig.PathName.Path,
-                    Title = schemaConfig.Title
+        public JsonDtoBuilder OfGroupAggregates(List<GroupEntity> value) {
+            // SchemaAggregateに変換して追加
+            foreach (GroupEntity schemaAggregate in value) {
+                GroupAggregateJsonDto groupAggregateDto = new() {
+                    Id = schemaAggregate.Id.GetId(),
+                    PathName = schemaAggregate.PathName.Path,
+                    Title = schemaAggregate.Title
                 };
-                _groupConfigDtos.Add(groupConfigDto);
+                _groupAggregateDtos.Add(groupAggregateDto);
             }
             return this;
         }
 
         public JsonDtoBuilder OfArgumentProperties(List<ResultEntity> value) {
-            foreach (ResultEntity resultConfig in value) {
-                foreach (ArgumentEntity argumentValue in resultConfig.Arguments) {
+            foreach (ResultEntity resultAggregate in value) {
+                foreach (ArgumentEntity argumentValue in resultAggregate.Arguments) {
                     ArgumentPropertieJsonDto argumentDto = new() {
-                        ParentId = resultConfig.Id.GetId(),
+                        ParentId = resultAggregate.Id.GetId(),
                         Id = argumentValue.Id.GetId(),
                         ListIndex = argumentValue.ListIndex.ToString(),
                         KeyIndex = argumentValue.KeyIndex.ToString(),
@@ -165,10 +165,10 @@ namespace FactStatus.Domain.Setup {
         }
 
         public JsonDtoBuilder OfAssertionProperties(List<ResultEntity> value) {
-            foreach (ResultEntity resultConfig in value) {
-                foreach (AssertionEntity assertionValue in resultConfig.Assertions) {
+            foreach (ResultEntity resultAggregate in value) {
+                foreach (AssertionEntity assertionValue in resultAggregate.Assertions) {
                     AssertionPropertieJsonDto assertionDto = new() {
-                        ParentId = resultConfig.Id.GetId(),
+                        ParentId = resultAggregate.Id.GetId(),
                         Id = assertionValue.Id.GetId(),
                         Assert = assertionValue.Assert.ToString(),
                         Target = assertionValue.Target,
@@ -225,124 +225,124 @@ namespace FactStatus.Domain.Setup {
             return this;
         }
 
-        public JsonDtoBuilder OfSubjectConfigs(Dictionary<IdValue,SubjectEntity> value) {
+        public JsonDtoBuilder OfSubjectAggregates(Dictionary<IdValue,SubjectEntity> value) {
             foreach (SubjectEntity subjectEntity in value.Values) {
-                SubjectConfigJsonDto subjectDto = new() {
+                SubjectAggregateJsonDto subjectDto = new() {
                     Id = subjectEntity.Id.GetId(),
                     PathName = subjectEntity.PathName.Path,
                     Title = subjectEntity.Title,
                     Description = subjectEntity.Description
                 };
-                _subjectConfigDtos.Add(subjectDto);
+                _subjectAggregateDtos.Add(subjectDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfAchievementConfigs(Dictionary<IdValue,AchievementEntity> value) {
-            foreach (AchievementEntity achievementConfig in value.Values) {
-                AchievementConfigJsonDto achievementDto = new() {
-                    Id = achievementConfig.Id.GetId(),
-                    PathName = achievementConfig.PathName.Path,
-                    Title = achievementConfig.Title,
-                    Description = achievementConfig.Description
+        public JsonDtoBuilder OfAchievementAggregates(Dictionary<IdValue,AchievementEntity> value) {
+            foreach (AchievementEntity achievementAggregate in value.Values) {
+                AchievementAggregateJsonDto achievementDto = new() {
+                    Id = achievementAggregate.Id.GetId(),
+                    PathName = achievementAggregate.PathName.Path,
+                    Title = achievementAggregate.Title,
+                    Description = achievementAggregate.Description
                 };
-                _achievementConfigDtos.Add(achievementDto);
+                _achievementAggregateDtos.Add(achievementDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfEvidenceConfigs(Dictionary<IdValue,EvidenceEntity> value) {
-            foreach (EvidenceEntity evidenceConfig in value.Values) {
-                EvidenceConfigJsonDto evidenceDto = new() {
-                    Id = evidenceConfig.Id.GetId(),
-                    PathName = evidenceConfig.PathName.Path,
-                    Title = evidenceConfig.Title,
-                    Description = evidenceConfig.Description,
-                    Success = evidenceConfig.Success.ToStringOfNumber()
+        public JsonDtoBuilder OfEvidenceAggregates(Dictionary<IdValue,EvidenceEntity> value) {
+            foreach (EvidenceEntity evidenceAggregate in value.Values) {
+                EvidenceAggregateJsonDto evidenceDto = new() {
+                    Id = evidenceAggregate.Id.GetId(),
+                    PathName = evidenceAggregate.PathName.Path,
+                    Title = evidenceAggregate.Title,
+                    Description = evidenceAggregate.Description,
+                    Success = evidenceAggregate.Success.ToStringOfNumber()
                 };
-                _evidenceConfigDtos.Add(evidenceDto);
+                _evidenceAggregateDtos.Add(evidenceDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfResultConfigs(Dictionary<IdValue,ResultEntity> value) {
-            foreach (ResultEntity resultConfig in value.Values) {
-                ResultConfigJsonDto resultDto = new() {
-                    Id = resultConfig.Id.GetId(),
-                    PathName = resultConfig.PathName.Path,
-                    Title = resultConfig.Title
+        public JsonDtoBuilder OfResultAggregates(Dictionary<IdValue,ResultEntity> value) {
+            foreach (ResultEntity resultAggregate in value.Values) {
+                ResultAggregateJsonDto resultDto = new() {
+                    Id = resultAggregate.Id.GetId(),
+                    PathName = resultAggregate.PathName.Path,
+                    Title = resultAggregate.Title
                 };
-                _resultConfigDtos.Add(resultDto);
+                _resultAggregateDtos.Add(resultDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfRecordConfigs(Dictionary<IdValue,RecordEntity> value) {
-            foreach (RecordEntity recordConfig in value.Values) {
-                RecordConfigJsonDto recordDto = new() {
-                    Id = recordConfig.Id.GetId(),
-                    PathName = recordConfig.PathName.Path,
-                    Title = recordConfig.Title,
-                    Description = recordConfig.Description,
-                    Date = recordConfig.Date.ToString("yyyy-MM-dd HH:mm:ss"),
-                    Reviewer = recordConfig.Reviewer,
-                    Success = recordConfig.Success.ToStringOfNumber()
+        public JsonDtoBuilder OfRecordAggregates(Dictionary<IdValue,RecordEntity> value) {
+            foreach (RecordEntity recordAggregate in value.Values) {
+                RecordAggregateJsonDto recordDto = new() {
+                    Id = recordAggregate.Id.GetId(),
+                    PathName = recordAggregate.PathName.Path,
+                    Title = recordAggregate.Title,
+                    Description = recordAggregate.Description,
+                    Date = recordAggregate.Date.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Reviewer = recordAggregate.Reviewer,
+                    Success = recordAggregate.Success.ToStringOfNumber()
                 };
-                _recordConfigDtos.Add(recordDto);
+                _recordAggregateDtos.Add(recordDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfTodoConfigs(Dictionary<IdValue,TodoEntity> value) {
-            foreach (TodoEntity todoConfig in value.Values) {
-                TodoConfigJsonDto todoDto = new() {
-                    Id = todoConfig.Id.GetId(),
-                    PathName = todoConfig.PathName.Path,
-                    Title = todoConfig.Title,
-                    Description = todoConfig.Description
+        public JsonDtoBuilder OfTodoAggregates(Dictionary<IdValue,TodoEntity> value) {
+            foreach (TodoEntity todoAggregate in value.Values) {
+                TodoAggregateJsonDto todoDto = new() {
+                    Id = todoAggregate.Id.GetId(),
+                    PathName = todoAggregate.PathName.Path,
+                    Title = todoAggregate.Title,
+                    Description = todoAggregate.Description
                 };
-                _todoConfigDtos.Add(todoDto);
+                _todoAggregateDtos.Add(todoDto);
             }
             return this;
         }
 
 
-        public JsonDtoBuilder OfSchemaConfigs(Dictionary<IdValue,SchemaEntity> value) {
-            // SchemaConfigに変換して追加
-            foreach (SchemaEntity schemaConfig in value.Values) {
-                SchemaConfigJsonDto schemaDto = new() {
-                    Id = schemaConfig.Id.GetId(),
-                    PathName = schemaConfig.PathName.Path,
-                    Title = schemaConfig.Title,
-                    Experience = schemaConfig.Experience,
-                    Evaluation = schemaConfig.Evaluation,
-                    Hypothesis = schemaConfig.Hypothesis,
-                    AbstractionGoal = schemaConfig.AbstractionGoal,
-                    ExecutionGoal = schemaConfig.ExecutionGoal
+        public JsonDtoBuilder OfSchemaAggregates(Dictionary<IdValue,SchemaEntity> value) {
+            // SchemaAggregateに変換して追加
+            foreach (SchemaEntity schemaAggregate in value.Values) {
+                SchemaAggregateJsonDto schemaDto = new() {
+                    Id = schemaAggregate.Id.GetId(),
+                    PathName = schemaAggregate.PathName.Path,
+                    Title = schemaAggregate.Title,
+                    Experience = schemaAggregate.Experience,
+                    Evaluation = schemaAggregate.Evaluation,
+                    Hypothesis = schemaAggregate.Hypothesis,
+                    AbstractionGoal = schemaAggregate.AbstractionGoal,
+                    ExecutionGoal = schemaAggregate.ExecutionGoal
                 };
-                _schemaConfigDtos.Add(schemaDto);
+                _schemaAggregateDtos.Add(schemaDto);
             }
             return this;
         }
 
-        public JsonDtoBuilder OfGroupConfigs(Dictionary<IdValue,GroupEntity> value) {
-            // SchemaConfigに変換して追加
-            foreach (GroupEntity schemaConfig in value.Values) {
-                GroupConfigJsonDto groupConfigDto = new() {
-                    Id = schemaConfig.Id.GetId(),
-                    PathName = schemaConfig.PathName.Path,
-                    Title = schemaConfig.Title
+        public JsonDtoBuilder OfGroupAggregates(Dictionary<IdValue,GroupEntity> value) {
+            // SchemaAggregateに変換して追加
+            foreach (GroupEntity schemaAggregate in value.Values) {
+                GroupAggregateJsonDto groupAggregateDto = new() {
+                    Id = schemaAggregate.Id.GetId(),
+                    PathName = schemaAggregate.PathName.Path,
+                    Title = schemaAggregate.Title
                 };
-                _groupConfigDtos.Add(groupConfigDto);
+                _groupAggregateDtos.Add(groupAggregateDto);
             }
             return this;
         }
 
         public JsonDtoBuilder OfArgumentProperties(Dictionary<IdValue,ResultEntity> value) {
-            foreach (ResultEntity resultConfig in value.Values) {
-                foreach (ArgumentEntity argumentValue in resultConfig.Arguments) {
+            foreach (ResultEntity resultAggregate in value.Values) {
+                foreach (ArgumentEntity argumentValue in resultAggregate.Arguments) {
                     ArgumentPropertieJsonDto argumentDto = new() {
-                        ParentId = resultConfig.Id.GetId(),
+                        ParentId = resultAggregate.Id.GetId(),
                         Id = argumentValue.Id.GetId(),
                         ListIndex = argumentValue.ListIndex.ToString(),
                         KeyIndex = argumentValue.KeyIndex.ToString(),
@@ -357,10 +357,10 @@ namespace FactStatus.Domain.Setup {
         }
 
         public JsonDtoBuilder OfAssertionProperties(Dictionary<IdValue,ResultEntity> value) {
-            foreach (ResultEntity resultConfig in value.Values) {
-                foreach (AssertionEntity assertionValue in resultConfig.Assertions) {
+            foreach (ResultEntity resultAggregate in value.Values) {
+                foreach (AssertionEntity assertionValue in resultAggregate.Assertions) {
                     AssertionPropertieJsonDto assertionDto = new() {
-                        ParentId = resultConfig.Id.GetId(),
+                        ParentId = resultAggregate.Id.GetId(),
                         Id = assertionValue.Id.GetId(),
                         Assert = assertionValue.Assert.ToString(),
                         Target = assertionValue.Target,
@@ -425,15 +425,15 @@ namespace FactStatus.Domain.Setup {
         /// <returns></returns>
         public JsonDto Build() {
             JsonDto jsonByRelationalDto = new() {
-                DocumentConfig = _documentConfigDto,
-                SubjectConfigs = _subjectConfigDtos,
-                AchievementConfigs = _achievementConfigDtos,
-                EvidenceConfigs = _evidenceConfigDtos,
-                ResultConfigs = _resultConfigDtos,
-                RecordConfigs = _recordConfigDtos,
-                TodoConfigs = _todoConfigDtos,
-                SchemaConfigs = _schemaConfigDtos,
-                GroupConfigs = _groupConfigDtos,
+                DocumentAggregate = _documentAggregateDto,
+                SubjectAggregates = _subjectAggregateDtos,
+                AchievementAggregates = _achievementAggregateDtos,
+                EvidenceAggregates = _evidenceAggregateDtos,
+                ResultAggregates = _resultAggregateDtos,
+                RecordAggregates = _recordAggregateDtos,
+                TodoAggregates = _todoAggregateDtos,
+                SchemaAggregates = _schemaAggregateDtos,
+                GroupAggregates = _groupAggregateDtos,
                 ArgumentProperties = _argumentPropertieDtos,
                 AssertionProperties = _assertionPropertieDtos,
                 ParentEdges = _parentEdgeDtos,
@@ -446,20 +446,20 @@ namespace FactStatus.Domain.Setup {
         /// コンストラクタ
         /// </summary>
         public JsonDtoBuilder() {
-            _documentConfigDto = new DocumentConfigJsonDto {
+            _documentAggregateDto = new DocumentAggregateJsonDto {
                 Id = "00010000",
                 PathName = "Documents",
                 Title = "ドキュメント",
                 Description = ""
             };
-            _subjectConfigDtos = new List<SubjectConfigJsonDto>();
-            _achievementConfigDtos = new List<AchievementConfigJsonDto>();
-            _evidenceConfigDtos = new List<EvidenceConfigJsonDto>();
-            _resultConfigDtos = new List<ResultConfigJsonDto>();
-            _recordConfigDtos = new List<RecordConfigJsonDto>();
-            _todoConfigDtos = new List<TodoConfigJsonDto>();
-            _schemaConfigDtos = new List<SchemaConfigJsonDto>();
-            _groupConfigDtos = new List<GroupConfigJsonDto>();
+            _subjectAggregateDtos = new List<SubjectAggregateJsonDto>();
+            _achievementAggregateDtos = new List<AchievementAggregateJsonDto>();
+            _evidenceAggregateDtos = new List<EvidenceAggregateJsonDto>();
+            _resultAggregateDtos = new List<ResultAggregateJsonDto>();
+            _recordAggregateDtos = new List<RecordAggregateJsonDto>();
+            _todoAggregateDtos = new List<TodoAggregateJsonDto>();
+            _schemaAggregateDtos = new List<SchemaAggregateJsonDto>();
+            _groupAggregateDtos = new List<GroupAggregateJsonDto>();
             _argumentPropertieDtos = new List<ArgumentPropertieJsonDto>();
             _assertionPropertieDtos = new List<AssertionPropertieJsonDto>();
             _parentEdgeDtos = new List<ParentEdgeJsonDto>();

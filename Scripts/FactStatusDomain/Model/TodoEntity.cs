@@ -29,6 +29,59 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public TodoEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+
+            return new TodoEntity(id, path, Title, Description);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static TodoEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            return new TodoEntity(
+                id,
+                pathName,
+                title,
+                "");
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public static TodoEntity Build(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            string description) {
+
+            return new TodoEntity(
+                id,
+                pathName,
+                title,
+                description);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>
@@ -41,7 +94,6 @@ namespace FactStatus.Domain.Model {
             string title,
             string description){
 
-            // 
             Id = id;
             PathName = pathName;
             Title = title ?? "";

@@ -25,6 +25,8 @@ namespace FactStatus.Domain.Setup {
         private Dictionary<IdValue,TodoEntity> _todoEntityDict;
         private Dictionary<IdValue,SchemaEntity> _schemaEntityDict;
         private Dictionary<IdValue,GroupEntity> _groupEntityDict;
+        private Dictionary<IdValue,ArgumentEntity> _argumentEntityDict;
+        private Dictionary<IdValue,AssertionEntity> _assertionEntityDict;
         private Dictionary<IdValue,IdValue> _parentLinkDict;
         private Dictionary<IdValue,List<IdValue>> _childrenLinkDict;
         private Dictionary<IdValue,List<IdValue>> _groupLinkDict;
@@ -89,51 +91,51 @@ namespace FactStatus.Domain.Setup {
             return this;
         }
 
-        public FactStatusBuilder OfDocumentEntity(DocumentConfigJsonDto value) {
+        public FactStatusBuilder OfDocumentEntity(DocumentAggregateJsonDto value) {
             _documentEntity = new DocumentEntity(value.Description); ;
             return this;
         }
 
         //
-        public FactStatusBuilder OfSubjectEntityDict(List<SubjectConfigJsonDto> value) {
-            foreach (SubjectConfigJsonDto subjectConfigDto in value) {
+        public FactStatusBuilder OfSubjectEntityDict(List<SubjectAggregateJsonDto> value) {
+            foreach (SubjectAggregateJsonDto subjectAggregateDto in value) {
                 var subjectEntity = new SubjectEntity(
-                    IdValue.FromString(subjectConfigDto.Id),
-                    PathValue.PathIsDirectory(subjectConfigDto.PathName),
-                    subjectConfigDto.Title,
-                    subjectConfigDto.Description);
+                    IdValue.FromString(subjectAggregateDto.Id),
+                    PathValue.PathIsDirectory(subjectAggregateDto.PathName),
+                    subjectAggregateDto.Title,
+                    subjectAggregateDto.Description);
                 _subjectEntityDict.Add(subjectEntity.Id,subjectEntity);
             }
             return this;
         }
 
-        public FactStatusBuilder OfAchievementEntityDict(List<AchievementConfigJsonDto> value) {
-            foreach (AchievementConfigJsonDto achievementConfigDto in value) {
+        public FactStatusBuilder OfAchievementEntityDict(List<AchievementAggregateJsonDto> value) {
+            foreach (AchievementAggregateJsonDto achievementAggregateDto in value) {
                 var achievementEntity = new AchievementEntity(
-                    IdValue.FromString(achievementConfigDto.Id),
-                    PathValue.PathIsDirectory(achievementConfigDto.PathName),
-                    achievementConfigDto.Title,
-                    achievementConfigDto.Description);
+                    IdValue.FromString(achievementAggregateDto.Id),
+                    PathValue.PathIsDirectory(achievementAggregateDto.PathName),
+                    achievementAggregateDto.Title,
+                    achievementAggregateDto.Description);
                 _achievementEntityDict.Add(achievementEntity.Id,achievementEntity);
             }
             return this;
         }
 
-        public FactStatusBuilder OfEvidenceEntityDict(List<EvidenceConfigJsonDto> value) {
-            foreach (EvidenceConfigJsonDto evidenceConfigDto in value) {
+        public FactStatusBuilder OfEvidenceEntityDict(List<EvidenceAggregateJsonDto> value) {
+            foreach (EvidenceAggregateJsonDto evidenceAggregateDto in value) {
                 var evidenceEntity = new EvidenceEntity(
-                    IdValue.FromString(evidenceConfigDto.Id),
-                    PathValue.PathIsDirectory(evidenceConfigDto.PathName),
-                    evidenceConfigDto.Title,
-                    evidenceConfigDto.Description,
-                    BoolValue.FromString(evidenceConfigDto.Success));
+                    IdValue.FromString(evidenceAggregateDto.Id),
+                    PathValue.PathIsDirectory(evidenceAggregateDto.PathName),
+                    evidenceAggregateDto.Title,
+                    evidenceAggregateDto.Description,
+                    BoolValue.FromString(evidenceAggregateDto.Success));
                 _evidenceEntityDict.Add(evidenceEntity.Id,evidenceEntity);
             }
             return this;
         }
 
         public FactStatusBuilder OfResultEntityDict(
-            List<ResultConfigJsonDto> resultConfigDtos,
+            List<ResultAggregateJsonDto> resultAggregateDtos,
             List<ArgumentPropertieJsonDto> argumentDtos,
             List<AssertionPropertieJsonDto> assertionDtos) {
 
@@ -155,6 +157,7 @@ namespace FactStatus.Domain.Setup {
                     argumentValueDict[argumentValue.ParentId.GetId()] = argumentList;
                 }
                 argumentList.Add(argumentValue);
+                _argumentEntityDict.Add(argumentValue.Id, argumentValue);
             }
 
             // 
@@ -174,17 +177,18 @@ namespace FactStatus.Domain.Setup {
                     assertionValueDict[assertionValue.ParentId.GetId()] = assertionList;
                 }
                 assertionList.Add(assertionValue);
+                _assertionEntityDict.Add(assertionValue.Id, assertionValue);
             }
 
             // 
-            foreach (ResultConfigJsonDto resultConfigDto in resultConfigDtos) {
-                var argumentValues = argumentValueDict.TryGetValue(resultConfigDto.Id, out var foundArguments) ? foundArguments : new List<ArgumentEntity>();
-                var assertionValues = assertionValueDict.TryGetValue(resultConfigDto.Id, out var foundAssertions) ? foundAssertions : new List<AssertionEntity>();
+            foreach (ResultAggregateJsonDto resultAggregateDto in resultAggregateDtos) {
+                var argumentValues = argumentValueDict.TryGetValue(resultAggregateDto.Id, out var foundArguments) ? foundArguments : new List<ArgumentEntity>();
+                var assertionValues = assertionValueDict.TryGetValue(resultAggregateDto.Id, out var foundAssertions) ? foundAssertions : new List<AssertionEntity>();
 
                 var resultEntity = new ResultEntity(
-                    IdValue.FromString(resultConfigDto.Id),
-                    PathValue.PathIsDirectory(resultConfigDto.PathName),
-                    resultConfigDto.Title,
+                    IdValue.FromString(resultAggregateDto.Id),
+                    PathValue.PathIsDirectory(resultAggregateDto.PathName),
+                    resultAggregateDto.Title,
                     argumentValues,
                     assertionValues);
                 _resultEntityDict.Add(resultEntity.Id,resultEntity);
@@ -192,58 +196,58 @@ namespace FactStatus.Domain.Setup {
             return this;
         }
 
-        public FactStatusBuilder OfRecordEntityDict(List<RecordConfigJsonDto> value) {
-            foreach (RecordConfigJsonDto recordConfigDto in value) {
+        public FactStatusBuilder OfRecordEntityDict(List<RecordAggregateJsonDto> value) {
+            foreach (RecordAggregateJsonDto recordAggregateDto in value) {
                 var recordEntity = new RecordEntity(
-                    IdValue.FromString(recordConfigDto.Id),
-                    PathValue.PathIsDirectory(recordConfigDto.PathName),
-                    recordConfigDto.Title,
-                    recordConfigDto.Description,
-                    DateTime.ParseExact(recordConfigDto.Date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
-                    recordConfigDto.Reviewer,
-                    BoolValue.FromString(recordConfigDto.Success));
+                    IdValue.FromString(recordAggregateDto.Id),
+                    PathValue.PathIsDirectory(recordAggregateDto.PathName),
+                    recordAggregateDto.Title,
+                    recordAggregateDto.Description,
+                    DateTime.ParseExact(recordAggregateDto.Date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
+                    recordAggregateDto.Reviewer,
+                    BoolValue.FromString(recordAggregateDto.Success));
                 _recordEntityDict.Add(recordEntity.Id,recordEntity);
             }
             return this;
         }
 
-        public FactStatusBuilder OfTodoEntityDict(List<TodoConfigJsonDto> value) {
-            foreach (TodoConfigJsonDto todoConfigDto in value) {
+        public FactStatusBuilder OfTodoEntityDict(List<TodoAggregateJsonDto> value) {
+            foreach (TodoAggregateJsonDto todoAggregateDto in value) {
                 var todoEntity = new TodoEntity(
-                    IdValue.FromString(todoConfigDto.Id),
-                    PathValue.PathIsDirectory(todoConfigDto.PathName),
-                    todoConfigDto.Title,
-                    todoConfigDto.Description);
+                    IdValue.FromString(todoAggregateDto.Id),
+                    PathValue.PathIsDirectory(todoAggregateDto.PathName),
+                    todoAggregateDto.Title,
+                    todoAggregateDto.Description);
                 _todoEntityDict.Add(todoEntity.Id,todoEntity);
             }
             return this;
         }
 
 
-        public FactStatusBuilder OfSchemaEntityDict(List<SchemaConfigJsonDto> value) {
-            // SchemaConfigに変換して追加
-            foreach (SchemaConfigJsonDto schemaConfigDto in value) {
+        public FactStatusBuilder OfSchemaEntityDict(List<SchemaAggregateJsonDto> value) {
+            // SchemaAggregateに変換して追加
+            foreach (SchemaAggregateJsonDto schemaAggregateDto in value) {
                 var schemaEntity = new SchemaEntity(
-                    IdValue.FromString(schemaConfigDto.Id),
-                    PathValue.PathIsDirectory(schemaConfigDto.PathName),
-                    schemaConfigDto.Title,
-                    schemaConfigDto.Experience,
-                    schemaConfigDto.Evaluation,
-                    schemaConfigDto.Hypothesis,
-                    schemaConfigDto.AbstractionGoal,
-                    schemaConfigDto.ExecutionGoal);
+                    IdValue.FromString(schemaAggregateDto.Id),
+                    PathValue.PathIsDirectory(schemaAggregateDto.PathName),
+                    schemaAggregateDto.Title,
+                    schemaAggregateDto.Experience,
+                    schemaAggregateDto.Evaluation,
+                    schemaAggregateDto.Hypothesis,
+                    schemaAggregateDto.AbstractionGoal,
+                    schemaAggregateDto.ExecutionGoal);
                 _schemaEntityDict.Add(schemaEntity.Id,schemaEntity);
             }
             return this;
         }
 
-        public FactStatusBuilder OfGroupEntityDict(List<GroupConfigJsonDto> value) {
-            // GroupConfigに変換して追加
-            foreach (GroupConfigJsonDto groupConfigDto in value) {
+        public FactStatusBuilder OfGroupEntityDict(List<GroupAggregateJsonDto> value) {
+            // GroupAggregateに変換して追加
+            foreach (GroupAggregateJsonDto groupAggregateDto in value) {
                 var groupEntity = new GroupEntity(
-                    IdValue.FromString(groupConfigDto.Id),
-                    PathValue.PathIsDirectory(groupConfigDto.PathName),
-                    groupConfigDto.Title);
+                    IdValue.FromString(groupAggregateDto.Id),
+                    PathValue.PathIsDirectory(groupAggregateDto.PathName),
+                    groupAggregateDto.Title);
                 _groupEntityDict.Add(groupEntity.Id,groupEntity);
             }
             return this;
@@ -284,13 +288,13 @@ namespace FactStatus.Domain.Setup {
         }
 
         /// <summary>
-        /// FactStatusConfigの生成
+        /// FactStatusAggregateの生成
         /// </summary>
         /// <returns></returns>
-        public FactStatusConfig Build() {
+        public FactStatusAggregate Build() {
 
-            // FactStatusConfigの生成
-            return new FactStatusConfig(
+            // FactStatusAggregateの生成
+            return new FactStatusAggregate(
                 _documentEntity,
                 _subjectEntityDict,
                 _achievementEntityDict,
@@ -300,6 +304,8 @@ namespace FactStatus.Domain.Setup {
                 _todoEntityDict,
                 _schemaEntityDict,
                 _groupEntityDict,
+                _argumentEntityDict,
+                _assertionEntityDict,
                 _parentLinkDict,
                 _childrenLinkDict,
                 _groupLinkDict);
@@ -345,6 +351,8 @@ namespace FactStatus.Domain.Setup {
             this._todoEntityDict = new Dictionary<IdValue,TodoEntity>();
             this._schemaEntityDict = new Dictionary<IdValue,SchemaEntity>();
             this._groupEntityDict = new Dictionary<IdValue,GroupEntity>();
+            this._argumentEntityDict = new Dictionary<IdValue,ArgumentEntity>();
+            this._assertionEntityDict = new Dictionary<IdValue,AssertionEntity>();
             this._parentLinkDict = new Dictionary<IdValue, IdValue>();
             this._childrenLinkDict = new Dictionary<IdValue,List<IdValue>>();
             this._groupLinkDict = new Dictionary<IdValue,List<IdValue>>();

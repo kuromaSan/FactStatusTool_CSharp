@@ -1,6 +1,4 @@
 # 結果名
-## 結果区分(正常値/異常値)
-正常値
 ## 引数
 - int intKey = 12
 - float floatKey = 3.14

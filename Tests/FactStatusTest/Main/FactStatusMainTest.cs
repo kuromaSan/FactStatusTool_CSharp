@@ -79,13 +79,13 @@ namespace FactStatus.Domain.Test.Main {
 
             int count = entityType switch {
                 "Subject" => factStatus.GetSubjectEntityDict().Count,
-                "Achievement" => factStatus.GetAchievementEntityDict(IdTypeEnum.AchievementEntity).Count,
-                "Evidence" => factStatus.GetEvidenceEntityDict(IdTypeEnum.EvidenceEntity).Count,
-                "Result" => factStatus.GetResultEntityDict(IdTypeEnum.ResultEntity).Count,
-                "Record" => factStatus.GetRecordEntityDict(IdTypeEnum.RecordEntity).Count,
-                "Todo" => factStatus.GetTodoEntityDict(IdTypeEnum.TodoEntity).Count,
-                "Schema" => factStatus.GetSchemaEntityDict(IdTypeEnum.SchemaEntity).Count,
-                "Group" => factStatus.GetGroupEntityDict(IdTypeEnum.GroupEntity).Count,
+                "Achievement" => factStatus.GetAchievementEntityDict(IdTypeEnum.Achievement).Count,
+                "Evidence" => factStatus.GetEvidenceEntityDict(IdTypeEnum.Evidence).Count,
+                "Result" => factStatus.GetResultEntityDict(IdTypeEnum.Result).Count,
+                "Record" => factStatus.GetRecordEntityDict(IdTypeEnum.Record).Count,
+                "Todo" => factStatus.GetTodoEntityDict(IdTypeEnum.Todo).Count,
+                "Schema" => factStatus.GetSchemaEntityDict(IdTypeEnum.Schema).Count,
+                "Group" => factStatus.GetGroupEntityDict(IdTypeEnum.Group).Count,
                 _ => 0
             };
 
@@ -121,8 +121,8 @@ namespace FactStatus.Domain.Test.Main {
         }
 
         [Theory]
-        [InlineData("00020002", IdTypeEnum.SubjectEntity)]
-        [InlineData("00020002", IdTypeEnum.AchievementEntity)]
+        [InlineData("00020002", IdTypeEnum.Subject)]
+        [InlineData("00020002", IdTypeEnum.Achievement)]
         public void CreateEntityを実行できる(string selectId, IdTypeEnum idTypeEnum) {
             var factStatus = CreateFactStatus();
             factStatus.SelectIdEntity = selectId;
@@ -249,8 +249,8 @@ namespace FactStatus.Domain.Test.Main {
                 IdValue.FromString("00050005"),
                 PathValue.PathIsDirectory("result"),
                 "result",
-                [new ArgumentEntity(IdValue.FromString("01040104"), IdValue.FromString("00050005"), 0, 0, "arg", DataTypeEnum.String, "v")],
-                [new AssertionEntity(IdValue.FromString("02040204"), IdValue.FromString("00050005"), AssertEnum.Equal, "target", DataTypeEnum.String, "v")]);
+                [new ArgumentEntity(IdValue.FromString("00010010"), IdValue.FromString("00050005"), 0, 0, "arg", DataTypeEnum.String, "v")],
+                [new AssertionEntity(IdValue.FromString("00010011"), IdValue.FromString("00050005"), AssertEnum.Equal, "target", DataTypeEnum.String, "v")]);
             var record = new RecordEntity(IdValue.FromString("00060006"), PathValue.PathIsDirectory("record"), "record", "desc", DateTime.Now.AddMinutes(-1), "reviewer", BoolValue.IsTrue());
             var todo = new TodoEntity(IdValue.FromString("00070007"), PathValue.PathIsDirectory("todo"), "todo", "desc");
             var schema = new SchemaEntity(IdValue.FromString("00080008"), PathValue.PathIsDirectory("schema"), "schema", "exp", "eva", "hyp", "abst", "exec");

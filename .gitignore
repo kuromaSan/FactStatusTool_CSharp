@@ -7,6 +7,15 @@ obj/
 *.user
 *.suo
 
+# JetBrains Rider / IntelliJ
+.idea/**/workspace.xml
+.idea/**/shelf/
+.idea/**/contentModel.xml
+.idea/**/modules.xml
+.idea/**/projectSettingsUpdater.xml
+.idea/**/*.iml
+*.DotSettings.user
+
 # Test results
 TestResults/
 

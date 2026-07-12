@@ -34,7 +34,7 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
-        /// 
+        /// アグリゲートの取得
         /// </summary>
         /// <returns></returns>
         public List<ArgumentEntity> GetArguments() {
@@ -42,11 +42,71 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
-        /// 
+        /// アサーションの取得
         /// </summary>
         /// <returns></returns>
         public List<AssertionEntity> GetAssertions() {
             return Assertions;
+        }
+
+        /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public ResultEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+
+            return new ResultEntity(id, path, Title, Arguments, Assertions);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static ResultEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            var arguments = new List<ArgumentEntity>();
+            var assertions = new List<AssertionEntity>();
+
+            return new ResultEntity(
+                id,
+                pathName,
+                title,
+                arguments,
+                assertions);
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <param name="arguments"></param>
+        /// <param name="assertions"></param>
+        /// <returns></returns>
+        public static ResultEntity Build(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            List<ArgumentEntity> arguments,
+            List<AssertionEntity> assertions) {
+
+            return new ResultEntity(
+                id,
+                pathName,
+                title,
+                arguments,
+                assertions);
         }
 
         /// <summary>

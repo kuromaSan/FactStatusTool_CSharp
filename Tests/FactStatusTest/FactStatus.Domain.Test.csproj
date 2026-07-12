@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Main\FactStatusMainTest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Surface\" />
     <Folder Include="Value\" />
     <Folder Include="Model\" />

@@ -41,6 +41,59 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <returns></returns>
+        public SubjectEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+                
+            return new SubjectEntity(id, path, Title, Description);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static SubjectEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            return new SubjectEntity(
+                id,
+                pathName,
+                title,
+                "");
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public static SubjectEntity Build(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            string description) {
+
+            return new SubjectEntity(
+                id,
+                pathName,
+                title,
+                description);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>

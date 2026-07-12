@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FactStatus.Domain.Test" type="DotNetProject" factoryName=".NET Project">
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Tests/FactStatusTest/FactStatus.Domain.Test.csproj" />
+    <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

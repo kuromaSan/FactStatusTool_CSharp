@@ -1,352 +1,373 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using FactStatus.Domain.Setup;
+using Domain.Test.TestSupport;
 using FactStatus.Domain.Model;
+using FactStatus.Domain.Setup;
 using FactStatus.Domain.Value;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Domain.Test.Setup {
-    public class FactStatusConfigTest(ITestOutputHelper output) {
-        private readonly ITestOutputHelper output = output;
+    public class FactStatusAggregateTest {
+        private static FactStatusAggregate CreateAggregateWithSubjectIndices(params int[] indices) {
+            var comparer = new FactStatusTestHelper.IdValueByIdComparer();
+            var subjectDict = new Dictionary<IdValue, SubjectEntity>(comparer);
+            foreach (var index in indices) {
+                var id = IdValue.FromString($"{index:0000}0002");
+                subjectDict[id] = new SubjectEntity(
+                    id,
+                    PathValue.PathIsDirectory($"subject{index}"),
+                    $"title{index}",
+                    "");
+            }
+
+            return new FactStatusAggregate(
+                new DocumentEntity(""),
+                subjectDict,
+                new Dictionary<IdValue, AchievementEntity>(comparer),
+                new Dictionary<IdValue, EvidenceEntity>(comparer),
+                new Dictionary<IdValue, ResultEntity>(comparer),
+                new Dictionary<IdValue, RecordEntity>(comparer),
+                new Dictionary<IdValue, TodoEntity>(comparer),
+                new Dictionary<IdValue, SchemaEntity>(comparer),
+                new Dictionary<IdValue, GroupEntity>(comparer),
+                new Dictionary<IdValue, ArgumentEntity>(comparer),
+                new Dictionary<IdValue, AssertionEntity>(comparer),
+                new Dictionary<IdValue, IdValue>(comparer),
+                new Dictionary<IdValue, List<IdValue>>(comparer),
+                new Dictionary<IdValue, List<IdValue>>(comparer));
+        }
 
         [Fact]
-        public void FactStatusConfig() {
+        public void FactStatusAggregate_コンストラクタで各辞書が設定される() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
 
-            // 入力値準備
-            var documentEntity = new DocumentEntity(
-                "");
-            var subjectEntity = new SubjectEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                "");
-            var achievementEntity = new AchievementEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                "");
-            var evidenceEntity = new EvidenceEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                "",
+            Assert.NotNull(Aggregate.DocumentEntity);
+            Assert.Equal(2, Aggregate.SubjectEntityDict.Count);
+            Assert.Single(Aggregate.AchievementEntityDict);
+            Assert.Single(Aggregate.EvidenceEntityDict);
+            Assert.Single(Aggregate.ResultEntityDict);
+            Assert.Single(Aggregate.RecordEntityDict);
+            Assert.Single(Aggregate.TodoEntityDict);
+            Assert.Single(Aggregate.SchemaEntityDict);
+            Assert.Single(Aggregate.GroupEntityDict);
+            Assert.Single(Aggregate.ParentLinkDict);
+            Assert.Single(Aggregate.ChildrenLinkDict);
+            Assert.Single(Aggregate.GroupLinkDict);
+        }
+
+        [Fact]
+        public void GetSubjectEntity_主題エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00020002");
+
+            var entity = Aggregate.GetSubjectEntity(id);
+
+            Assert.Equal("subject-1", entity.Title);
+        }
+
+        [Fact]
+        public void GetAchievementEntity_達成エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00030003");
+
+            var entity = Aggregate.GetAchievementEntity(id);
+
+            Assert.Equal("achievement", entity.Title);
+        }
+
+        [Fact]
+        public void GetEvidenceEntity_証拠エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00040004");
+
+            var entity = Aggregate.GetEvidenceEntity(id);
+
+            Assert.Equal("evidence", entity.Title);
+        }
+
+        [Fact]
+        public void GetResultEntity_結果エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00050005");
+
+            var entity = Aggregate.GetResultEntity(id);
+
+            Assert.Equal("result", entity.Title);
+        }
+
+        [Fact]
+        public void GetRecordEntity_記録エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00060006");
+
+            var entity = Aggregate.GetRecordEntity(id);
+
+            Assert.Equal("record", entity.Title);
+        }
+
+        [Fact]
+        public void GetTodoEntity_実装エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00070007");
+
+            var entity = Aggregate.GetTodoEntity(id);
+
+            Assert.Equal("todo", entity.Title);
+        }
+
+        [Fact]
+        public void GetSchemaEntity_構想エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00080008");
+
+            var entity = Aggregate.GetSchemaEntity(id);
+
+            Assert.Equal("schema", entity.Title);
+        }
+
+        [Fact]
+        public void GetGroupEntity_集合エンティティを取得できる() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+            var id = IdValue.FromString("00090009");
+
+            var entity = Aggregate.GetGroupEntity(id);
+
+            Assert.Equal("group", entity.Title);
+        }
+
+        [Fact]
+        public void GetSubjectMinId_空の場合は0001を返す() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+
+            var minId = Aggregate.GetSubjectMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Theory]
+        [InlineData(new[] { 1, 2, 3, 4, 5 }, "0006")]
+        [InlineData(new[] { 1, 3, 4, 5, 6 }, "0002")]
+        public void GetSubjectMinId_欠番の最小Indexを返す(int[] indices, string expected) {
+            var Aggregate = CreateAggregateWithSubjectIndices(indices);
+
+            var minId = Aggregate.GetSubjectMinId();
+
+            Assert.Equal(expected, minId);
+        }
+
+        [Fact]
+        public void GetAchievementMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetAchievementMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void GetEvidenceMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetEvidenceMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void GetResultMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetResultMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void GetRecordMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetRecordMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void GetTodoMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetTodoMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void GetSchemaMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetSchemaMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void GetGroupMinId_欠番の最小Indexを返す() {
+            var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
+
+            var minId = Aggregate.GetGroupMinId();
+
+            Assert.Equal("0001", minId);
+        }
+
+        [Fact]
+        public void AddSubjectEntity_主題エンティティを追加しMinIdを更新する() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = SubjectEntity.Create(
+                IdValue.FromString("00010002"),
+                PathValue.PathIsDirectory("new-subject"),
+                "new");
+
+            Aggregate.AddSubjectEntity(entity);
+
+            Assert.Single(Aggregate.SubjectEntityDict);
+            Assert.Equal("new", Aggregate.GetSubjectEntity(IdValue.FromString("00010002")).Title);
+            Assert.Equal("0002", Aggregate.GetSubjectMinId());
+        }
+
+        [Fact]
+        public void AddAchievementEntity_達成エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = AchievementEntity.Create(
+                IdValue.FromString("00010003"),
+                PathValue.PathIsDirectory("achievement"),
+                "achievement");
+
+            Aggregate.AddAchievementEntity(entity);
+
+            Assert.Single(Aggregate.AchievementEntityDict);
+            Assert.Equal("achievement", Aggregate.GetAchievementEntity(IdValue.FromString("00010003")).Title);
+            Assert.Equal("0002", Aggregate.GetAchievementMinId());
+        }
+
+        [Fact]
+        public void AddEvidenceEntity_証拠エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = EvidenceEntity.Create(
+                IdValue.FromString("00010004"),
+                PathValue.PathIsDirectory("evidence"),
+                "evidence");
+
+            Aggregate.AddEvidenceEntity(entity);
+
+            Assert.Single(Aggregate.EvidenceEntityDict);
+            Assert.Equal("evidence", Aggregate.GetEvidenceEntity(IdValue.FromString("00010004")).Title);
+        }
+
+        [Fact]
+        public void AddResultEntity_結果エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = ResultEntity.Create(
+                IdValue.FromString("00010005"),
+                PathValue.PathIsDirectory("result"),
+                "result");
+
+            Aggregate.AddResultEntity(entity);
+
+            Assert.Single(Aggregate.ResultEntityDict);
+            Assert.Equal("result", Aggregate.GetResultEntity(IdValue.FromString("00010005")).Title);
+        }
+
+        [Fact]
+        public void AddRecordEntity_記録エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = RecordEntity.Build(
+                IdValue.FromString("00010006"),
+                PathValue.PathIsDirectory("record"),
+                "record",
+                "desc",
+                "reviewer",
                 BoolValue.IsTrue());
-            var resultEntity = new ResultEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                new List<ArgumentEntity> {
-                    new ArgumentEntity(
-                        IdValue.FromString("00010104"),
-                        IdValue.FromString(""),
-                        0,
-                        0,
-                        "testKey",
-                        DataTypeEnum.String,
-                        "testValue")
-                },
-                new List<AssertionEntity> {
-                    new AssertionEntity(
-                        IdValue.FromString("00010204"),
-                        IdValue.FromString(""),
-                        AssertEnum.Equal,
-                        "ClassName.functionName()",
-                        DataTypeEnum.Int,
-                        "1")
-                }
-            );
-            var date = DateTime.ParseExact(
-                "2000-10-10 10:10:10",
-                "yyyy-MM-dd HH:mm:ss",
-                CultureInfo.InvariantCulture);
-            var recordEntity = new RecordEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                "",
-                date,
-                "",
-                BoolValue.IsTrue());
-            var todoEntity = new TodoEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                "");
-            var schemaEntity = new SchemaEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "",
-                "",
-                "",
-                "",
-                "",
-                "");
-            var groupEntity = new GroupEntity(
-                IdValue.FromString(""),
-                PathValue.PathIsDirectory(""),
-                "");
 
-            // 設定の作成
-            var config = new FactStatusConfig(
-                documentEntity ,
-                new Dictionary<IdValue,SubjectEntity>{{new IdValue(""),subjectEntity}} ,
-                new Dictionary<IdValue,AchievementEntity>{{new IdValue(""), achievementEntity }},
-                new Dictionary<IdValue,EvidenceEntity>{{new IdValue(""), evidenceEntity }},
-                new Dictionary<IdValue,ResultEntity>{{new IdValue(""), resultEntity }},
-                new Dictionary<IdValue,RecordEntity>{{new IdValue(""), recordEntity }},
-                new Dictionary<IdValue,TodoEntity>{{new IdValue(""), todoEntity }},
-                new Dictionary<IdValue,SchemaEntity>{{new IdValue(""), schemaEntity }},
-                new Dictionary<IdValue,GroupEntity>{{new IdValue(""), groupEntity}},
-                new Dictionary<IdValue,IdValue>{{new IdValue(""), new IdValue("")}},
-                new Dictionary<IdValue,List<IdValue>>{{new IdValue(""), new List<IdValue> { new IdValue("") }}},
-                new Dictionary<IdValue,List<IdValue>>{{new IdValue(""), new List<IdValue> { new IdValue("") }}}
-            );
+            Aggregate.AddRecordEntity(entity);
 
-            // 内容確認
-            Assert.NotNull(config.DocumentEntity);
-            Assert.Single(config.SubjectEntityDict);
-            Assert.Single(config.AchievementEntityDict);
-            Assert.Single(config.EvidenceEntityDict);
-            Assert.Single(config.ResultEntityDict);
-            Assert.Single(config.RecordEntityDict);
-            Assert.Single(config.TodoEntityDict);
-            Assert.Single(config.SchemaEntityDict);
-            Assert.Single(config.GroupEntityDict);
-            Assert.Single(config.ParentLinkDict);
-            Assert.Single(config.ChildrenLinkDict);
-            Assert.Single(config.GroupLinkDict);
+            Assert.Single(Aggregate.RecordEntityDict);
+            Assert.Equal("record", Aggregate.GetRecordEntity(IdValue.FromString("00010006")).Title);
         }
 
         [Fact]
-        public void SubjectEntity() {
-            // 入力値準備
-            string id = "00010001";
-            string pathName = "path";
-            string title = "title";
-            string description = "description";
+        public void AddTodoEntity_実装エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = TodoEntity.Create(
+                IdValue.FromString("00010007"),
+                PathValue.PathIsDirectory("todo"),
+                "todo");
 
-            // 設定の作成
-            var subjectEntity = new SubjectEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                description);
+            Aggregate.AddTodoEntity(entity);
 
-            // 内容確認
-            Assert.Equal(id, subjectEntity.Id.GetId());
-            Assert.Equal(pathName, subjectEntity.PathName.Path);
-            Assert.Equal(title, subjectEntity.Title);
-            Assert.Equal(description, subjectEntity.Description);
+            Assert.Single(Aggregate.TodoEntityDict);
+            Assert.Equal("todo", Aggregate.GetTodoEntity(IdValue.FromString("00010007")).Title);
         }
 
         [Fact]
-        public void AchievementEntity() {
-            // 入力値準備
-            string id = "00010002";
-            string pathName = "path";
-            string title = "title";
-            string description = "description";
+        public void AddSchemaEntity_構想エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = SchemaEntity.Create(
+                IdValue.FromString("00010008"),
+                PathValue.PathIsDirectory("schema"),
+                "schema");
 
-            // 設定の作成
-            var achievementEntity = new AchievementEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                description);
+            Aggregate.AddSchemaEntity(entity);
 
-            // 内容確認
-            output.WriteLine($"achievementEntity.Id:{achievementEntity.Id}");
-            Assert.Equal(id, achievementEntity.Id.GetId());
-            
-            output.WriteLine($"achievementEntity.PathName:{achievementEntity.PathName}");
-            Assert.Equal(pathName, achievementEntity.PathName.Path);
-            
-            output.WriteLine($"achievementEntity.Title:{achievementEntity.Title}");
-            Assert.Equal(title, achievementEntity.Title);
-
-            output.WriteLine($"achievementEntity.Description:{achievementEntity.Description}");
-            Assert.Equal(description, achievementEntity.Description);
-        }
-        
-        [Fact]
-        public void EvidenceEntity() {
-            // 入力値準備
-            string id = "00010002";
-            string pathName = "path";
-            string title = "title";
-            string description = "description";
-            string success = "1";
-
-            // 設定の作成
-            var evidenceEntity = new EvidenceEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                description,
-                BoolValue.FromString(success));
-
-            // 内容確認
-            Assert.Equal(id, evidenceEntity.Id.GetId());
-            Assert.Equal(pathName, evidenceEntity.PathName.Path);
-            Assert.Equal(title, evidenceEntity.Title);
-            Assert.Equal(description, evidenceEntity.Description);
-            Assert.Equal(success, evidenceEntity.Success.ToStringOfNumber());
-        }
-        
-        [Fact]
-        public void ResultEntity() {
-            // 入力値準備
-            string id = "00010002";
-            string pathName = "path";
-            string title = "title";
-            var argumentValue = new List<ArgumentEntity> {
-                    new ArgumentEntity(
-                        IdValue.FromString("00010104"),
-                        IdValue.FromString(""),
-                        0,
-                        0,
-                        "testKey",
-                        DataTypeEnum.String,
-                        "testValue")
-            };
-            var assertionValue = new List<AssertionEntity> {
-                    new AssertionEntity(
-                        IdValue.FromString("00010204"),
-                        IdValue.FromString(""),
-                        AssertEnum.Equal,
-                        "ClassName.functionName()",
-                        DataTypeEnum.Int,
-                        "1")
-            };
-
-            // 設定の作成
-            var resultEntity = new ResultEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                argumentValue,
-                assertionValue);
-
-            // 内容確認
-            Assert.Equal(id, resultEntity.Id.GetId());
-            Assert.Equal(pathName, resultEntity.PathName.Path);
-            Assert.Equal(title, resultEntity.Title);
+            Assert.Single(Aggregate.SchemaEntityDict);
+            Assert.Equal("schema", Aggregate.GetSchemaEntity(IdValue.FromString("00010008")).Title);
         }
 
         [Fact]
-        public void RecordEntity() {
-            // 入力値準備
-            string id = "00010002";
-            string pathName = "path";
-            string title = "title";
-            string success = "1";
-            var date = DateTime.ParseExact(
-                "2000-10-10 10:10:10",
-                "yyyy-MM-dd HH:mm:ss",
-                CultureInfo.InvariantCulture);
-            string reviewer = "reviewer";
-            string description = "description";
+        public void AddGroupEntity_集合エンティティを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var entity = GroupEntity.Create(
+                IdValue.FromString("00010009"),
+                PathValue.PathIsDirectory("group"),
+                "group");
 
-            // 設定の作成
-            var recordEntity = new RecordEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                description,
-                date,
-                reviewer,
-                BoolValue.FromString(success));
+            Aggregate.AddGroupEntity(entity);
 
-            // 内容確認
-            Assert.Equal(id, recordEntity.Id.GetId());
-            Assert.Equal(pathName, recordEntity.PathName.Path);
-            Assert.Equal(title, recordEntity.Title);
-            Assert.Equal(description, recordEntity.Description);
-            Assert.Equal(date, recordEntity.Date);
-            Assert.Equal(reviewer, recordEntity.Reviewer);
-            Assert.Equal(success,recordEntity.Success.ToStringOfNumber());
+            Assert.Single(Aggregate.GroupEntityDict);
+            Assert.Equal("group", Aggregate.GetGroupEntity(IdValue.FromString("00010009")).Title);
         }
 
         [Fact]
-        public void TodoEntity() {
-            // 入力値準備
-            string id = "00010002";
-            string pathName = "path";
-            string title = "title";
-            string description = "description";
+        public void AddParentLink_親子リンクを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var parentId = IdValue.FromString("00010002");
+            var childId = IdValue.FromString("00020003");
 
-            // 設定の作成
-            var todoEntity = new TodoEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                description);
+            Aggregate.AddParentLink(childId, parentId);
 
-            // 内容確認
-            Assert.Equal(id, todoEntity.Id.GetId());
-            Assert.Equal(pathName, todoEntity.PathName.Path);
-            Assert.Equal(title, todoEntity.Title);
-            Assert.Equal(description, todoEntity.Description);
+            Assert.Equal(parentId, Aggregate.ParentLinkDict[childId]);
         }
 
         [Fact]
-        public void SchemaEntity() {
-            // 入力値準備
-            string id = "00010007";
-            string pathName = "path";
-            string title = "title";
-            string experience = "experience";
-            string evaluation = "evaluation";
-            string hypothesis = "hypothesis";
-            string abstractionGoal = "abstractionGoal";
-            string executionGoal = "executionGoal";
+        public void AddChildrenLink_子リンクを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var parentId = IdValue.FromString("00010002");
+            var childId = IdValue.FromString("00020003");
 
+            Aggregate.AddChildrenLink(parentId, childId);
 
-            // 設定の作成
-            var schemaEntity = new SchemaEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title,
-                experience,
-                evaluation,
-                hypothesis,
-                abstractionGoal,
-                executionGoal);
-
-            // 内容確認
-            Assert.Equal(id, schemaEntity.Id.GetId());
-            Assert.Equal(pathName, schemaEntity.PathName.Path);
-            Assert.Equal(title, schemaEntity.Title);
-            Assert.Equal(experience, schemaEntity.Experience);
-            Assert.Equal(evaluation, schemaEntity.Evaluation);
-            Assert.Equal(hypothesis, schemaEntity.Hypothesis);
-            Assert.Equal(abstractionGoal, schemaEntity.AbstractionGoal);
-            Assert.Equal(executionGoal, schemaEntity.ExecutionGoal);
+            Assert.Single(Aggregate.ChildrenLinkDict[parentId]);
+            Assert.Equal(childId, Aggregate.ChildrenLinkDict[parentId][0]);
         }
 
         [Fact]
-        public void GroupEntity() {
-            // 入力値準備
-            string id = "00010008";
-            string pathName = "path";
-            string title = "title";
+        public void AddGroupLink_集合リンクを追加できる() {
+            var Aggregate = FactStatusTestHelper.CreateEmptyAggregate();
+            var groupId = IdValue.FromString("00010009");
+            var memberId = IdValue.FromString("00020002");
 
-            // 設定の作成
-            var groupEntity = new GroupEntity(
-                IdValue.FromString(id),
-                PathValue.PathIsDirectory(pathName),
-                title);
+            Aggregate.AddGroupLink(groupId, memberId);
 
-            // 内容確認
-            Assert.Equal(id, groupEntity.Id.GetId());
-            Assert.Equal(pathName, groupEntity.PathName.Path);
-            Assert.Equal(title, groupEntity.Title);
+            Assert.Single(Aggregate.GroupLinkDict[groupId]);
+            Assert.Equal(memberId, Aggregate.GroupLinkDict[groupId][0]);
         }
     }
 }

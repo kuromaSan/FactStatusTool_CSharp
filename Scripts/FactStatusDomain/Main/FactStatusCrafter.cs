@@ -30,19 +30,19 @@ namespace FactStatus.Domain.Main {
         /// </summary>
         public void LoadJson(string loadFilePath) {
             try {
-                FactStatusConfig factStatusConfig = _factStatusPolicy.LoadJson(loadFilePath);
-                _factStatusBuilder.OfDocumentEntity(factStatusConfig.DocumentEntity);
-                _factStatusBuilder.OfSubjectEntityDict(factStatusConfig.SubjectEntityDict);
-                _factStatusBuilder.OfAchievementEntityDict(factStatusConfig.AchievementEntityDict);
-                _factStatusBuilder.OfEvidenceEntityDict(factStatusConfig.EvidenceEntityDict);
-                _factStatusBuilder.OfResultEntityDict(factStatusConfig.ResultEntityDict);
-                _factStatusBuilder.OfRecordEntityDict(factStatusConfig.RecordEntityDict);
-                _factStatusBuilder.OfTodoEntityDict(factStatusConfig.TodoEntityDict);
-                _factStatusBuilder.OfSchemaEntityDict(factStatusConfig.SchemaEntityDict);
-                _factStatusBuilder.OfGroupEntityDict(factStatusConfig.GroupEntityDict);
-                _factStatusBuilder.OfParentLinkDict(factStatusConfig.ParentLinkDict);
-                _factStatusBuilder.OfChildrenLinkDict(factStatusConfig.ChildrenLinkDict);
-                _factStatusBuilder.OfGroupLinkDict(factStatusConfig.GroupLinkDict);
+                FactStatusAggregate factStatusAggregate = _factStatusPolicy.LoadJson(loadFilePath);
+                _factStatusBuilder.OfDocumentEntity(factStatusAggregate.DocumentEntity);
+                _factStatusBuilder.OfSubjectEntityDict(factStatusAggregate.SubjectEntityDict);
+                _factStatusBuilder.OfAchievementEntityDict(factStatusAggregate.AchievementEntityDict);
+                _factStatusBuilder.OfEvidenceEntityDict(factStatusAggregate.EvidenceEntityDict);
+                _factStatusBuilder.OfResultEntityDict(factStatusAggregate.ResultEntityDict);
+                _factStatusBuilder.OfRecordEntityDict(factStatusAggregate.RecordEntityDict);
+                _factStatusBuilder.OfTodoEntityDict(factStatusAggregate.TodoEntityDict);
+                _factStatusBuilder.OfSchemaEntityDict(factStatusAggregate.SchemaEntityDict);
+                _factStatusBuilder.OfGroupEntityDict(factStatusAggregate.GroupEntityDict);
+                _factStatusBuilder.OfParentLinkDict(factStatusAggregate.ParentLinkDict);
+                _factStatusBuilder.OfChildrenLinkDict(factStatusAggregate.ChildrenLinkDict);
+                _factStatusBuilder.OfGroupLinkDict(factStatusAggregate.GroupLinkDict);
             }
             catch (AggregateException) { throw; }
         }
@@ -132,9 +132,9 @@ namespace FactStatus.Domain.Main {
         /// </summary>
         /// <returns></returns>
         public FactStatusMain Build() {
-            FactStatusConfig factStatusConfig = this._factStatusBuilder.Build();
+            FactStatusAggregate factStatusAggregate = this._factStatusBuilder.Build();
             return new FactStatusMain(
-                factStatusConfig,
+                factStatusAggregate,
                 this._factStatusPolicy);
         }
 
@@ -153,7 +153,7 @@ namespace FactStatus.Domain.Main {
             // FactStatusBuilderの生成
             this._factStatusBuilder = new FactStatusBuilder();
 
-            // ConfigListの生成
+            // AggregateListの生成
             this._documentEntity = new DocumentEntity("");
             this._subjectEntityDict = new Dictionary<IdValue,SubjectEntity>();
             this._achievementEntityDict = new Dictionary<IdValue,AchievementEntity>();

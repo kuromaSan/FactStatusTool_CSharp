@@ -45,7 +45,7 @@ namespace FactStatus.Domain.Value {
 
             // Index,Typeに変換
             Index = int.Parse(indexText);
-            Type = (IdTypeEnum)int.Parse(indexText);
+            Type = (IdTypeEnum)int.Parse(typeText);
         }
     }
 }

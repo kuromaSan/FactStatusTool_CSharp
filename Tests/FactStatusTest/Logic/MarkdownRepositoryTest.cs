@@ -13,7 +13,7 @@ namespace Domain.Test.Logic {
     public class MarkdownRepositoryTest {
         private readonly ITestOutputHelper output;
 
-        private FactStatusConfig CreateFactStatusConfig() {
+        private FactStatusAggregate CreateFactStatusAggregate() {
 
             var factStatusBuilder = new FactStatusBuilder();
             return factStatusBuilder.Build();
@@ -21,14 +21,14 @@ namespace Domain.Test.Logic {
 
         [Fact]
         public void SaveMarkdownByRootTest() {
-            // JsonからDocumentConfigを生成
-            FactStatusConfig documentConfig = CreateFactStatusConfig();
+            // JsonからDocumentAggregateを生成
+            FactStatusAggregate documentAggregate = CreateFactStatusAggregate();
             // Markdownの保存先ルートディレクトリ
             //string markdownRootDirectory = "D:/Action/FactStatus_CSharp";
 
             // MarkdownDtoを生成
             var markdownDtoBuilder = new MarkdownDtoBuilder();
-            //markdownDtoBuilder.OfFactStatusConfig(documentConfig);
+            //markdownDtoBuilder.OfFactStatusAggregate(documentAggregate);
             //MarkdownDto markdownDto = markdownDtoBuilder.ListBuild();
 
             // Markdownを保存

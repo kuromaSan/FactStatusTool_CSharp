@@ -21,6 +21,55 @@ namespace FactStatus.Domain.Model {
         public string Value { get; private set; }
 
         /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public static ArgumentEntity Create(
+            IdValue id,
+            IdValue parentId) {
+
+            return new ArgumentEntity(
+                id,
+                parentId,
+                0,
+                0,
+                "",
+                DataTypeEnum.None,
+                "");
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parentId"></param>
+        /// <param name="listIndex"></param>
+        /// <param name="keyIndex"></param>
+        /// <param name="keyName"></param>
+        /// <param name="dataType"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static ArgumentEntity Build(
+            IdValue id,
+            IdValue parentId,
+            int listIndex,
+            int keyIndex,
+            string keyName,
+            DataTypeEnum dataType,
+            string value) {
+            return new ArgumentEntity(
+                id,
+                parentId,
+                listIndex,
+                keyIndex,
+                keyName,
+                dataType,
+                value);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>
@@ -39,7 +88,6 @@ namespace FactStatus.Domain.Model {
             DataTypeEnum dataType,
             string value) {
             
-
             Id = id;
             ParentId = parentId;
 
@@ -52,7 +100,6 @@ namespace FactStatus.Domain.Model {
             Validation.NullOfString(keyName);
             KeyName = keyName;
             
-            Validation.EnumNotNullAndDefined<DataTypeEnum>(dataType,DataTypeEnum.None);
             DataType = dataType;
             
             Value = value ?? "";

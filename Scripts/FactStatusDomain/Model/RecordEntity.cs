@@ -96,6 +96,94 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public RecordEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+
+            return new RecordEntity(id, path, Title, Description, Date, Reviewer, Success);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <param name="discription"></param>
+        /// <param name="reviewer"></param>
+        /// <param name="success"></param>
+        /// <returns></returns>
+        public static RecordEntity AutoSet(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            string discription,
+            string reviewer,
+            BoolValue success) {
+
+            return new RecordEntity(
+                id,
+                pathName,
+                title,
+                discription,
+                DateTime.Now,
+                reviewer,
+                success);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static RecordEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            return new RecordEntity(
+                id,
+                pathName,
+                title,
+                "",
+                DateTime.Now,
+                "",
+                BoolValue.IsTrue());
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static RecordEntity Build(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            string discription,
+            string reviewer,
+            BoolValue success) {
+
+            return new RecordEntity(
+                id,
+                pathName,
+                title,
+                discription,
+                DateTime.Now,
+                reviewer,
+                success);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>

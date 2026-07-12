@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace FactStatus.Domain.Setup {
     public class JsonDto {
-        public required DocumentConfigJsonDto DocumentConfig { get; set; }
-        public required List<SubjectConfigJsonDto> SubjectConfigs { get; set; }
-        public required List<AchievementConfigJsonDto> AchievementConfigs { get; set; }
-        public required List<EvidenceConfigJsonDto> EvidenceConfigs { get; set; }
-        public required List<ResultConfigJsonDto> ResultConfigs { get; set; }
-        public required List<RecordConfigJsonDto> RecordConfigs { get; set; }
-        public required List<TodoConfigJsonDto> TodoConfigs { get; set; }
-        public required List<SchemaConfigJsonDto> SchemaConfigs { get; set; }
-        public required List<GroupConfigJsonDto> GroupConfigs { get; set; }
+        public required DocumentAggregateJsonDto DocumentAggregate { get; set; }
+        public required List<SubjectAggregateJsonDto> SubjectAggregates { get; set; }
+        public required List<AchievementAggregateJsonDto> AchievementAggregates { get; set; }
+        public required List<EvidenceAggregateJsonDto> EvidenceAggregates { get; set; }
+        public required List<ResultAggregateJsonDto> ResultAggregates { get; set; }
+        public required List<RecordAggregateJsonDto> RecordAggregates { get; set; }
+        public required List<TodoAggregateJsonDto> TodoAggregates { get; set; }
+        public required List<SchemaAggregateJsonDto> SchemaAggregates { get; set; }
+        public required List<GroupAggregateJsonDto> GroupAggregates { get; set; }
         public required List<ArgumentPropertieJsonDto> ArgumentProperties { get; set; }
         public required List<AssertionPropertieJsonDto> AssertionProperties { get; set; }
         public required List<ParentEdgeJsonDto> ParentEdges { get; set; }
         public required List<GroupEdgeJsonDto> GroupEdges { get; set; }
     }
 
-    public class DocumentConfigJsonDto {
+    public class DocumentAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -33,7 +33,7 @@ namespace FactStatus.Domain.Setup {
         public required string Description { get; set; }
     }
 
-    public class SubjectConfigJsonDto {
+    public class SubjectAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -44,7 +44,7 @@ namespace FactStatus.Domain.Setup {
         public required string Description { get; set; }
     }
 
-    public class AchievementConfigJsonDto {
+    public class AchievementAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -55,7 +55,7 @@ namespace FactStatus.Domain.Setup {
         public required string Description { get; set; }
     }
 
-    public class EvidenceConfigJsonDto {
+    public class EvidenceAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -68,7 +68,7 @@ namespace FactStatus.Domain.Setup {
         public required string Success { get; set; }
     }
 
-    public class ResultConfigJsonDto {
+    public class ResultAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -77,7 +77,7 @@ namespace FactStatus.Domain.Setup {
         public required string Title { get; set; }
     }
 
-    public class RecordConfigJsonDto {
+    public class RecordAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -94,7 +94,7 @@ namespace FactStatus.Domain.Setup {
         public required string Success { get; set; }
     }
 
-    public class TodoConfigJsonDto {
+    public class TodoAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -105,7 +105,7 @@ namespace FactStatus.Domain.Setup {
         public required string Description { get; set; }
     }
 
-    public class SchemaConfigJsonDto {
+    public class SchemaAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]
@@ -124,7 +124,7 @@ namespace FactStatus.Domain.Setup {
         public required string ExecutionGoal { get; set; }
     }
 
-    public class GroupConfigJsonDto {
+    public class GroupAggregateJsonDto {
         [JsonPropertyName("id")]
         public required string Id { get; set; }
         [JsonPropertyName("path_name")]

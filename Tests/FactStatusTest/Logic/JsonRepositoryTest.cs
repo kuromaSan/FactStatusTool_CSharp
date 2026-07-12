@@ -18,8 +18,8 @@ namespace Domain.Test.Logic {
             JsonDto jsonDto = new JsonRepository().LoadJson(new PathValue("D:/Action/FactStatusTool/Documents/RelationalData.json",PathTypeEnum.RootFile));
 
             Assert.NotNull(jsonDto);
-            Assert.NotNull(jsonDto.SubjectConfigs);
-            Assert.NotEmpty(jsonDto.SubjectConfigs);
+            Assert.NotNull(jsonDto.SubjectAggregates);
+            Assert.NotEmpty(jsonDto.SubjectAggregates);
 
             FileInfo fileInfo = new("D:/Action/FactStatusTool/Documents/RelationalSaveTest.json");
             if (fileInfo.Exists) {
@@ -30,21 +30,21 @@ namespace Domain.Test.Logic {
 
 
 
-            foreach (SubjectConfigJsonDto projectDto in jsonDto.SubjectConfigs) {
+            foreach (SubjectAggregateJsonDto projectDto in jsonDto.SubjectAggregates) {
                 output.WriteLine($"Project_Id: {projectDto.Id}");
                 output.WriteLine($"Project_Path: {projectDto.PathName}");
                 output.WriteLine($"Project_Title: {projectDto.Title}");
                 output.WriteLine($"Project_Description: {projectDto.Description}");
             }
 
-            foreach (AchievementConfigJsonDto achievementDto in jsonDto.AchievementConfigs) {
+            foreach (AchievementAggregateJsonDto achievementDto in jsonDto.AchievementAggregates) {
                 output.WriteLine($"Achievement.Id: {achievementDto.Id}");
                 output.WriteLine($"Achievement.PathName: {achievementDto.PathName}");
                 output.WriteLine($"Achievement.Title: {achievementDto.Title}");
                 output.WriteLine($"Achievement.Description: {achievementDto.Description}");
             }
 
-            foreach (EvidenceConfigJsonDto evidenceDto in jsonDto.EvidenceConfigs) {
+            foreach (EvidenceAggregateJsonDto evidenceDto in jsonDto.EvidenceAggregates) {
                 output.WriteLine($"Evidence_Id: {evidenceDto.Id}");
                 output.WriteLine($"Evidence_Path: {evidenceDto.PathName}");
                 output.WriteLine($"Evidence_Title: {evidenceDto.Title}");
@@ -52,20 +52,20 @@ namespace Domain.Test.Logic {
                 output.WriteLine($"Evidence_Description: {evidenceDto.Success}");
             }
 
-            foreach (ResultConfigJsonDto resultDto in jsonDto.ResultConfigs) {
+            foreach (ResultAggregateJsonDto resultDto in jsonDto.ResultAggregates) {
                 output.WriteLine($"Result_ParentId: {resultDto.Id}");
             }
 
-            foreach (RecordConfigJsonDto recordDto in jsonDto.RecordConfigs) {
+            foreach (RecordAggregateJsonDto recordDto in jsonDto.RecordAggregates) {
                 output.WriteLine($"Record_ParentId: {recordDto.Id}");
 
             }
 
-            foreach (TodoConfigJsonDto todoDto in jsonDto.TodoConfigs) {
+            foreach (TodoAggregateJsonDto todoDto in jsonDto.TodoAggregates) {
                 output.WriteLine($"Todo.ParentId: {todoDto.Id}");
             }
 
-            foreach (SchemaConfigJsonDto schemaDto in jsonDto.SchemaConfigs) {
+            foreach (SchemaAggregateJsonDto schemaDto in jsonDto.SchemaAggregates) {
                 output.WriteLine($"Schema_ParentId: {schemaDto.Id}");
             }
         }

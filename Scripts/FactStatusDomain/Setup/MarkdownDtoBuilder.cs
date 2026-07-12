@@ -13,104 +13,104 @@ namespace FactStatus.Domain.Setup {
         private List<MarkdownItemDto> _markdownDtos;
 
         // 一時保留
-        //public MarkdownDtoBuilder OfFactStatusConfig(FactStatusConfig documentConfig) {
+        //public MarkdownDtoBuilder OfFactStatusAggregate(FactStatusAggregate documentAggregate) {
         //    // /Document/README.mdの生成
         //    MarkdownItemDto documentMarkdown = this.CreateDocumentMarkdown(
-        //        documentConfig.SubjectConfigList,
+        //        documentAggregate.SubjectAggregateList,
         //        "Document/README.md");
         //    // リストに追加
         //    this._markdownDtos.Add(documentMarkdown);
 
         //    // /Subject/README.mdの生成
-        //    foreach (SubjectConfig subjectConfig in documentConfig.SubjectConfigList) {
+        //    foreach (SubjectAggregate subjectAggregate in documentAggregate.SubjectAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(subjectConfig.Id,documentConfig);
+        //        string filePath = this.SearchFilePath(subjectAggregate.Id,documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto subjectMarkdown = this.CreateSubjectMarkdown(
-        //            subjectConfig,
-        //            documentConfig.TodoConfigList,
-        //            documentConfig.SchemaConfigList,
+        //            subjectAggregate,
+        //            documentAggregate.TodoAggregateList,
+        //            documentAggregate.SchemaAggregateList,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(subjectMarkdown);
         //    }
 
         //    // /Todo/README.mdの生成
-        //    foreach (TodoConfig todoConfig in documentConfig.TodoConfigList) {
+        //    foreach (TodoAggregate todoAggregate in documentAggregate.TodoAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(todoConfig.Id, documentConfig);
+        //        string filePath = this.SearchFilePath(todoAggregate.Id, documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto todoMarkdown = this.CreateTodoMarkdown(
-        //            todoConfig,
-        //            documentConfig.EvidenceConfigList,
-        //            documentConfig.ProcessConfigList,
-        //            documentConfig.SchemaConfigList,
+        //            todoAggregate,
+        //            documentAggregate.EvidenceAggregateList,
+        //            documentAggregate.ProcessAggregateList,
+        //            documentAggregate.SchemaAggregateList,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(todoMarkdown);
         //    }
 
         //    // /Evidence/README.mdの生成
-        //    foreach (EvidenceConfig evidenceConfig in documentConfig.EvidenceConfigList) {
+        //    foreach (EvidenceAggregate evidenceAggregate in documentAggregate.EvidenceAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(evidenceConfig.Id, documentConfig);
+        //        string filePath = this.SearchFilePath(evidenceAggregate.Id, documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto evidenceMarkdown = this.CreateEvidenceMarkdown(
-        //            evidenceConfig,
-        //            documentConfig.ResultConfigList,
-        //            documentConfig.ProcessConfigList,
-        //            documentConfig.SchemaConfigList,
+        //            evidenceAggregate,
+        //            documentAggregate.ResultAggregateList,
+        //            documentAggregate.ProcessAggregateList,
+        //            documentAggregate.SchemaAggregateList,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(evidenceMarkdown);
         //    }
 
         //    // /Result/README.mdの生成
-        //    foreach (ResultConfig resultConfig in documentConfig.ResultConfigList) {
+        //    foreach (ResultAggregate resultAggregate in documentAggregate.ResultAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(resultConfig.Id, documentConfig);
+        //        string filePath = this.SearchFilePath(resultAggregate.Id, documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto resultMarkdown = this.CreateResultMarkdown(
-        //            resultConfig,
-        //            documentConfig.RecordConfigList,
-        //            documentConfig.ArgumentConfigList,
+        //            resultAggregate,
+        //            documentAggregate.RecordAggregateList,
+        //            documentAggregate.ArgumentAggregateList,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(resultMarkdown);
         //    }
 
         //    // /Record/README.mdの生成
-        //    foreach (RecordConfig recordConfig in documentConfig.RecordConfigList) {
+        //    foreach (RecordAggregate recordAggregate in documentAggregate.RecordAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(recordConfig.Id, documentConfig);
+        //        string filePath = this.SearchFilePath(recordAggregate.Id, documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto recordMarkdown = this.CreateRecordMarkdown(
-        //            recordConfig,
+        //            recordAggregate,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(recordMarkdown);
         //    }
 
         //    // /Process/README.mdの生成
-        //    foreach (ProcessConfig processConfig in documentConfig.ProcessConfigList) {
+        //    foreach (ProcessAggregate processAggregate in documentAggregate.ProcessAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(processConfig.Id, documentConfig);
+        //        string filePath = this.SearchFilePath(processAggregate.Id, documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto processMarkdown = this.CreateProcessMarkdown(
-        //            processConfig,
-        //            documentConfig.StepConfigList,
+        //            processAggregate,
+        //            documentAggregate.StepAggregateList,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(processMarkdown);
         //    }
 
         //    // /Schema/README.mdの生成
-        //    foreach (SchemaConfig schemaConfig in documentConfig.SchemaConfigList) {
+        //    foreach (SchemaAggregate schemaAggregate in documentAggregate.SchemaAggregateList) {
         //        // ファイルパスの生成
-        //        string filePath = this.SearchFilePath(schemaConfig.Id, documentConfig);
+        //        string filePath = this.SearchFilePath(schemaAggregate.Id, documentAggregate);
         //        // マークダウンアイテムの生成
         //        MarkdownItemDto schemaMarkdown = this.CreateSchemaMarkdown(
-        //            schemaConfig,
+        //            schemaAggregate,
         //            $"Document/{filePath}");
         //        // リストに追加
         //        this._markdownDtos.Add(schemaMarkdown);
@@ -118,74 +118,74 @@ namespace FactStatus.Domain.Setup {
         //    return this;
         //}
 
-        //public MarkdownDtoBuilder OfFactStatusConfig(FactStatusConfig documentConfig, string id) {
+        //public MarkdownDtoBuilder OfFactStatusAggregate(FactStatusAggregate documentAggregate, string id) {
         //    // ファイルパスの生成
-        //    string filePath = this.SearchFilePath(id, documentConfig);
+        //    string filePath = this.SearchFilePath(id, documentAggregate);
 
         //    switch (id) {
         //        case "Document":
         //            MarkdownItemDto documentMarkdown = this.CreateDocumentMarkdown(
-        //                documentConfig.SubjectConfigList,
+        //                documentAggregate.SubjectAggregateList,
         //                "Document/README.md");
         //            this._markdownDtos[0] = documentMarkdown;
         //            break;
         //        case "Subject":
-        //            SubjectConfig subjectConfig = this.SearchSubjectConfig(id, documentConfig.SubjectConfigList);
+        //            SubjectAggregate subjectAggregate = this.SearchSubjectAggregate(id, documentAggregate.SubjectAggregateList);
         //            MarkdownItemDto subjectMarkdown = this.CreateSubjectMarkdown(
-        //                subjectConfig,
-        //                documentConfig.TodoConfigList,
-        //                documentConfig.SchemaConfigList,
+        //                subjectAggregate,
+        //                documentAggregate.TodoAggregateList,
+        //                documentAggregate.SchemaAggregateList,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = subjectMarkdown;
         //            break;
         //        case "Todo":
-        //            TodoConfig todoConfig = this.SearchTodoConfig(id, documentConfig.TodoConfigList);
+        //            TodoAggregate todoAggregate = this.SearchTodoAggregate(id, documentAggregate.TodoAggregateList);
         //            MarkdownItemDto todoMarkdown = this.CreateTodoMarkdown(
-        //                todoConfig,
-        //                documentConfig.EvidenceConfigList,
-        //                documentConfig.ProcessConfigList,
-        //                documentConfig.SchemaConfigList,
+        //                todoAggregate,
+        //                documentAggregate.EvidenceAggregateList,
+        //                documentAggregate.ProcessAggregateList,
+        //                documentAggregate.SchemaAggregateList,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = todoMarkdown;
         //            break;
         //        case "Evidence":
-        //            EvidenceConfig evidenceConfig = this.SearchEvidenceConfig(id, documentConfig.EvidenceConfigList);
+        //            EvidenceAggregate evidenceAggregate = this.SearchEvidenceAggregate(id, documentAggregate.EvidenceAggregateList);
         //            MarkdownItemDto evidenceMarkdown = this.CreateEvidenceMarkdown(
-        //                evidenceConfig,
-        //                documentConfig.ResultConfigList,
-        //                documentConfig.ProcessConfigList,
-        //                documentConfig.SchemaConfigList,
+        //                evidenceAggregate,
+        //                documentAggregate.ResultAggregateList,
+        //                documentAggregate.ProcessAggregateList,
+        //                documentAggregate.SchemaAggregateList,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = evidenceMarkdown;
         //            break;
         //        case "Result":
-        //            ResultConfig resultConfig = this.SearchResultConfig(id, documentConfig.ResultConfigList);
+        //            ResultAggregate resultAggregate = this.SearchResultAggregate(id, documentAggregate.ResultAggregateList);
         //            MarkdownItemDto resultMarkdown = this.CreateResultMarkdown(
-        //                resultConfig,
-        //                documentConfig.RecordConfigList,
-        //                documentConfig.ArgumentConfigList,
+        //                resultAggregate,
+        //                documentAggregate.RecordAggregateList,
+        //                documentAggregate.ArgumentAggregateList,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = resultMarkdown;
         //            break;
         //        case "Record":
-        //            RecordConfig recordConfig = this.SearchRecordConfig(id, documentConfig.RecordConfigList);
+        //            RecordAggregate recordAggregate = this.SearchRecordAggregate(id, documentAggregate.RecordAggregateList);
         //            MarkdownItemDto recordMarkdown = this.CreateRecordMarkdown(
-        //                recordConfig,
+        //                recordAggregate,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = recordMarkdown;
         //            break;
         //        case "Process":
-        //            ProcessConfig processConfig = this.SearchProcessConfig(id, documentConfig.ProcessConfigList);
+        //            ProcessAggregate processAggregate = this.SearchProcessAggregate(id, documentAggregate.ProcessAggregateList);
         //            MarkdownItemDto processMarkdown = this.CreateProcessMarkdown(
-        //                processConfig,
-        //                documentConfig.StepConfigList,
+        //                processAggregate,
+        //                documentAggregate.StepAggregateList,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = processMarkdown;
         //            break;
         //        case "Schema":
-        //            SchemaConfig schemaConfig = this.SearchSchemaConfig(id, documentConfig.SchemaConfigList);
+        //            SchemaAggregate schemaAggregate = this.SearchSchemaAggregate(id, documentAggregate.SchemaAggregateList);
         //            MarkdownItemDto schemaMarkdown = this.CreateSchemaMarkdown(
-        //                schemaConfig,
+        //                schemaAggregate,
         //                $"Document/{filePath}");
         //            this._markdownDtos[0] = schemaMarkdown;
         //            break;
@@ -218,55 +218,55 @@ namespace FactStatus.Domain.Setup {
         ///// 
         ///// </summary>
         ///// <param name="id"></param>
-        ///// <param name="documentConfig"></param>
+        ///// <param name="documentAggregate"></param>
         ///// <returns></returns>
-        //private string SearchFilePath(string id, FactStatusConfig documentConfig) {
+        //private string SearchFilePath(string id, FactStatusAggregate documentAggregate) {
         //    string classTypeId = id.Substring(id.Length - 2);
         //    // idに紐づくデータを抽出
         //    switch(classTypeId) {
         //        case "01":
-        //            var subject = documentConfig.SubjectConfigList?.FirstOrDefault(subject => subject.Id == id);
-        //            return this.BuildPath(subject, documentConfig);
+        //            var subject = documentAggregate.SubjectAggregateList?.FirstOrDefault(subject => subject.Id == id);
+        //            return this.BuildPath(subject, documentAggregate);
         //        case "02":
-        //            var todo = documentConfig.TodoConfigList?.FirstOrDefault(todo => todo.Id == id);
-        //            return this.BuildPath(todo, documentConfig);
+        //            var todo = documentAggregate.TodoAggregateList?.FirstOrDefault(todo => todo.Id == id);
+        //            return this.BuildPath(todo, documentAggregate);
         //        case "03":
-        //            var evidence = documentConfig.EvidenceConfigList?.FirstOrDefault(evidence => evidence.Id == id);
-        //            return this.BuildPath(evidence, documentConfig);
+        //            var evidence = documentAggregate.EvidenceAggregateList?.FirstOrDefault(evidence => evidence.Id == id);
+        //            return this.BuildPath(evidence, documentAggregate);
         //        case "04":
-        //            var result = documentConfig.ResultConfigList?.FirstOrDefault(result => result.Id == id);
-        //            return this.BuildPath(result, documentConfig);
+        //            var result = documentAggregate.ResultAggregateList?.FirstOrDefault(result => result.Id == id);
+        //            return this.BuildPath(result, documentAggregate);
         //        case "05":
-        //            var record = documentConfig.RecordConfigList?.FirstOrDefault(record => record.Id == id);
-        //            return this.BuildPath(record, documentConfig);
+        //            var record = documentAggregate.RecordAggregateList?.FirstOrDefault(record => record.Id == id);
+        //            return this.BuildPath(record, documentAggregate);
         //        case "06":
-        //            var process = documentConfig.ProcessConfigList?.FirstOrDefault(process => process.Id == id);
-        //            return this.BuildPath(process, documentConfig);
+        //            var process = documentAggregate.ProcessAggregateList?.FirstOrDefault(process => process.Id == id);
+        //            return this.BuildPath(process, documentAggregate);
         //        case "07":
-        //            var schema = documentConfig.SchemaConfigList?.FirstOrDefault(schema => schema.Id == id);
-        //            return this.BuildPath(schema, documentConfig);
+        //            var schema = documentAggregate.SchemaAggregateList?.FirstOrDefault(schema => schema.Id == id);
+        //            return this.BuildPath(schema, documentAggregate);
         //        default:
         //            throw new Exception($"IDの形式が不正です。ID:{id}");
         //    }
         //}
 
-        //private string BuildPath(SubjectConfig subjectConfig, FactStatusConfig documentConfig) {
+        //private string BuildPath(SubjectAggregate subjectAggregate, FactStatusAggregate documentAggregate) {
         //    // パスの結合
         //    List<string> pathList = new List<string> {
-        //        subjectConfig.PathName,
+        //        subjectAggregate.PathName,
         //        "README.md"
         //    };
         //    return string.Join("/", pathList);
         //}
 
-        //private string BuildPath(IParentConfig commonConfig, FactStatusConfig documentConfig) {
-        //    // 親のConfigを取得
-        //    var parentConfig = documentConfig.SubjectConfigList.First(subject => subject.Id == commonConfig.ParentId);
+        //private string BuildPath(IParentAggregate commonAggregate, FactStatusAggregate documentAggregate) {
+        //    // 親のAggregateを取得
+        //    var parentAggregate = documentAggregate.SubjectAggregateList.First(subject => subject.Id == commonAggregate.ParentId);
 
         //    // パスの結合
         //    List<string> pathList = new List<string> {
-        //        parentConfig.PathName,
-        //        commonConfig.PathName,
+        //        parentAggregate.PathName,
+        //        commonAggregate.PathName,
         //        "README.md"
         //    };
         //    return string.Join("/", pathList);
@@ -276,10 +276,10 @@ namespace FactStatus.Domain.Setup {
         ///// <summary>
         ///// /Document/README.mdの生成
         ///// </summary>
-        ///// <param name="subjectConfigList"></param>
+        ///// <param name="subjectAggregateList"></param>
         ///// <returns></returns>
         //private MarkdownItemDto CreateDocumentMarkdown(
-        //    List<SubjectConfig> subjectConfigList,
+        //    List<SubjectAggregate> subjectAggregateList,
         //    string filePath) {
 
         //    // Document/README.mdの生成
@@ -287,8 +287,8 @@ namespace FactStatus.Domain.Setup {
         //    markdownList.Add(Header(1, "ドキュメント"));
         //    // 主題一覧を追加
         //    markdownList.Add(Header(2, "主題一覧"));
-        //    foreach (var subjectConfig in subjectConfigList) {
-        //        markdownList.Add(Link(subjectConfig.Title, $"./{subjectConfig.PathName}/README.md"));
+        //    foreach (var subjectAggregate in subjectAggregateList) {
+        //        markdownList.Add(Link(subjectAggregate.Title, $"./{subjectAggregate.PathName}/README.md"));
         //    }
         //    // 区切り線と上部READMEへのリンク
         //    markdownList.Add(HorizontalRule());
@@ -303,26 +303,26 @@ namespace FactStatus.Domain.Setup {
         //}
 
         //private MarkdownItemDto CreateSubjectMarkdown(
-        //    SubjectConfig subjectConfig,
-        //    List<AchievementConfig> achievementConfigList,
-        //    List<SchemaConfig> schemaConfigList,
+        //    SubjectAggregate subjectAggregate,
+        //    List<AchievementAggregate> achievementAggregateList,
+        //    List<SchemaAggregate> schemaAggregateList,
         //    string filePath) {
 
         //    // Subject/README.mdの生成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, subjectConfig.Title));
+        //    markdownList.Add(Header(1, subjectAggregate.Title));
         //    // 企画内容
         //    markdownList.Add(Header(2, "企画内容"));
-        //    markdownList.Add(Text(subjectConfig.Description));
+        //    markdownList.Add(Text(subjectAggregate.Description));
         //    // 企画実装に紐づくTodoを抽出、追加
         //    markdownList.Add(Header(2, "企画達成"));
-        //    var achievementFiltered = achievementConfigList.Where(achievement => achievement.ParentId == subjectConfig.Id).ToList();
+        //    var achievementFiltered = achievementAggregateList.Where(achievement => achievement.ParentId == subjectAggregate.Id).ToList();
         //    foreach (var achievement in achievementFiltered) {
         //        markdownList.Add(Link(achievement.Title, $"./{achievement.PathName}/README.md"));
         //    }
         //    // 企画構想に紐づくSchemaを抽出、追加
         //    markdownList.Add(Header(2, "企画構想"));
-        //    var schemaFiltered = schemaConfigList.Where(schema => schema.ParentId == subjectConfig.Id).ToList();
+        //    var schemaFiltered = schemaAggregateList.Where(schema => schema.ParentId == subjectAggregate.Id).ToList();
         //    foreach (var schema in schemaFiltered) {
         //        markdownList.Add(Link(schema.Title, $"./{schema.PathName}/README.md"));
         //    }
@@ -339,33 +339,33 @@ namespace FactStatus.Domain.Setup {
         //}
 
         //private MarkdownItemDto CreateTodoMarkdown(
-        //    TodoConfig todoConfig,
-        //    List<EvidenceConfig> evidenceConfigList,
-        //    List<ProcessConfig> processConfigList,
-        //    List<SchemaConfig> schemaConfigList,
+        //    TodoAggregate todoAggregate,
+        //    List<EvidenceAggregate> evidenceAggregateList,
+        //    List<ProcessAggregate> processAggregateList,
+        //    List<SchemaAggregate> schemaAggregateList,
         //    string filePath) {
 
         //    // Todo/README.md作成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, todoConfig.Title));
+        //    markdownList.Add(Header(1, todoAggregate.Title));
         //    // 実装内容
         //    markdownList.Add(Header(2, "実装内容"));
-        //    markdownList.Add(Text(todoConfig.Description));
+        //    markdownList.Add(Text(todoAggregate.Description));
         //    // 実装証拠に紐づくEvidenceを抽出
         //    markdownList.Add(Header(2, "実装証拠"));
-        //    var evidenceFiltered = evidenceConfigList.Where(evidence => evidence.ParentId == todoConfig.Id).ToList();
+        //    var evidenceFiltered = evidenceAggregateList.Where(evidence => evidence.ParentId == todoAggregate.Id).ToList();
         //    foreach (var evidence in evidenceFiltered) {
         //        markdownList.Add(Link(evidence.Title, $"./{evidence.PathName}/README.md"));
         //    }
         //    // 実装手順に紐づくProcessを抽出
         //    markdownList.Add(Header(2, "実装手順"));
-        //    var processFiltered = processConfigList.Where(process => process.ParentId == todoConfig.Id).ToList();
+        //    var processFiltered = processAggregateList.Where(process => process.ParentId == todoAggregate.Id).ToList();
         //    foreach (var process in processFiltered) {
         //        markdownList.Add(Link(process.Title, $"./{process.PathName}/README.md"));
         //    }
         //    // 実装構想に紐づくSchemaを抽出
         //    markdownList.Add(Header(2, "実装構想"));
-        //    var schemaFiltered = schemaConfigList.Where(schema => schema.ParentId == todoConfig.Id).ToList();
+        //    var schemaFiltered = schemaAggregateList.Where(schema => schema.ParentId == todoAggregate.Id).ToList();
         //    foreach (var schema in schemaFiltered) {
         //        markdownList.Add(Link(schema.Title, $"./{schema.PathName}/README.md"));
         //    }
@@ -382,33 +382,33 @@ namespace FactStatus.Domain.Setup {
         //}
 
         //private MarkdownItemDto CreateEvidenceMarkdown(
-        //    EvidenceConfig evidenceConfig,
-        //    List<ResultConfig> resultConfigList,
-        //    List<ProcessConfig> processConfigList,
-        //    List<SchemaConfig> schemaConfigList,
+        //    EvidenceAggregate evidenceAggregate,
+        //    List<ResultAggregate> resultAggregateList,
+        //    List<ProcessAggregate> processAggregateList,
+        //    List<SchemaAggregate> schemaAggregateList,
         //    string filePath) {
 
         //    // Evidence/README.md作成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, evidenceConfig.Title));
+        //    markdownList.Add(Header(1, evidenceAggregate.Title));
         //    // 証拠内容
         //    markdownList.Add(Header(2, "証拠内容"));
-        //    markdownList.Add(Text(evidenceConfig.Description));
+        //    markdownList.Add(Text(evidenceAggregate.Description));
         //    // 証拠結果に紐づくResultを抽出、追加
         //    markdownList.Add(Header(2, "証拠結果"));
-        //    var evidenceFiltered = resultConfigList.Where(result => result.ParentId == evidenceConfig.Id).ToList();
+        //    var evidenceFiltered = resultAggregateList.Where(result => result.ParentId == evidenceAggregate.Id).ToList();
         //    foreach (var evidence in evidenceFiltered) {
         //        markdownList.Add(Link(evidence.Title, $"./{evidence.PathName}/README.md"));
         //    }
         //    // 証拠手順に紐づくProcessを抽出、追加
         //    markdownList.Add(Header(2, "証拠手順"));
-        //    var processFiltered = processConfigList.Where(process => process.ParentId == evidenceConfig.Id).ToList();
+        //    var processFiltered = processAggregateList.Where(process => process.ParentId == evidenceAggregate.Id).ToList();
         //    foreach (var process in processFiltered) {
         //        markdownList.Add(Link(process.Title, $"./{process.PathName}/README.md"));
         //    }
         //    // 証拠手順に紐づくSchemaを抽出、追加
         //    markdownList.Add(Header(2, "証拠構想"));
-        //    var schemaFiltered = schemaConfigList.Where(schema => schema.ParentId == evidenceConfig.Id).ToList();
+        //    var schemaFiltered = schemaAggregateList.Where(schema => schema.ParentId == evidenceAggregate.Id).ToList();
         //    foreach (var schema in schemaFiltered) {
         //        markdownList.Add(Link(schema.Title, $"./{schema.PathName}/README.md"));
         //    }
@@ -425,35 +425,35 @@ namespace FactStatus.Domain.Setup {
         //}
 
         //private MarkdownItemDto CreateResultMarkdown(
-        //    ResultConfig resultConfig,
-        //    List<RecordConfig> recordConfigList,
-        //    List<ArgumentConfig> argumentConfigList,
+        //    ResultAggregate resultAggregate,
+        //    List<RecordAggregate> recordAggregateList,
+        //    List<ArgumentAggregate> argumentAggregateList,
         //    string filePath) {
 
         //    // Result/README.md作成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, resultConfig.Title));
+        //    markdownList.Add(Header(1, resultAggregate.Title));
         //    // 結果区分
         //    markdownList.Add(Header(2, "結果区分(正常値/異常値)"));
-        //    markdownList.Add((resultConfig.Success) ? "正常値" : "異常値");
+        //    markdownList.Add((resultAggregate.Success) ? "正常値" : "異常値");
         //    // 期待値
         //    markdownList.Add(Header(2, "期待値"));
-        //    markdownList.Add(Text(resultConfig.ExpectedValue));
+        //    markdownList.Add(Text(resultAggregate.ExpectedValue));
         //    // 期待型式
         //    markdownList.Add(Header(2, "期待型式"));
-        //    markdownList.Add(Text(resultConfig.ExpectedType));
+        //    markdownList.Add(Text(resultAggregate.ExpectedType));
         //    // 結果に紐づくexceptionを抽出、追加
         //    markdownList.Add(Header(2, "例外型式"));
-        //    markdownList.Add(Text(resultConfig.ExceptionType));
+        //    markdownList.Add(Text(resultAggregate.ExceptionType));
         //    // 結果に紐づくargumentを抽出、追加
         //    markdownList.Add(Header(2, "引数"));
-        //    var argumentFiltered = argumentConfigList.Where(record => record.ParentId == resultConfig.Id).ToList();
+        //    var argumentFiltered = argumentAggregateList.Where(record => record.ParentId == resultAggregate.Id).ToList();
         //    foreach (var argument in argumentFiltered) {
         //        markdownList.Add($"{argument.Type} {argument.Key} = {argument.Value}\n");
         //    }
         //    // 結果に紐づくrecordを抽出、追加
         //    markdownList.Add(Header(2, "記録一覧"));
-        //    var recordFiltered = recordConfigList.Where(record => record.ParentId == resultConfig.Id).ToList();
+        //    var recordFiltered = recordAggregateList.Where(record => record.ParentId == resultAggregate.Id).ToList();
         //    foreach (var record in recordFiltered) {
         //        markdownList.Add(Link(record.Title, $"./{record.PathName}/README.md"));
         //    }
@@ -470,32 +470,32 @@ namespace FactStatus.Domain.Setup {
         //}
 
         //private MarkdownItemDto CreateRecordMarkdown(
-        //    RecordConfig recordConfig,
+        //    RecordAggregate recordAggregate,
         //    string filePath) {
 
         //    // Record/README.md作成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, recordConfig.Title));
+        //    markdownList.Add(Header(1, recordAggregate.Title));
         //    // 確認日
         //    markdownList.Add(Header(2, "確認日(yyyy-MM-dd HH:mm:ss)"));
-        //    markdownList.Add(Text(recordConfig.Date.ToString("yyyy-MM-dd HH:mm:ss")));
+        //    markdownList.Add(Text(recordAggregate.Date.ToString("yyyy-MM-dd HH:mm:ss")));
         //    // 確認者
         //    markdownList.Add(Header(2, "確認者"));
-        //    markdownList.Add(Text(recordConfig.Reviewer));
+        //    markdownList.Add(Text(recordAggregate.Reviewer));
         //    // 判定
         //    markdownList.Add(Header(2, "判定(OK/NG)"));
-        //    markdownList.Add((recordConfig.Success) ? "OK" : "NG");
+        //    markdownList.Add((recordAggregate.Success) ? "OK" : "NG");
         //    // 期待値
         //    markdownList.Add(Header(2, "期待値"));
-        //    markdownList.Add(Text(recordConfig.ExpectedValue));
+        //    markdownList.Add(Text(recordAggregate.ExpectedValue));
         //    // 期待型式
         //    markdownList.Add(Header(2, "期待型式"));
-        //    markdownList.Add(Text(recordConfig.ExpectedType));
+        //    markdownList.Add(Text(recordAggregate.ExpectedType));
         //    // 記録に紐づくexceptionを抽出、追加
         //    markdownList.Add(Header(2, "例外型式"));
-        //    markdownList.Add(Bullet(recordConfig.ExceptionType));
+        //    markdownList.Add(Bullet(recordAggregate.ExceptionType));
         //    markdownList.Add(Header(2, "メッセージ"));
-        //    markdownList.Add(Text(recordConfig.Message));
+        //    markdownList.Add(Text(recordAggregate.Message));
         //    // 区切り線と上部READMEへのリンク
         //    markdownList.Add(HorizontalRule());
         //    markdownList.Add(LineBack());
@@ -510,15 +510,15 @@ namespace FactStatus.Domain.Setup {
 
 
         //private MarkdownItemDto CreateProcessMarkdown(
-        //    ProcessConfig processConfig,
-        //    List<StepConfig> stepConfigList,
+        //    ProcessAggregate processAggregate,
+        //    List<StepAggregate> stepAggregateList,
         //    string filePath) {
 
         //    // Process/README.md作成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, processConfig.Title));
+        //    markdownList.Add(Header(1, processAggregate.Title));
         //    // 手順に紐づくstepを抽出、追加
-        //    var stepFiltered = stepConfigList.Where(step => step.ParentId == processConfig.Id).ToList();
+        //    var stepFiltered = stepAggregateList.Where(step => step.ParentId == processAggregate.Id).ToList();
         //    foreach (var step in stepFiltered) {
         //        markdownList.Add(Ordered(step.Value));
         //    }
@@ -535,27 +535,27 @@ namespace FactStatus.Domain.Setup {
         //}
 
         //private MarkdownItemDto CreateSchemaMarkdown(
-        //    SchemaConfig schemaConfig,
+        //    SchemaAggregate schemaAggregate,
         //    string filePath) {
 
         //    // Schema/README.md作成
         //    var markdownList = new List<string>();
-        //    markdownList.Add(Header(1, schemaConfig.Title));
+        //    markdownList.Add(Header(1, schemaAggregate.Title));
         //    // 体験
         //    markdownList.Add(Header(2, "体験"));
-        //    markdownList.Add(schemaConfig.Experience);
+        //    markdownList.Add(schemaAggregate.Experience);
         //    // 評価
         //    markdownList.Add(Header(2, "評価"));
-        //    markdownList.Add(schemaConfig.Evaluation);
+        //    markdownList.Add(schemaAggregate.Evaluation);
         //    // 仮説
         //    markdownList.Add(Header(2, "仮説"));
-        //    markdownList.Add(schemaConfig.Hypothesis);
+        //    markdownList.Add(schemaAggregate.Hypothesis);
         //    // 抽象目標
         //    markdownList.Add(Header(2, "抽象目標"));
-        //    markdownList.Add(schemaConfig.AbstractionGoal);
+        //    markdownList.Add(schemaAggregate.AbstractionGoal);
         //    // 実行目標
         //    markdownList.Add(Header(2, "実行目標"));
-        //    markdownList.Add(schemaConfig.ExecutionGoal);
+        //    markdownList.Add(schemaAggregate.ExecutionGoal);
         //    // 区切り線と上部READMEへのリンク
         //    markdownList.Add(HorizontalRule());
         //    markdownList.Add(LineBack());
@@ -568,32 +568,32 @@ namespace FactStatus.Domain.Setup {
         //    return markdownDto;
         //}
 
-        //private SubjectConfig SearchSubjectConfig(string id, List<SubjectConfig> subjectConfigList) {
-        //    return subjectConfigList.First(subject => subject.Id == id);
+        //private SubjectAggregate SearchSubjectAggregate(string id, List<SubjectAggregate> subjectAggregateList) {
+        //    return subjectAggregateList.First(subject => subject.Id == id);
         //}
         
-        //private AchievementConfig SearchAchievementConfig(string id, List<AchievementConfig> achievementConfigList) {
-        //    return achievementConfigList.First(achievement => achievement.Id == id);
+        //private AchievementAggregate SearchAchievementAggregate(string id, List<AchievementAggregate> achievementAggregateList) {
+        //    return achievementAggregateList.First(achievement => achievement.Id == id);
         //}
 
-        //private EvidenceConfig SearchEvidenceConfig(string id, List<EvidenceConfig> evidenceConfigList) {
-        //    return evidenceConfigList.First(evidence => evidence.Id == id);
+        //private EvidenceAggregate SearchEvidenceAggregate(string id, List<EvidenceAggregate> evidenceAggregateList) {
+        //    return evidenceAggregateList.First(evidence => evidence.Id == id);
         //}
 
-        //private ResultConfig SearchResultConfig(string id, List<ResultConfig> resultConfigList) {
-        //    return resultConfigList.First(result => result.Id == id);
+        //private ResultAggregate SearchResultAggregate(string id, List<ResultAggregate> resultAggregateList) {
+        //    return resultAggregateList.First(result => result.Id == id);
         //}
 
-        //private RecordConfig SearchRecordConfig(string id, List<RecordConfig> recordConfigList) {
-        //    return recordConfigList.First(record => record.Id == id);
+        //private RecordAggregate SearchRecordAggregate(string id, List<RecordAggregate> recordAggregateList) {
+        //    return recordAggregateList.First(record => record.Id == id);
         //}
 
-        //private TodoConfig SearchProcessConfig(string id, List<TodoConfig> todoConfigList) {
-        //    return todoConfigList.First(todo => todo.Id == id);
+        //private TodoAggregate SearchProcessAggregate(string id, List<TodoAggregate> todoAggregateList) {
+        //    return todoAggregateList.First(todo => todo.Id == id);
         //}
 
-        //private SchemaConfig SearchSchemaConfig(string id, List<SchemaConfig> schemaConfigList) {
-        //    return schemaConfigList.First(schema => schema.Id == id);
+        //private SchemaAggregate SearchSchemaAggregate(string id, List<SchemaAggregate> schemaAggregateList) {
+        //    return schemaAggregateList.First(schema => schema.Id == id);
         //}
 
         private string Text(string value) {

@@ -29,6 +29,83 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public SchemaEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+
+            return new SchemaEntity(
+                id,
+                path,
+                Title,
+                Experience,
+                Evaluation,
+                Hypothesis,
+                AbstractionGoal,
+                ExecutionGoal);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static SchemaEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            return new SchemaEntity(
+                id,
+                pathName,
+                title,
+                "",
+                "",
+                "",
+                "",
+                "");
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <param name="experience"></param>
+        /// <param name="evaluation"></param>
+        /// <param name="hypothesis"></param>
+        /// <param name="abstractionGoal"></param>
+        /// <param name="executionGoal"></param>
+        /// <returns></returns>
+        public static SchemaEntity Build(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            string experience,
+            string evaluation,
+            string hypothesis,
+            string abstractionGoal,
+            string executionGoal) {
+
+            return new SchemaEntity(
+                id,
+                pathName,
+                title,
+                experience,
+                evaluation,
+                hypothesis,
+                abstractionGoal,
+                executionGoal);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>

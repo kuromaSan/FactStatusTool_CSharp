@@ -20,6 +20,51 @@ namespace FactStatus.Domain.Model {
         public string Value { get; private set; }
 
         /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public static AssertionEntity Create(
+            IdValue id,
+            IdValue parentId) {
+
+            return new AssertionEntity(
+                id,
+                parentId,
+                AssertEnum.None,
+                "",
+                DataTypeEnum.None,
+                "");
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parentId"></param>
+        /// <param name="assert"></param>
+        /// <param name="target"></param>
+        /// <param name="dataType"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static AssertionEntity Build(
+            IdValue id,
+            IdValue parentId,
+            AssertEnum assert,
+            string target,
+            DataTypeEnum dataType,
+            string value) {
+            return new AssertionEntity(
+                id,
+                parentId,
+                assert,
+                target,
+                dataType,
+                value);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>
@@ -38,14 +83,11 @@ namespace FactStatus.Domain.Model {
 
             Id = id;
             ParentId = parentId;
-
-            Validation.EnumNotNullAndDefined<AssertEnum>(assert,AssertEnum.None);
             Assert = assert;
 
             Validation.NullOfString(target);
             Target = target;
             
-            Validation.EnumNotNullAndDefined<DataTypeEnum>(dataType, DataTypeEnum.None);
             DataType = dataType;
             
             Value = value ?? "";

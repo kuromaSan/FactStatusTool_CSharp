@@ -14,7 +14,7 @@ namespace FactStatus.Domain.Main {
     public class FactStatusMain {
         
         private readonly FactStatusPolicy _factStatusPolicy;
-        private FactStatusConfig _factStatusConfig;
+        private FactStatusAggregate _factStatusAggregate;
 
         /// <summary>
         /// 読み込むファイルパスを設定 
@@ -29,14 +29,35 @@ namespace FactStatus.Domain.Main {
         /// <summary>
         /// 選択している設定IDを設定
         /// </summary>
-        public string SelectIdEntity { get; set; }
+        public string SelectIdValue { get; set; }
+
+
+        /// <summary>
+        /// 選択しているIDエンティティの親IDエンティティを取得
+        /// </summary>
+        /// <returns></returns>
+        public IEntity GetParentIdEntity() {
+            return _factStatusPolicy.GetParentIdEntity(
+                _factStatusAggregate,
+                SelectIdValue);
+        }
+
+        /// <summary>
+        /// 選択しているIDエンティティの子IDエンティティリストを取得
+        /// </summary>
+        /// <returns></returns>
+        public List<IEntity> GetChildIdEntityList() {
+            return _factStatusPolicy.GetChildrenIdEntityList(
+                _factStatusAggregate,
+                SelectIdValue);
+        }
 
         /// <summary>
         /// ドキュメントエンティティの取得
         /// </summary>
         /// <returns></returns>
         public DocumentEntity GetDocumentEntity() {
-            return _factStatusPolicy.GetDocumentEntity(_factStatusConfig);
+            return _factStatusPolicy.GetDocumentEntity(_factStatusAggregate);
         }
 
         /// <summary>
@@ -45,8 +66,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public SubjectEntity GetSubjectEntity() {
             return _factStatusPolicy.GetSubjectEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -56,8 +77,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public AchievementEntity GetAchievementEntity() {
             return _factStatusPolicy.GetAchievementEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -67,8 +88,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public EvidenceEntity GetEvidenceEntity() {
             return _factStatusPolicy.GetEvidenceEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -78,8 +99,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public ResultEntity GetResultEntity() {
             return _factStatusPolicy.GetResultEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -89,8 +110,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public RecordEntity GetRecordEntity() {
             return _factStatusPolicy.GetRecordEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -100,8 +121,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public TodoEntity GetTodoEntity() {
             return _factStatusPolicy.GetTodoEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -111,8 +132,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public SchemaEntity GetSchemaEntity() {
             return _factStatusPolicy.GetSchemaEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -122,8 +143,8 @@ namespace FactStatus.Domain.Main {
         /// <returns></returns>
         public GroupEntity GetGroupEntity() {
             return _factStatusPolicy.GetGroupEntity(
-                _factStatusConfig,
-                SelectIdEntity
+                _factStatusAggregate,
+                SelectIdValue
             );
         }
 
@@ -132,79 +153,103 @@ namespace FactStatus.Domain.Main {
         /// </summary>
         /// <returns></returns>
         public Dictionary<IdValue,SubjectEntity> GetSubjectEntityDict() {
-            return _factStatusPolicy.GetSubjectEntityDict(_factStatusConfig);
+            return _factStatusPolicy.GetSubjectEntityDict(_factStatusAggregate);
         }
 
         /// <summary>
         /// 達成エンティティの取得
         /// </summary>
-        /// <param name="idTypeEnum"></param>
         /// <returns></returns>
-        public Dictionary<IdValue, AchievementEntity> GetAchievementEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetAchievementEntityDict(_factStatusConfig);
+        public Dictionary<IdValue, AchievementEntity> GetAchievementEntityDict() {
+            return _factStatusPolicy.GetAchievementEntityDict(_factStatusAggregate);
         }
 
-        public Dictionary<IdValue, EvidenceEntity> GetEvidenceEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetEvidenceEntityDict(_factStatusConfig);
+        /// <summary>
+        /// 証拠エンティティの取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue, EvidenceEntity> GetEvidenceEntityDict() {
+            return _factStatusPolicy.GetEvidenceEntityDict(_factStatusAggregate);
         }
 
-        public Dictionary<IdValue, ResultEntity> GetResultEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetResultEntityDict(_factStatusConfig);
+        /// <summary>
+        /// 結果エンティティの取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue, ResultEntity> GetResultEntityDict() {
+            return _factStatusPolicy.GetResultEntityDict(_factStatusAggregate);
         }
 
-        public Dictionary<IdValue, RecordEntity> GetRecordEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetRecordEntityDict(_factStatusConfig);
+        /// <summary>
+        /// 記録エンティティの取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue, RecordEntity> GetRecordEntityDict() {
+            return _factStatusPolicy.GetRecordEntityDict(_factStatusAggregate);
         }
 
-        public Dictionary<IdValue, TodoEntity> GetTodoEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetTodoEntityDict(_factStatusConfig);
+        /// <summary>
+        /// 実装エンティティの取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue, TodoEntity> GetTodoEntityDict() {
+            return _factStatusPolicy.GetTodoEntityDict(_factStatusAggregate);
         }
 
-        public Dictionary<IdValue, SchemaEntity> GetSchemaEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetSchemaEntityDict(_factStatusConfig);
+        /// <summary>
+        /// 構想エンティティの取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue, SchemaEntity> GetSchemaEntityDict() {
+            return _factStatusPolicy.GetSchemaEntityDict(_factStatusAggregate);
         }
 
-        public Dictionary<IdValue, GroupEntity> GetGroupEntityDict(IdTypeEnum idTypeEnum) {
-            return _factStatusPolicy.GetGroupEntityDict(_factStatusConfig);
+        /// <summary>
+        /// 集合エンティティの取得
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<IdValue, GroupEntity> GetGroupEntityDict() {
+            return _factStatusPolicy.GetGroupEntityDict(_factStatusAggregate);
         }
 
         /// <summary>
         /// 指定したIDタイプのエンティティを作成
         /// </summary>
-        public void CreateEntity(IdTypeEnum idTypeEnum) {
-            _factStatusConfig = _factStatusPolicy.CreateEntity(
-                _factStatusConfig,
-                SelectIdEntity,
-                idTypeEnum);
-            
+        public void CreateEntity(string createIdType, string title, string pathName) {
+            _factStatusAggregate = _factStatusPolicy.CreateEntity(
+                _factStatusAggregate,
+                SelectIdValue,
+                createIdType,
+                title,
+                pathName);
         }
 
         /// <summary>
         /// 指定したIDエンティティを削除
         /// </summary>
         public void DeleteEntity() {
-            _factStatusConfig = _factStatusPolicy.DeleteEntity(
-                _factStatusConfig,
-                SelectIdEntity);
+            _factStatusAggregate = _factStatusPolicy.DeleteEntity(
+                _factStatusAggregate,
+                SelectIdValue);
         }
 
         /// <summary>
-        /// エンティティ同士を接続
+        /// エンティティを移動
         /// </summary>
-        public void LinkEntity(string linkIdEntity) {
-            _factStatusConfig = _factStatusPolicy.LinkEntity(
-                _factStatusConfig,
-                SelectIdEntity,
+        public void MoveEntity(string linkIdEntity) {
+            _factStatusAggregate = _factStatusPolicy.MoveEntity(
+                _factStatusAggregate,
+                SelectIdValue,
                 linkIdEntity);
         }
 
         /// <summary>
-        /// エンティティをにコピー
+        /// エンティティをコピー
         /// </summary>
         public void CopyEntity(string copyIdEntity) {
-            _factStatusConfig = _factStatusPolicy.CopyEntity(
-                _factStatusConfig,
-                SelectIdEntity,
+            _factStatusAggregate = _factStatusPolicy.CopyEntity(
+                _factStatusAggregate,
+                SelectIdValue,
                 copyIdEntity);
         }
 
@@ -212,9 +257,9 @@ namespace FactStatus.Domain.Main {
         /// 複数のエンティティをグループ化
         /// </summary>
         public void GroupEntity(string title, List<string>idEntityList) {
-            _factStatusConfig = _factStatusPolicy.GroupEntity(
-                _factStatusConfig,
-                SelectIdEntity,
+            _factStatusAggregate = _factStatusPolicy.GroupEntity(
+                _factStatusAggregate,
+                SelectIdValue,
                 title,
                 idEntityList);
         }
@@ -223,70 +268,70 @@ namespace FactStatus.Domain.Main {
         /// 達成数を取得
         /// </summary>
         public int GetAchievementCount() {
-            return _factStatusPolicy.GetAchievementCount(_factStatusConfig);
+            return _factStatusPolicy.GetAchievementCount(_factStatusAggregate);
         }
 
         /// <summary>
         /// 証拠数を取得 
         /// </summary>
         public int GetEvidenceCount() {
-            return _factStatusPolicy.GetEvidenceCount(_factStatusConfig);
+            return _factStatusPolicy.GetEvidenceCount(_factStatusAggregate);
         }
 
         /// <summary>
         /// 結果数を取得
         /// </summary>
         public int GetResultCount() {
-            return _factStatusPolicy.GetResultCount(_factStatusConfig);
+            return _factStatusPolicy.GetResultCount(_factStatusAggregate);
         }
 
         /// <summary>
         /// 成功数を取得
         /// </summary>
         public int GetSuccessCount() {
-            return _factStatusPolicy.GetSuccessCount(_factStatusConfig);
+            return _factStatusPolicy.GetSuccessCount(_factStatusAggregate);
         }
 
         /// <summary>
         ///失敗数を取得
         /// </summary>
         public int GetFailureCount() {
-            return _factStatusPolicy.GetFailureCount(_factStatusConfig);
+            return _factStatusPolicy.GetFailureCount(_factStatusAggregate);
         }
         
         /// <summary>
         ///失敗内容一覧を取得
         /// </summary>
-        public void GetFailureConfigList() {
-            _factStatusPolicy.GetFailureConfigList(_factStatusConfig);
+        public void GetFailureAggregateList() {
+            _factStatusPolicy.GetFailureAggregateList(_factStatusAggregate);
         }
 
         /// <summary>
         /// リレーショナル型の読込
         /// </summary>
         public void LoadRelational() {
-            _factStatusConfig = _factStatusPolicy.LoadRelational(LoadFilePath);
+            _factStatusAggregate = _factStatusPolicy.LoadRelational(LoadFilePath);
         }
 
         /// <summary>
         /// リレーショナル型で保存
         /// </summary>
         public void SaveRelational() {
-            _factStatusPolicy.SaveRelational(SaveFilePath, _factStatusConfig);
+            _factStatusPolicy.SaveRelational(SaveFilePath, _factStatusAggregate);
         }
         
         /// <summary>
         /// JSONファイルの読込
         /// </summary>
         public void LoadJson() {
-            _factStatusConfig = _factStatusPolicy.LoadJson(LoadFilePath);
+            _factStatusAggregate = _factStatusPolicy.LoadJson(LoadFilePath);
         }
 
         /// <summary>
         /// JSONファイルで保存
         /// </summary>
         public void SaveJson() {
-            _factStatusPolicy.SaveJson(SaveFilePath, _factStatusConfig);
+            _factStatusPolicy.SaveJson(SaveFilePath, _factStatusAggregate);
         }
 
         /// <summary>
@@ -300,7 +345,7 @@ namespace FactStatus.Domain.Main {
         /// Markdown単体で保存
         /// </summary>
         public void SaveMarkdownSelect() {
-            _factStatusPolicy.SaveMarkdownSelect(SaveFilePath, _factStatusConfig);
+            _factStatusPolicy.SaveMarkdownSelect(SaveFilePath, _factStatusAggregate);
         }
 
         /// <summary>
@@ -314,18 +359,18 @@ namespace FactStatus.Domain.Main {
         /// Markdownルートを作成して保存
         /// </summary>
         public void SaveMarkdownRoot() {
-            _factStatusPolicy.SaveMarkdownRoot(SaveFilePath, _factStatusConfig);
+            _factStatusPolicy.SaveMarkdownRoot(SaveFilePath, _factStatusAggregate);
         }
 
         public FactStatusMain(
-            FactStatusConfig factStatusConfig,
+            FactStatusAggregate factStatusAggregate,
             FactStatusPolicy factStatusPolicy) {
 
             this._factStatusPolicy = factStatusPolicy;
-            this._factStatusConfig = factStatusConfig;
+            this._factStatusAggregate = factStatusAggregate;
             this.LoadFilePath = "";
             this.SaveFilePath = "";
-            this.SelectIdEntity = "";
+            this.SelectIdValue = "";
         }
     }
 }

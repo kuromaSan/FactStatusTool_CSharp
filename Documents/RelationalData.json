@@ -1,11 +1,11 @@
 {
-  "DocumentConfig":{
+  "DocumentEntity":{
     "id":"00010001",
     "path_name":"Documents",
     "title":"ドキュメント",
     "description":""
   },
-  "SubjectConfigs":[
+  "SubjectEntitys":[
     {
       "id":"00010002",
       "path_name":"Documents_SubjectA",
@@ -19,7 +19,7 @@
       "description":""
     }
   ],
-  "AchievementConfigs":[
+  "AchievementEntitys":[
     {
       "id":"00010003",
       "path_name":"__SubjectA_AchievementA",
@@ -33,7 +33,7 @@
       "description":""
     }
   ],
-  "EvidenceConfigs":[
+  "EvidenceEntitys":[
     {
       "id":"00010004",
       "path_name":"__AchievementA_EvidenceA",
@@ -49,7 +49,7 @@
       "success":"1"
     }
   ],
-  "ResultConfigs":[
+  "ResultEntitys":[
     {
       "id":"00010005",
       "path_name":"__EvidenceA_ResultA",
@@ -61,7 +61,7 @@
       "title":"結果名"
     }
   ],
-  "RecordConfigs":[
+  "RecordEntitys":[
     {
       "id":"00010006",
       "path_name":"__ResultA_20001010101010",
@@ -99,7 +99,7 @@
       "success": "0"
     }
   ],
-  "TodoConfigs":[
+  "TodoEntitys":[
     {
       "id":"00010007",
       "path_name":"__AchievementA_TodoA",
@@ -125,7 +125,7 @@
       "description":"1行目\n2行目\n3行目"
     }
   ],
-  "SchemaConfigs":[
+  "SchemaEntitys":[
     {
       "id":"00010008",
       "path_name":"__SubjectA_SchemaA",
@@ -187,7 +187,7 @@
       "execution_goal":""
     }
   ],
-  "GroupConfigs":[
+  "GroupEntitys":[
     {
       "id":"00010009",
       "path_name":"__SubjectA_GroupA",
@@ -219,10 +219,9 @@
       "title":"グループ名"
     }
   ],
-  "ArgumentProperties":[
+  "ArgumentEntitys":[
     {
-      "parent_id":"00010005",
-      "id":"00010105",
+      "id":"00010010",
       "listIndex":"0",
       "keyIndex":"0",
       "keyName":"intKey",
@@ -230,8 +229,7 @@
       "value":"12"
     },
     {
-      "parent_id":"00010005",
-      "id":"00020105",
+      "id":"00020010",
       "listIndex":"0",
       "keyIndex":"0",
       "keyName":"floatKey",
@@ -239,8 +237,7 @@
       "value":"3.14"
     },
     {
-      "parent_id":"00010005",
-      "id":"00030105",
+      "id":"00030010",
       "listIndex":"0",
       "keyIndex":"0",
       "keyName":"boolKey",
@@ -248,8 +245,7 @@
       "value":"true"
     },
     {
-      "parent_id":"00010005",
-      "id":"00040105",
+      "id":"00040010",
       "listIndex":"0",
       "keyIndex":"0",
       "keyName":"stringKey",
@@ -257,8 +253,7 @@
       "value":"value"
     },
     {
-      "parent_id":"00010005",
-      "id":"00050105",
+      "id":"00050010",
       "listIndex":"0",
       "keyIndex":"0",
       "keyName":"objectKey",
@@ -266,96 +261,483 @@
       "value":"object"
     }
   ],
-  "AssertionProperties":[
+  "AssertionEntitys":[
     {
-      "parent_id":"00010005",
-      "id":"00010205",
+      "id":"00010011",
       "assert":"Equal",
       "target":"ClassName.functionName()",
       "dataType":"int",
       "value":"1"
     },
     {
-      "parent_id":"00010005",
-      "id":"00020205",
+      "id":"00020011",
       "assert":"NotEqual",
       "target":"ClassName.propertyName",
       "dataType":"float",
       "value":"1.23"
     }
   ],
+  "PathNameAttributes":[
+    {
+      "parent_id":"00010001",
+      "value":"Documents"
+    }
+  ],
+  "TitleAttributes":[
+    {
+      "parent_id":"00010001",
+      "value":"ドキュメント"
+    }
+  ],
+  "DescriptionAttributes":[
+    {
+      "parent_id":"00010001",
+      "value":""
+    }
+  ],
+  "SuccessAttributes":[
+    {
+      "parent_id":"00010004",
+      "value":"1"
+    },
+    {
+      "parent_id":"00020004",
+      "value":"1"
+    },
+    {
+      "parent_id":"00010006",
+      "value":"1"
+    },
+    {
+      "parent_id":"00020006",
+      "value":"0"
+    },
+    {
+      "parent_id":"00030006",
+      "value":"1"
+    },
+    {
+      "parent_id":"00040006",
+      "value":"0"
+    }
+  ],
+  "DateAttributes":[
+    {
+      "parent_id":"00010006",
+      "value":"2000-10-10 10:10:10"
+    },
+    {
+      "parent_id":"00020006",
+      "value":"2000-12-31 23:59:59"
+    },
+    {
+      "parent_id":"00030006",
+      "value":"2000-10-10 10:10:10"
+    },
+    {
+      "parent_id":"00040006",
+      "value":"2000-12-31 23:59:59"
+    }
+  ],
+  "ReviewerAttributes":[
+    {
+      "parent_id":"00010006",
+      "value":"見本名"
+    },
+    {
+      "parent_id":"00020006",
+      "value":"見本名"
+    },
+    {
+      "parent_id":"00030006",
+      "value":"見本名"
+    },
+    {
+      "parent_id":"00040006",
+      "value":"見本名"
+    }
+  ],
+  "ExperienceAttributes":[
+    {
+      "parent_id":"00010008",
+      "value":""
+    },
+    {
+      "parent_id":"00020008",
+      "value":""
+    },
+    {
+      "parent_id":"00030008",
+      "value":""
+    },
+    {
+      "parent_id":"00040008",
+      "value":""
+    },
+    {
+      "parent_id":"00050008",
+      "value":""
+    },
+    {
+      "parent_id":"00060008",
+      "value":""
+    }
+  ],
+  "EvaluationAttributes":[
+    {
+      "parent_id":"00010008",
+      "value":""
+    },
+    {
+      "parent_id":"00020008",
+      "value":""
+    },
+    {
+      "parent_id":"00030008",
+      "value":""
+    },
+    {
+      "parent_id":"00040008",
+      "value":""
+    },
+    {
+      "parent_id":"00050008",
+      "value":""
+    },
+    {
+      "parent_id":"00060008",
+      "value":""
+    }
+  ],
+  "HypothesisAttributes":[
+    {
+      "parent_id":"00010008",
+      "value":""
+    },
+    {
+      "parent_id":"00020008",
+      "value":""
+    },
+    {
+      "parent_id":"00030008",
+      "value":""
+    },
+    {
+      "parent_id":"00040008",
+      "value":""
+    },
+    {
+      "parent_id":"00050008",
+      "value":""
+    },
+    {
+      "parent_id":"00060008",
+      "value":""
+    }
+  ],
+  "AbstractionGoalAttributes":[
+    {
+      "parent_id":"00010008",
+      "value":""
+    },
+    {
+      "parent_id":"00020008",
+      "value":""
+    },
+    {
+      "parent_id":"00030008",
+      "value":""
+    },
+    {
+      "parent_id":"00040008",
+      "value":""
+    },
+    {
+      "parent_id":"00050008",
+      "value":""
+    },
+    {
+      "parent_id":"00060008",
+      "value":""
+    }
+  ],
+  "ExecutionGoalAttributes":[
+    {
+      "parent_id":"00010008",
+      "value":""
+    },
+    {
+      "parent_id":"00020008",
+      "value":""
+    },
+    {
+      "parent_id":"00030008",
+      "value":""
+    },
+    {
+      "parent_id":"00040008",
+      "value":""
+    },
+    {
+      "parent_id":"00050008",
+      "value":""
+    },
+    {
+      "parent_id":"00060008",
+      "value":""
+    }
+  ],
+  "ListIndexAttributes":[
+    {
+      "parent_id":"00010010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00020010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00030010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00040010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00050010",
+      "value":"0"
+    }
+  ],
+  "KeyIndexAttributes":[
+    {
+      "parent_id":"00010010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00020010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00030010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00040010",
+      "value":"0"
+    },
+    {
+      "parent_id":"00050010",
+      "value":"0"
+    }
+  ],
+  "KeyNameAttributes":[
+    {
+      "parent_id":"00010010",
+      "value":"intKey"
+    },
+    {
+      "parent_id":"00020010",
+      "value":"floatKey"
+    },
+    {
+      "parent_id":"00030010",
+      "value":"boolKey"
+    },
+    {
+      "parent_id":"00040010",
+      "value":"stringKey"
+    },
+    {
+      "parent_id":"00050010",
+      "value":"objectKey"
+    }
+  ],
+  "DataTypeAttributes":[
+    {
+      "parent_id":"00010010",
+      "value":"int"
+    },
+    {
+      "parent_id":"00020010",
+      "value":"float"
+    },
+    {
+      "parent_id":"00030010",
+      "value":"bool"
+    },
+    {
+      "parent_id":"00040010",
+      "value":"string"
+    },
+    {
+      "parent_id":"00050010",
+      "value":"object"
+    }
+  ],
+  "ValueAttributes":[
+    {
+      "parent_id":"00010010",
+      "value":"12"
+    },
+    {
+      "parent_id":"00020010",
+      "value":"3.14"
+    },
+    {
+      "parent_id":"00030010",
+      "value":"true"
+    },
+    {
+      "parent_id":"00040010",
+      "value":"value"
+    },
+    {
+      "parent_id":"00050010",
+      "value":"object"
+    }
+  ],
+  "AssertAttributes":[
+    {
+      "parent_id":"00010011",
+      "value":"Equal"
+    },
+    {
+      "parent_id":"00020011",
+      "value":"NotEqual"
+    }
+  ],
+  "TargetAttributes":[
+    {
+      "parent_id":"00010011",
+      "value":"ClassName.functionName()"
+    },
+    {
+      "parent_id":"00020011",
+      "value":"ClassName.propertyName"
+    }
+  ],
+  "SequenceAttributes":[
+    {
+      "parent_id":"00012002",
+      "value":"0"
+    },
+    {
+      "parent_id":"00022002",
+      "value":"1"
+    },
+    {
+      "parent_id":"00032002",
+      "value":"2"
+    }
+  ],
   "ParentEdges":[
     {
-      "id":"00010080",
+      "id":"00012001",
       "from_id":"00010001",
       "to_id":"00010002"
     },
     {
-      "id":"00020080",
+      "id":"00022001",
       "from_id":"00010002",
       "to_id":"00010003"
     },
     {
-      "id":"00030080",
+      "id":"00032001",
       "from_id":"00010003",
       "to_id":"00010004"
     },
     {
-      "id":"00040080",
+      "id":"00042001",
       "from_id":"00010004",
       "to_id":"00010005"
     },
     {
-      "id":"00050080",
+      "id":"00052001",
       "from_id":"00010005",
       "to_id":"00010006"
     },
     {
-      "id":"00060080",
+      "id":"00062001",
       "from_id":"00010005",
       "to_id":"00020006"
     },
     {
-      "id":"00070080",
+      "id":"00072001",
       "from_id":"00010003",
       "to_id":"00010007"
     },
     {
-      "id":"00080080",
+      "id":"00082001",
       "from_id":"00010004",
       "to_id":"00020007"
     },
     {
-      "id":"00090080",
+      "id":"00092001",
       "from_id":"00010002",
       "to_id":"00010008"
     },
     {
-      "id":"00100080",
+      "id":"00102001",
       "from_id":"00010003",
       "to_id":"00020008"
     },
     {
-      "id":"00110080",
+      "id":"00112001",
       "from_id":"00010004",
       "to_id":"00030008"
+    },
+    {
+      "id":"00122001",
+      "from_id":"00010005",
+      "to_id":"00010010"
+    },
+    {
+      "id":"00132001",
+      "from_id":"00010005",
+      "to_id":"00020010"
+    },
+    {
+      "id":"00142001",
+      "from_id":"00010005",
+      "to_id":"00030010"
+    },
+    {
+      "id":"00152001",
+      "from_id":"00010005",
+      "to_id":"00040010"
+    },
+    {
+      "id":"00162001",
+      "from_id":"00010005",
+      "to_id":"00050010"
+    },
+    {
+      "id":"00172001",
+      "from_id":"00010005",
+      "to_id":"00010011"
+    },
+    {
+      "id":"00182001",
+      "from_id":"00010005",
+      "to_id":"00020011"
     }
   ],
   "GroupEdges":[
     {
-      "id":"00010081",
+      "id":"00012002",
       "from_id":"00010009",
       "to_id":"00010002",
       "sequence":"0"
     },
     {
-      "id":"00020081",
+      "id":"00022002",
       "from_id":"00010009",
       "to_id":"00010006",
       "sequence":"1"
     },
     {
-      "id":"00030081",
+      "id":"00032002",
       "from_id":"00010009",
       "to_id":"00020007",
       "sequence":"2"

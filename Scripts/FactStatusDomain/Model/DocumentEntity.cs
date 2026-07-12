@@ -41,6 +41,23 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <returns></returns>
+        public static DocumentEntity Create() {
+            return new DocumentEntity("");
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public static DocumentEntity Build(string description) {
+            return new DocumentEntity(description);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="description"></param>

@@ -74,6 +74,62 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public EvidenceEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+
+            return new EvidenceEntity(id, path, Title, Description, Success);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static EvidenceEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            return new EvidenceEntity(
+                id,
+                pathName,
+                title,
+                "",
+                BoolValue.IsTrue());
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="boolValue"></param>
+        /// <returns></returns>
+        public static EvidenceEntity Build(
+            IdValue id,
+            PathValue pathName,
+            string title,
+            string description,
+            BoolValue boolValue) {
+            return new EvidenceEntity(
+                id,
+                pathName,
+                title,
+                description,
+                boolValue);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>

@@ -31,6 +31,55 @@ namespace FactStatus.Domain.Model {
         }
 
         /// <summary>
+        /// エンティティを複製
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public GroupEntity Duplicate(
+            IdValue id,
+            PathValue path) {
+
+            return new GroupEntity(id, path, Title);
+        }
+
+        /// <summary>
+        /// 初期作成
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static GroupEntity Create(
+            IdValue id,
+            PathValue pathName,
+            string title) {
+
+            return new GroupEntity(
+                id,
+                pathName,
+                title);
+        }
+
+        /// <summary>
+        /// ビルド
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pathName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static GroupEntity Build(
+            IdValue id,
+            string pathName,
+            string title) {
+
+            return new GroupEntity(
+                id,
+                PathValue.PathIsDirectory(pathName),
+                title);
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="id"></param>
