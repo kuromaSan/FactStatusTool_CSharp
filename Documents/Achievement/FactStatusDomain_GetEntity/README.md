@@ -1,0 +1,56 @@
+# エンティティを取得
+## 実装内容
+`FactStatusDomainMain` で指定したIDのエンティティをContractとして取得する。
+## 実装証拠
+[指定したエンティティが無ければエラーになること](../../Evidence/GetEntity_Error/README.md)  
+[DomainMainでContractsDtoを取得できること](../../Evidence/GetEntity_DomainMainGetContractsDto/README.md)  
+[DomainPolicyでEntityを取得できること](../../Evidence/GetEntity_DomainPolicyGetEntity/README.md)  
+[DomainStrategyでEntityを取得できること](../../Evidence/GetEntity_DomainStrategyGetEntity/README.md)  
+[DomainRepositoryでSetupDtoを取得できること](../../Evidence/GetEntity_DomainRepositoryGetSetupDto/README.md)  
+[DocumentEntityの取得ができること](../../Evidence/GetEntity_DocumentEntityGet/README.md)  
+[SubjectEntityの取得ができること](../../Evidence/GetEntity_SubjectEntityGet/README.md)  
+[AchievementEntityの取得ができること](../../Evidence/GetEntity_AchievementEntityGet/README.md)  
+[EvidenceEntityの取得ができること](../../Evidence/GetEntity_EvidenceEntityGet/README.md)  
+[ResultEntityの取得ができること](../../Evidence/GetEntity_ResultEntityGet/README.md)  
+[RecordEntityの取得ができること](../../Evidence/GetEntity_RecordEntityGet/README.md)  
+[TodoEntityの取得ができること](../../Evidence/GetEntity_TodoEntityGet/README.md)  
+[SchemaEntityの取得ができること](../../Evidence/GetEntity_SchemaEntityGet/README.md)  
+[StringValueの取得ができること](../../Evidence/GetEntity_StringValueGet/README.md)  
+[BoolValueの取得ができること](../../Evidence/GetEntity_BoolValueGet/README.md)  
+[DateValueの取得ができること](../../Evidence/GetEntity_DateValueGet/README.md)  
+[IdValueの取得ができること](../../Evidence/GetEntity_IdValueGet/README.md)  
+[PairIdValueの取得ができること](../../Evidence/GetEntity_PairIdValueGet/README.md)  
+[PathValueの取得ができること](../../Evidence/GetEntity_PathValueGet/README.md)  
+[AddValueの取得ができること](../../Evidence/GetEntity_AddValueGet/README.md)  
+[ArgumentValueの取得ができること](../../Evidence/GetEntity_ArgumentValueGet/README.md)  
+[AssertionValueの取得ができること](../../Evidence/GetEntity_AssertionValueGet/README.md)  
+[DataTypeEnumの取得ができること](../../Evidence/GetEntity_DataTypeEnumGet/README.md)  
+[IdTypeEnumの取得ができること](../../Evidence/GetEntity_IdTypeEnumGet/README.md)  
+[PathTypeEnumの取得ができること](../../Evidence/GetEntity_PathTypeEnumGet/README.md)  
+[AssertEnumの取得ができること](../../Evidence/GetEntity_AssertEnumGet/README.md)  
+
+## 実装手順
+[DocumentEntityの作成](../../Todo/GetEntity_CreateDocumentEntity/README.md)  
+[SubjectEntityの作成](../../Todo/GetEntity_CreateSubjectEntity/README.md)  
+[AchievementEntityの作成](../../Todo/GetEntity_CreateAchievementEntity/README.md)  
+[EvidenceEntityの作成](../../Todo/GetEntity_CreateEvidenceEntity/README.md)  
+[ResultEntityの作成](../../Todo/GetEntity_CreateResultEntity/README.md)  
+[RecordEntityの作成](../../Todo/GetEntity_CreateRecordEntity/README.md)  
+[TodoEntityの作成](../../Todo/GetEntity_CreateTodoEntity/README.md)  
+[SchemaEntityの作成](../../Todo/GetEntity_CreateSchemaEntity/README.md)  
+[ContractsDtoの作成](../../Todo/GetEntity_CreateContractsDto/README.md)  
+[SetupDtoの作成](../../Todo/GetEntity_CreateSetupDto/README.md)  
+[エンティティを保持するAggregateを作成](../../Todo/GetEntity_CreateAggregate/README.md)  
+[DomainMainにGetEntity関数の作成](../../Todo/GetEntity_CreateDomainMainGetEntity/README.md)  
+[DomainPolicyにGetEntity関数の作成](../../Todo/GetEntity_CreateDomainPolicyGetEntity/README.md)  
+[DomainStrategyにGetEntity関数の作成](../../Todo/GetEntity_CreateDomainStrategyGetEntity/README.md)  
+[DomainRepositoryにGetEntity関数の作成](../../Todo/GetEntity_CreateDomainRepositoryGetEntity/README.md)  
+
+## 実装構想
+[リポジトリで ID から Entity を取得する（`FindById`）](../../Achievement/FactStatusDomain_FindEntityById/README.md)
+[Entity の一覧表示に必要な値を公開する（`EntitySummaryDto`）](../../Achievement/FactStatusDomain/Api/Contract/EntitySummaryDto.cs)
+[選択 Entity・親・子を公開する（`EntityDetailDto`）](../../../Scripts/FactStatusDomain/Api/Contract/EntityDetailDto.cs)
+[SQLiteからList`<IEntity>`に変換するためのDto](../../Achievement/FactStatusDomain_/README.md)
+
+---
+[Back](../../Subject/Documents_FactStatusDomain/README.md)

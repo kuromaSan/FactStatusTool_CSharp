@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,12 +10,13 @@ using Xunit;
 using Xunit.Abstractions;
 using FactStatus.Domain.Internal.Setup;
 using FactStatus.Domain.Api.Value;
+using FactStatus.Domain.Internal.Value;
 
 namespace FactStatus.Domain.Test.Internal.Logic {
     public class JsonRepositoryTest(ITestOutputHelper output) {
         [Fact]
         public void LoadJsonTest() {
-            JsonDto jsonDto = new JsonRepository().LoadJson(new PathValue("D:/Action/FactStatusTool/Documents/RelationalData.json",PathTypeEnum.RootFile));
+            FactStatusDomainDao jsonDto = new JsonRepository().LoadJson(new PathValue("D:/Action/FactStatusTool/Documents/RelationalData.json",PathTypeEnum.RootFile));
 
             Assert.NotNull(jsonDto);
             Assert.NotNull(jsonDto.SubjectAggregates);
@@ -72,7 +73,7 @@ namespace FactStatus.Domain.Test.Internal.Logic {
 
         [Fact]
         public void LoadJsonByIdPatternRulesTest() {
-            IdPatternRulesDto idPatternRulesDto = new FactStatusRepository().LoadIdPatternRules(new PathValue("D:/Action/__CoreTemplateIDCM/Documents/IdPatternRules.json",PathTypeEnum.RootFile));
+            IdPatternRulesDao idPatternRulesDto = new FactStatusDomainRepository().LoadIdPatternRules(new PathValue("D:/Action/__CoreTemplateIDCM/Documents/IdPatternRules.json",PathTypeEnum.RootFile));
 
             Assert.NotNull(idPatternRulesDto);
             Assert.NotNull(idPatternRulesDto.ClassTypes);

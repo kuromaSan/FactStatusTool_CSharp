@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using FactStatus.Domain.Api.Value;
+using FactStatus.Domain.Internal.Value;
 
 namespace FactStatus.Domain.Internal.Rule {
     internal static class Validation {

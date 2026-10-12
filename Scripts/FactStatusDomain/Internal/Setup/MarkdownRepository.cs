@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,10 +7,28 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
 using FactStatus.Domain.Internal.Logic;
-using FactStatus.Domain.Api.Value;
+using FactStatus.Domain.Internal.Value;
 
 namespace FactStatus.Domain.Internal.Setup {
-    public class MarkdownRepository : IMarkdownRepository {
+    public class MarkdownRepository {
+
+        public List<MarkdownItemDto> LoadMarkdownList(PathValue markdownPath) {
+            // MarkdownDto
+            List<MarkdownItemDto> markdownItemDtoList = new List<MarkdownItemDto>();
+            foreach (var filePath in Directory.GetFiles(markdownPath)) {
+                string description = File.ReadAllText(filePath);
+                string directory = Path.GetFileName(filePath);
+                MarkdownItemDto markdownItemDto = new MarkdownItemDto(directory, description);
+                markdownItemDtoList.Add(markdownItemDto);
+            }
+            return markdownItemDtoList;
+        }
+
+        public void SaveMarkdownList(PathValue markdownPath, List<MarkdownItemDto> markdownItemDtoList) {
+            foreach (var markdownItemDto in markdownItemDtoList) {
+                File.WriteAllText($"{markdownPath}/{markdownItemDto.Directory}", markdownItemDto.Description);
+            }
+        }
 
         public string LoadMarkdown(PathValue markdownPath) {
             // MarkdownDto

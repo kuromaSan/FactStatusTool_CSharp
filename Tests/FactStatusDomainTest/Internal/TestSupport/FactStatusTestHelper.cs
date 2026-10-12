@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using FactStatus.Domain.Internal.Logic;
-using FactStatus.Domain.Api.Entity;
-using FactStatus.Domain.Internal.Setup;
-using FactStatus.Domain.Api.Value;
 using Moq;
+using FactStatus.Domain.Internal.Value;
+using FactStatus.Domain.Internal.Entity;
+using FactStatus.Domain.Internal.Setup;
 
 namespace FactStatus.Domain.Test.Internal.TestSupport {
     internal static class FactStatusTestHelper {
@@ -26,8 +26,8 @@ namespace FactStatus.Domain.Test.Internal.TestSupport {
             }
         }
 
-        internal static JsonDto CreateEmptyJsonDto() {
-            return new JsonDto {
+        internal static FactStatusDomainDao CreateEmptyJsonDto() {
+            return new FactStatusDomainDao {
                 DocumentAggregate = new DocumentAggregateJsonDto {
                     Id = "00010001",
                     PathName = "Documents",
@@ -61,8 +61,8 @@ namespace FactStatus.Domain.Test.Internal.TestSupport {
                 new Dictionary<IdValue, TodoEntity>(comparer),
                 new Dictionary<IdValue, SchemaEntity>(comparer),
                 new Dictionary<IdValue, GroupEntity>(comparer),
-                new Dictionary<IdValue, ArgumentEntity>(comparer),
-                new Dictionary<IdValue, AssertionEntity>(comparer),
+                new Dictionary<IdValue, ArgumentValue>(comparer),
+                new Dictionary<IdValue, AssertionValue>(comparer),
                 new Dictionary<IdValue, IdValue>(comparer),
                 new Dictionary<IdValue, List<IdValue>>(comparer),
                 new Dictionary<IdValue, List<IdValue>>(comparer));
@@ -90,7 +90,7 @@ namespace FactStatus.Domain.Test.Internal.TestSupport {
                 "evidence",
                 "desc",
                 BoolValue.IsTrue());
-            var argument = new ArgumentEntity(
+            var argument = new ArgumentValue(
                 IdValue.FromString("00010010"),
                 IdValue.FromString("00050005"),
                 0,
@@ -98,7 +98,7 @@ namespace FactStatus.Domain.Test.Internal.TestSupport {
                 "arg",
                 DataTypeEnum.String,
                 "v");
-            var assertion = new AssertionEntity(
+            var assertion = new AssertionValue(
                 IdValue.FromString("00010011"),
                 IdValue.FromString("00050005"),
                 AssertEnum.Equal,
@@ -169,10 +169,10 @@ namespace FactStatus.Domain.Test.Internal.TestSupport {
                 new Dictionary<IdValue, GroupEntity>(comparer) {
                     [group.Id] = group
                 },
-                new Dictionary<IdValue, ArgumentEntity>(comparer) {
+                new Dictionary<IdValue, ArgumentValue>(comparer) {
                     [argument.Id] = argument
                 },
-                new Dictionary<IdValue, AssertionEntity>(comparer) {
+                new Dictionary<IdValue, AssertionValue>(comparer) {
                     [assertion.Id] = assertion
                 },
                 new Dictionary<IdValue, IdValue>(comparer) {
@@ -186,20 +186,20 @@ namespace FactStatus.Domain.Test.Internal.TestSupport {
                 });
         }
 
-        internal static FactStatusStrategy CreateStrategy(
-            Mock<IFactStatusRepository>? factStatusRepository = null,
-            Mock<IJsonRepository>? jsonRepository = null,
+        internal static FactStatusDomainStrategy CreateStrategy(
+            Mock<IFactStatusDomainRepository>? factStatusRepository = null,
+            Mock<IJsonDomainRepository>? jsonRepository = null,
             Mock<IMarkdownRepository>? markdownRepository = null) {
 
-            return new FactStatusStrategy(
-                factStatusRepository?.Object ?? new Mock<IFactStatusRepository>().Object,
-                jsonRepository?.Object ?? new Mock<IJsonRepository>().Object,
+            return new FactStatusDomainStrategy(
+                factStatusRepository?.Object ?? new Mock<IFactStatusDomainRepository>().Object,
+                jsonRepository?.Object ?? new Mock<IJsonDomainRepository>().Object,
                 markdownRepository?.Object ?? new Mock<IMarkdownRepository>().Object);
         }
 
-        internal static FactStatusPolicy CreatePolicy(FactStatusStrategy? strategy = null) {
+        internal static FactStatusDomainPolicy CreatePolicy(FactStatusDomainStrategy? strategy = null) {
             strategy ??= CreateStrategy();
-            return new FactStatusPolicy(strategy);
+            return new FactStatusDomainPolicy(strategy);
         }
     }
 }

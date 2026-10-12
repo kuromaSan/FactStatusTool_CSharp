@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,22 +8,22 @@ using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
 using FactStatus.Domain.Internal.Logic;
-using FactStatus.Domain.Api.Value;
+using FactStatus.Domain.Internal.Value;
 
 namespace FactStatus.Domain.Internal.Setup {
-    public class JsonRepository : IJsonRepository {
+    public class JsonRepository {
 
         /// <summary>
         /// データベース型jsonファイルから内容を読み込み
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <returns>RelationalDataDto</returns>
-        public JsonDto LoadJson(PathValue jsonFilePath) {
+        public FactStatusDomainDao LoadJson(PathValue jsonFilePath) {
             // ファイルパスからテキストに変換
             string jsonText = File.ReadAllText(jsonFilePath.Path);
 
             // JsonTextをRelationalDataDtoに変換
-            JsonDto? relationalDataDto = JsonSerializer.Deserialize<JsonDto>(jsonText);
+            FactStatusDomainDao? relationalDataDto = JsonSerializer.Deserialize<FactStatusDomainDao>(jsonText);
 
             // RelationalDataDtoが空の場合の対処
             if (relationalDataDto == null) {
@@ -38,7 +38,7 @@ namespace FactStatus.Domain.Internal.Setup {
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <param name="jsonDto"></param>
-        public void SaveJson(PathValue jsonFilePath, JsonDto jsonDto) {
+        public void SaveJson(PathValue jsonFilePath, FactStatusDomainDao jsonDto) {
 
             // 整形オプションを作成
             JsonSerializerOptions jsonSerializerOptions1 = new() {
@@ -58,6 +58,7 @@ namespace FactStatus.Domain.Internal.Setup {
         /// コンストラクタ
         /// </summary>
         public JsonRepository() {
+
             // 処理なし
         }
     }

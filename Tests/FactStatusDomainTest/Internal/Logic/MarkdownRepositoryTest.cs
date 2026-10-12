@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +8,7 @@ using Xunit;
 using Xunit.Abstractions;
 using FactStatus.Domain.Internal.Logic;
 using FactStatus.Domain.Internal.Setup;
+using FactStatus.Domain.Internal.Entity;
 
 namespace FactStatus.Domain.Test.Internal.Logic {
     public class MarkdownRepositoryTest {
@@ -27,7 +28,7 @@ namespace FactStatus.Domain.Test.Internal.Logic {
             //string markdownRootDirectory = "D:/Action/FactStatus_CSharp";
 
             // MarkdownDtoを生成
-            var markdownDtoBuilder = new MarkdownDtoBuilder();
+            var markdownDtoBuilder = new FactStatusDomainSubBuilder();
             //markdownDtoBuilder.OfFactStatusAggregate(documentAggregate);
             //MarkdownDto markdownDto = markdownDtoBuilder.ListBuild();
 

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using FactStatus.Domain.Test.Internal.TestSupport;
 using FactStatus.Domain.Internal.Logic;
 using FactStatus.Domain.Api.Entity;
-using FactStatus.Domain.Internal.Setup;
-using FactStatus.Domain.Api.Value;
 using Moq;
 using Xunit;
+using FactStatus.Domain.Internal.Value;
+using FactStatus.Domain.Internal.Setup;
 
 namespace FactStatus.Domain.Test.Internal.Logic {
     public class FactStatusStrategyTest {
@@ -301,7 +301,7 @@ namespace FactStatus.Domain.Test.Internal.Logic {
         [Fact]
         public void LoadRelational_リレーショナル型を読込できる() {
             var jsonDto = FactStatusTestHelper.CreateEmptyJsonDto();
-            var mockRepo = new Mock<IFactStatusRepository>();
+            var mockRepo = new Mock<IFactStatusDomainRepository>();
             mockRepo.Setup(r => r.LoadRelational(It.IsAny<PathValue>())).Returns(jsonDto);
             var strategy = FactStatusTestHelper.CreateStrategy(factStatusRepository: mockRepo);
 
@@ -313,20 +313,20 @@ namespace FactStatus.Domain.Test.Internal.Logic {
 
         [Fact]
         public void SaveRelational_リレーショナル型を保存できる() {
-            var mockRepo = new Mock<IFactStatusRepository>();
+            var mockRepo = new Mock<IFactStatusDomainRepository>();
             var strategy = FactStatusTestHelper.CreateStrategy(factStatusRepository: mockRepo);
             var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
             var path = new PathValue("data.json", PathTypeEnum.RootFile);
 
             strategy.SaveRelational(path, Aggregate);
 
-            mockRepo.Verify(r => r.SaveRelational(path, It.IsAny<JsonDto>()), Times.Once);
+            mockRepo.Verify(r => r.SaveRelational(path, It.IsAny<FactStatusDomainDao>()), Times.Once);
         }
 
         [Fact]
         public void LoadJson_JSONを読込できる() {
             var jsonDto = FactStatusTestHelper.CreateEmptyJsonDto();
-            var mockRepo = new Mock<IJsonRepository>();
+            var mockRepo = new Mock<IJsonDomainRepository>();
             mockRepo.Setup(r => r.LoadJson(It.IsAny<PathValue>())).Returns(jsonDto);
             var strategy = FactStatusTestHelper.CreateStrategy(jsonRepository: mockRepo);
 
@@ -338,14 +338,14 @@ namespace FactStatus.Domain.Test.Internal.Logic {
 
         [Fact]
         public void SaveJson_JSONを保存できる() {
-            var mockRepo = new Mock<IJsonRepository>();
+            var mockRepo = new Mock<IJsonDomainRepository>();
             var strategy = FactStatusTestHelper.CreateStrategy(jsonRepository: mockRepo);
             var Aggregate = FactStatusTestHelper.CreateSampleAggregate();
             var path = new PathValue("data.json", PathTypeEnum.RootFile);
 
             strategy.SaveJson(path, Aggregate);
 
-            mockRepo.Verify(r => r.SaveJson(path, It.IsAny<JsonDto>()), Times.Once);
+            mockRepo.Verify(r => r.SaveJson(path, It.IsAny<FactStatusDomainDao>()), Times.Once);
         }
     }
 }

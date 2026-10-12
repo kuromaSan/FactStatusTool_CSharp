@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using FactStatus.Domain.Test.Internal.TestSupport;
-using FactStatus.Domain.Api.Entity;
-using FactStatus.Domain.Internal.Setup;
-using FactStatus.Domain.Api.Value;
 using Xunit;
+using FactStatus.Domain.Internal.Value;
+using FactStatus.Domain.Internal.Entity;
 
 namespace FactStatus.Domain.Test.Internal.Setup {
     public class FactStatusAggregateTest {
@@ -30,8 +29,8 @@ namespace FactStatus.Domain.Test.Internal.Setup {
                 new Dictionary<IdValue, TodoEntity>(comparer),
                 new Dictionary<IdValue, SchemaEntity>(comparer),
                 new Dictionary<IdValue, GroupEntity>(comparer),
-                new Dictionary<IdValue, ArgumentEntity>(comparer),
-                new Dictionary<IdValue, AssertionEntity>(comparer),
+                new Dictionary<IdValue, ArgumentValue>(comparer),
+                new Dictionary<IdValue, AssertionValue>(comparer),
                 new Dictionary<IdValue, IdValue>(comparer),
                 new Dictionary<IdValue, List<IdValue>>(comparer),
                 new Dictionary<IdValue, List<IdValue>>(comparer));
